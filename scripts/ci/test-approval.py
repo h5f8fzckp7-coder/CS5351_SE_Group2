@@ -15,7 +15,8 @@ IMPL_RE = re.compile(
     r"^(src/(cmd|internal)/.*(?<!_test)\.go|src/web/src/.*(?<!\.test)\.(ts|tsx)|prompts/.*)$"
 )
 TEST_RE = re.compile(r"(_test\.go|\.test\.(ts|tsx))$")
-REQ_RE = re.compile(r"\b(?:FR|NFR|INV)-\d+\b")
+REQ_FILE = "docs/req/requirements.yaml"
+REQ_ID_LINE = re.compile(r"^  - id:\s*(\S+)")
 LIST_KEYS = {"requirement_ids", "tests"}
 
 
@@ -75,20 +76,137 @@ def diff_names(base: str) -> str:
         return git("diff", "--name-only", base, "HEAD")
 
 
-def diff_text(base: str) -> str:
-    try:
-        git("merge-base", "--is-ancestor", base, "HEAD")
-        return git("diff", "-U0", f"{base}...HEAD")
-    except subprocess.CalledProcessError:
-        return git("diff", "-U0", base, "HEAD")
-
-
 def changed_files(base: str) -> list[str]:
     return [line for line in diff_names(base).splitlines() if line]
 
 
-def changed_requirement_scope(base: str) -> set[str]:
-    return set(REQ_RE.findall(diff_text(base)))
+def file_at(rev: str, path: str) -> str | None:
+    try:
+        return subprocess.check_output(["git", "show", f"{rev}:{path}"], text=True)
+    except subprocess.CalledProcessError:
+        return None
+
+
+def yaml_scalar(text: str) -> str:
+    text = text.strip()
+    if len(text) >= 2 and text[0] == text[-1] and text[0] in {'"', "'"}:
+        return text[1:-1]
+    if " #" in text:
+        text = text.split(" #", 1)[0].strip()
+    return text
+
+
+def source_repo_path(entry: str) -> str:
+    """Map a requirement source entry onto a repo-relative path.
+
+    Entries in requirements.yaml are relative to docs/req/ and may carry a
+    trailing #line anchor. The anchor is not part of the file identity.
+    """
+    raw = yaml_scalar(entry).split("#", 1)[0].strip()
+    if not raw or "://" in raw:
+        return ""
+    return os.path.normpath(os.path.join("docs/req", raw)).replace("\\", "/")
+
+
+def parse_requirements(text: str) -> list[dict]:
+    """Return requirement blocks with their own ids and source paths.
+
+    IDs that appear only in statement text, comments, or `related:` lists are
+    not returned as separate requirements.
+    """
+    reqs: list[dict] = []
+    current: dict | None = None
+    in_requirements = False
+    in_source = False
+    for raw in text.splitlines():
+        line = raw.rstrip()
+        if not line.strip():
+            continue
+        if not in_requirements:
+            if line.startswith("requirements:"):
+                in_requirements = True
+            continue
+        match = REQ_ID_LINE.match(line)
+        if match:
+            if current is not None:
+                reqs.append(current)
+            current = {
+                "id": yaml_scalar(match.group(1)),
+                "source": [],
+                "body": [line],
+            }
+            in_source = False
+            continue
+        if current is None:
+            continue
+        current["body"].append(line)
+        if re.match(r"^    source:\s*$", line):
+            in_source = True
+            continue
+        inline = re.match(r"^    source:\s*\[(.*)\]\s*$", line)
+        if inline:
+            in_source = False
+            for part in inline.group(1).split(","):
+                item = yaml_scalar(part)
+                if item:
+                    current["source"].append(item)
+            continue
+        if in_source and line.startswith("      - "):
+            item = yaml_scalar(line.strip()[2:])
+            if item:
+                current["source"].append(item)
+            continue
+        if in_source:
+            in_source = False
+    if current is not None:
+        reqs.append(current)
+    return reqs
+
+
+def changed_definition_ids(base: str) -> set[str]:
+    """Requirement ids whose own block was added, removed, or edited.
+
+    A `related:` mention or other free text inside a block does not add the
+    mentioned id. Only the block that changed contributes its id.
+    """
+    old = parse_requirements(file_at(base, REQ_FILE) or "")
+    new = parse_requirements(file_at("HEAD", REQ_FILE) or "")
+    old_body = {req["id"]: "\n".join(req["body"]) for req in old}
+    new_body = {req["id"]: "\n".join(req["body"]) for req in new}
+    changed = set()
+    for req_id in set(old_body) | set(new_body):
+        if old_body.get(req_id) != new_body.get(req_id):
+            changed.add(req_id)
+    return changed
+
+
+def ownership_ids(implementation: list[str]) -> set[str]:
+    """Requirement ids that list a changed implementation file as a source.
+
+    README and other non-implementation paths are not consulted, so a docs
+    mention cannot attach a requirement to this change.
+    """
+    text = file_at("HEAD", REQ_FILE)
+    if text is None:
+        return set()
+    impl = set(implementation)
+    owned = set()
+    for req in parse_requirements(text):
+        for entry in req["source"]:
+            if source_repo_path(entry) in impl:
+                owned.add(req["id"])
+                break
+    return owned
+
+
+def registry_present() -> bool:
+    return file_at("HEAD", REQ_FILE) is not None
+
+
+def changed_requirement_scope(base: str, implementation: list[str]) -> set[str]:
+    if not registry_present():
+        return set()
+    return changed_definition_ids(base) | ownership_ids(implementation)
 
 
 def is_implementation(path: str) -> bool:
@@ -163,11 +281,25 @@ def referenced_paths(data: dict) -> list[str]:
     return paths
 
 
-def approval_bound(record_rel: str, data: dict, files: list[str], scope: set[str]) -> bool:
-    if record_rel in files:
+def requirement_ids_of(data: dict) -> set[str]:
+    return {str(item).strip() for item in (data.get("requirement_ids") or []) if str(item).strip()}
+
+
+def approval_bound(record_rel: str, data: dict, files: list[str], scope: set[str], registry: bool) -> bool:
+    """An approval counts only when this change adds or updates the record.
+
+    When a requirement registry exists, the record's requirement_ids must also
+    intersect requirement-definition edits or source paths of the changed
+    implementation files. A pre-existing file, a README mention, or any other
+    free-text id is not sufficient.
+    """
+    if record_rel not in files:
+        return False
+    if not registry:
         return True
-    ids = {str(item).strip() for item in (data.get("requirement_ids") or []) if str(item).strip()}
-    return bool(ids & scope)
+    if not scope:
+        return False
+    return bool(requirement_ids_of(data) & scope)
 
 
 def main() -> int:
@@ -183,7 +315,10 @@ def main() -> int:
     for f in implementation:
         print(f"  {f}")
 
-    scope = changed_requirement_scope(base)
+    registry = registry_present()
+    scope = changed_requirement_scope(base, implementation) if registry else set()
+    if registry:
+        print("requirement scope:", ", ".join(sorted(scope)) or "(none)")
     records = sorted((ROOT / "docs/evidence/test-approvals").glob("*.yaml"))
     approved = []
     for record in records:
@@ -220,10 +355,13 @@ def main() -> int:
                 + ", ".join(missing)
             )
             continue
-        if not approval_bound(rel, data, files, scope):
+        if rel not in files:
+            print(f"{rel}: approval is not part of this diff")
+            continue
+        if not approval_bound(rel, data, files, scope, registry):
             print(
-                f"{rel}: approval is not in this diff and its requirement_ids "
-                "do not intersect the changed requirement scope"
+                f"{rel}: requirement_ids do not intersect the changed requirement scope "
+                "(definition edits or implementation source paths)"
             )
             continue
         approved.append(record)
@@ -231,12 +369,13 @@ def main() -> int:
 
     if not approved:
         print(
-            "test-approval: implementation changes require an APPROVED record that "
-            "is part of this diff or whose requirement_ids intersect the changed "
-            "requirement scope, with a non-author reviewer and an approved_commit "
-            "that is an ancestor of HEAD and that contains the referenced plan/test "
-            "files. Pending templates and unrelated historical approvals do not "
-            "satisfy this gate.",
+            "test-approval: implementation changes require an APPROVED record added "
+            "or updated in this diff, whose requirement_ids intersect requirement "
+            "definitions edited here or source paths of the changed implementation "
+            "files when a registry exists. The record also needs a non-author "
+            "reviewer and an approved_commit that is an ancestor of HEAD and that "
+            "contains the referenced plan/test files. Pre-existing approvals and "
+            "free-text requirement mentions do not satisfy this gate.",
             file=sys.stderr,
         )
         return 1
