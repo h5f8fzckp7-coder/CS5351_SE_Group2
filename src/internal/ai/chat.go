@@ -33,6 +33,7 @@ func (s *Service) ChatHistory(ctx context.Context, contentID string) (ChatResult
 	if len(row.Value) > 512<<10 || json.Unmarshal([]byte(row.Value), &messages) != nil || !utf8ValidChat("", messages) {
 		return ChatResult{}, ErrStorage
 	}
+	messages = s.assessHistory(ctx, contentID, messages)
 	return ChatResult{ContentID: contentID, Messages: messages, UpdatedAt: row.CreatedAt}, nil
 }
 
@@ -99,11 +100,10 @@ func (s *Service) chat(ctx context.Context, in ChatRequest, emit func(string) er
 	if len(in.Messages) > 0 {
 		history = append([]ChatMessage(nil), in.Messages...)
 
-		// Client-supplied citations are untrusted.
-		// Only citations generated and validated by the server may be retained.
-		for i := range history {
-			history[i].Citations = nil
-		}
+		// Client-supplied citations and freshness labels are untrusted.
+		// Only server-generated citations and server-assessed version
+		// status may be retained.
+		stripUntrustedEvidence(history)
 	}
 	if len(history) == 0 || history[len(history)-1].Role != "user" {
 		return ChatResult{}, ErrInvalid
@@ -305,13 +305,17 @@ func (s *Service) chat(ctx context.Context, in ChatRequest, emit func(string) er
 		}
 	}
 
-	history = append(history, ChatMessage{Role: "assistant", Content: strings.TrimSpace(cleanAnswer), Model: c.Model, Citations: citations})
+	assistant := ChatMessage{Role: "assistant", Content: strings.TrimSpace(cleanAnswer), Model: c.Model, Citations: citations}
+	current, lookupErr := lookupCurrent(ctx, s.contentVersionReader(), in.ContentID)
+	stampFreshness(&assistant, in.ContentID, current, lookupErr)
+	history = append(history, assistant)
 	value, _ := json.Marshal(history)
 	if err := s.results.PutAIResult(ctx, StoredResult{Kind: chatResultKind, SourceHash: key, Value: string(value), Target: "", Model: c.Model, CreatedAt: time.Now().Unix()}); err != nil {
 		return ChatResult{}, ErrStorage
 	}
 
 	SetOutcome(ctx, OutcomeCompleted)
+	history = applyFreshness(history, in.ContentID, current, lookupErr)
 	return ChatResult{ContentID: in.ContentID, Messages: history, UpdatedAt: time.Now().Unix(), Budget: budgetReportFor(ctx), Retrieval: retrievalResp}, nil
 }
 
