@@ -291,6 +291,130 @@ func TestETApplyFreshnessOnStoredCitations(t *testing.T) {
 	}
 }
 
+// textVersions can prove whether client context matches a saved source.
+// memoryVersions cannot, so client context stays unverified with it.
+type textVersions struct {
+	*memoryVersions
+	text string
+}
+
+func (t textVersions) SavedSourceText(ctx context.Context, contentID string) (string, freshness.Current, error) {
+	current, err := t.CurrentContentVersion(ctx, contentID)
+	if err != nil {
+		return "", freshness.Current{}, err
+	}
+	return t.text, current, nil
+}
+
+func TestETSourceChangeDuringGenerationIsNotCurrent(t *testing.T) {
+	const id = "rss:freshness-mid-generation"
+	versions := newMemoryVersions()
+	versions.set(id, freshness.Current{Exists: true, Revision: 1, Hash: "hash-v1"})
+	provider := &retrievalChatProvider{answer: "根据生成开始时的原文回答。"}
+	provider.onChat = func() {
+		// Save lands after context is read and before the answer is stamped.
+		versions.set(id, freshness.Current{Exists: true, Revision: 2, Hash: "hash-v2"})
+	}
+	service, _, _ := configured(t, provider)
+	service.SetContentVersionReader(versions)
+
+	result, err := service.Chat(context.Background(), ChatRequest{
+		ContentID: id,
+		Revision:  service.Status().Revision,
+		Model:     "fixture",
+		Messages:  []ChatMessage{{Role: "user", Content: "原文说了什么？"}},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	stored := assistantOf(t, result)
+	if stored.VersionStatus == freshness.StatusCurrent || freshness.DisplayedAsCurrentlyValid(stored.VersionStatus) {
+		t.Fatalf("mid-generation save stored the answer as current: rev=%d hash=%q status=%q", stored.SourceRevision, stored.SourceHash, stored.VersionStatus)
+	}
+	if stored.SourceRevision == 2 || stored.SourceHash == "hash-v2" {
+		t.Fatalf("stamped the post-generation snapshot: %+v", stored)
+	}
+
+	reopen, err := service.ChatHistory(context.Background(), id)
+	if err != nil {
+		t.Fatal(err)
+	}
+	again := assistantOf(t, reopen)
+	if again.VersionStatus == freshness.StatusCurrent || freshness.DisplayedAsCurrentlyValid(again.VersionStatus) {
+		t.Fatalf("reopen still current after mid-generation save: rev=%d hash=%q status=%q", again.SourceRevision, again.SourceHash, again.VersionStatus)
+	}
+}
+
+func TestETClientContextMismatchIsNotCurrent(t *testing.T) {
+	const id = "rss:freshness-client-mismatch"
+	const saved = "保存的原文句子。"
+	versions := newMemoryVersions()
+	versions.set(id, freshness.Current{Exists: true, Revision: 4, Hash: "saved-hash"})
+	provider := &retrievalChatProvider{answer: "这是客户端上下文上的回答。"}
+	service, _, _ := configured(t, provider)
+	service.SetContentVersionReader(textVersions{memoryVersions: versions, text: saved})
+
+	result, err := service.Chat(context.Background(), ChatRequest{
+		ContentID: id,
+		Context:   "这是另一份完全不同的客户端上下文。",
+		Revision:  service.Status().Revision,
+		Model:     "fixture",
+		Messages:  []ChatMessage{{Role: "user", Content: "请回答"}},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	stored := assistantOf(t, result)
+	if stored.VersionStatus == freshness.StatusCurrent || freshness.DisplayedAsCurrentlyValid(stored.VersionStatus) {
+		t.Fatalf("mismatched client context stamped current: rev=%d hash=%q status=%q", stored.SourceRevision, stored.SourceHash, stored.VersionStatus)
+	}
+	if stored.SourceRevision == 4 || stored.SourceHash == "saved-hash" {
+		t.Fatalf("mismatched client context was stamped with the saved snapshot: %+v", stored)
+	}
+
+	matched, err := service.Chat(context.Background(), ChatRequest{
+		ContentID: id,
+		Context:   "概览\n\n" + saved,
+		Revision:  service.Status().Revision,
+		Model:     "fixture",
+		Messages:  []ChatMessage{{Role: "user", Content: "第一问"}, {Role: "assistant", Content: stored.Content}, {Role: "user", Content: "请根据原文回答"}},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	current := matched.Messages[len(matched.Messages)-1]
+	if current.VersionStatus != freshness.StatusCurrent || current.SourceRevision != 4 || current.SourceHash != "saved-hash" {
+		t.Fatalf("matching client context = rev=%d hash=%q status=%q", current.SourceRevision, current.SourceHash, current.VersionStatus)
+	}
+}
+
+func TestETUnverifiedClientContextIsNotCurrent(t *testing.T) {
+	const id = "rss:freshness-client-unverified"
+	versions := newMemoryVersions()
+	versions.set(id, freshness.Current{Exists: true, Revision: 3, Hash: "live-hash"})
+	provider := &retrievalChatProvider{answer: "无法核对来源的回答。"}
+	service, _, _ := configured(t, provider)
+	service.SetContentVersionReader(versions)
+
+	result, err := service.Chat(context.Background(), ChatRequest{
+		ContentID: id,
+		Context:   "客户端自行提供的上下文。",
+		Revision:  service.Status().Revision,
+		Model:     "fixture",
+		Messages:  []ChatMessage{{Role: "user", Content: "请回答"}},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	stored := assistantOf(t, result)
+	if stored.VersionStatus == freshness.StatusCurrent || freshness.DisplayedAsCurrentlyValid(stored.VersionStatus) {
+		t.Fatalf("unverifiable client context stamped current: rev=%d hash=%q status=%q", stored.SourceRevision, stored.SourceHash, stored.VersionStatus)
+	}
+	if stored.SourceRevision == 3 || stored.SourceHash == "live-hash" {
+		t.Fatalf("unverifiable client context copied the live snapshot: %+v", stored)
+	}
+}
+
 func TestETLegacyMessageWithoutSnapshotIsNotCurrent(t *testing.T) {
 	messages := []ChatMessage{{Role: "assistant", Content: "上游旧对话，没有版本快照"}}
 	out := applyFreshness(messages, "rss:legacy", freshness.Current{Exists: true, Revision: 3, Hash: "now"}, nil)

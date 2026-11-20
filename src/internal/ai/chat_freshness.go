@@ -2,9 +2,11 @@ package ai
 
 import (
 	"context"
+	"strings"
 
 	"tangentry/internal/citation"
 	"tangentry/internal/freshness"
+	"tangentry/internal/retrieval"
 )
 
 // ContentVersionReader looks up the live saved_content revision and hash.
@@ -41,32 +43,142 @@ func lookupCurrent(ctx context.Context, reader ContentVersionReader, contentID s
 // unavailable (fail closed), so this must be a non-nil error.
 var errVersionLookupUnavailable = errSentinel("content version lookup is not configured")
 
+// SourceTextReader is optional. A ContentVersionReader that also returns the
+// saved source text from the same read lets chat check client-supplied
+// context against that snapshot. Without it, client context cannot be proven
+// to match the saved source and is not stamped current.
+type SourceTextReader interface {
+	SavedSourceText(ctx context.Context, contentID string) (text string, current freshness.Current, err error)
+}
+
+// sourceBinding is the saved-content snapshot the generation context was
+// read from. Established is false when that identity cannot be proven.
+// Stamp must not copy a later live row onto the answer in that case.
+type sourceBinding struct {
+	Established bool
+	Revision    int64
+	Hash        string
+}
+
+// bindGenerationSource captures the source identity at context-assembly time,
+// before the provider runs. A later lookup is compared with this snapshot.
+func (s *Service) bindGenerationSource(ctx context.Context, in ChatRequest, passages []retrieval.Passage) sourceBinding {
+	reader := s.contentVersionReader()
+	if in.Retrieval != nil && in.Retrieval.Enabled {
+		return bindRetrievedSource(ctx, reader, in.ContentID, passages)
+	}
+	if strings.TrimSpace(in.Context) != "" {
+		return bindClientContext(ctx, reader, in.ContentID, in.Context)
+	}
+	current, err := lookupCurrent(ctx, reader, in.ContentID)
+	if err != nil || !current.Exists {
+		return sourceBinding{}
+	}
+	return sourceBinding{Established: true, Revision: current.Revision, Hash: current.Hash}
+}
+
+func bindRetrievedSource(ctx context.Context, reader ContentVersionReader, contentID string, passages []retrieval.Passage) sourceBinding {
+	current, err := lookupCurrent(ctx, reader, contentID)
+	if err != nil || !current.Exists {
+		return sourceBinding{}
+	}
+	revision, ok := uniformContentRevision(passages)
+	if !ok {
+		return sourceBinding{}
+	}
+	// The passages name an earlier revision than the row we just read.
+	// Keep that earlier revision and do not attach the newer hash.
+	if revision > 0 && revision != current.Revision {
+		return sourceBinding{Established: true, Revision: revision}
+	}
+	return sourceBinding{Established: true, Revision: current.Revision, Hash: current.Hash}
+}
+
+func bindClientContext(ctx context.Context, reader ContentVersionReader, contentID, contextText string) sourceBinding {
+	texter, ok := reader.(SourceTextReader)
+	if !ok {
+		return sourceBinding{}
+	}
+	text, current, err := texter.SavedSourceText(ctx, contentID)
+	if err != nil || !current.Exists {
+		return sourceBinding{}
+	}
+	if !clientContextMatchesSaved(contextText, text) {
+		return sourceBinding{}
+	}
+	return sourceBinding{Established: true, Revision: current.Revision, Hash: current.Hash}
+}
+
+// clientContextMatchesSaved reports whether the client context contains the
+// exact saved source text. A shorter or different excerpt is not treated as
+// that snapshot.
+func clientContextMatchesSaved(contextText, saved string) bool {
+	saved = strings.TrimSpace(saved)
+	if saved == "" {
+		return false
+	}
+	return strings.Contains(contextText, saved)
+}
+
+// uniformContentRevision returns the shared content-revision of passages.
+// ok is false when a passage version is present but is not a single
+// content-revision value. No versioned passages returns 0, true.
+func uniformContentRevision(passages []retrieval.Passage) (int64, bool) {
+	var revision int64
+	seen := false
+	for _, passage := range passages {
+		if strings.TrimSpace(passage.SourceVersion) == "" {
+			continue
+		}
+		parsed := freshness.ParseRevision(passage.SourceVersion)
+		if parsed <= 0 {
+			return 0, false
+		}
+		if seen && parsed != revision {
+			return 0, false
+		}
+		revision = parsed
+		seen = true
+	}
+	return revision, true
+}
+
 type errSentinel string
 
 func (e errSentinel) Error() string { return string(e) }
 
-// stampFreshness records the live content snapshot on a newly stored assistant
-// message and its citations, and sets their freshness to the assessed value.
-func stampFreshness(message *ChatMessage, contentID string, current freshness.Current, lookupErr error) {
+// stampFreshness records the context-time source snapshot on a newly stored
+// assistant message and assesses it against the live row. A binding that was
+// not established is not filled from the live row, so the answer cannot be
+// current. Citations keep a passage revision that disagrees with the binding.
+func stampFreshness(message *ChatMessage, contentID string, binding sourceBinding, current freshness.Current, lookupErr error) {
 	if message == nil {
 		return
 	}
-	if lookupErr == nil && current.Exists {
-		message.SourceRevision = current.Revision
-		message.SourceHash = current.Hash
+	if binding.Established {
+		message.SourceRevision = binding.Revision
+		message.SourceHash = binding.Hash
 	}
-	captured := messageSnapshot(*message, contentID)
-	message.VersionStatus = freshness.Assess(captured, current, lookupErr)
+	message.VersionStatus = freshness.Assess(messageSnapshot(*message, contentID), current, lookupErr)
 	for i := range message.Citations {
-		if lookupErr == nil && current.Exists {
-			if message.Citations[i].ContentRevision == 0 {
-				message.Citations[i].ContentRevision = current.Revision
-			}
-			if message.Citations[i].ContentHash == "" {
-				message.Citations[i].ContentHash = current.Hash
-			}
-		}
+		fillCitationSnapshot(&message.Citations[i], binding)
 		message.Citations[i].Freshness = freshness.Assess(citationSnapshot(message.Citations[i], contentID), current, lookupErr)
+	}
+}
+
+func fillCitationSnapshot(c *citation.Citation, binding sourceBinding) {
+	if c == nil || !binding.Established {
+		return
+	}
+	passageRevision := freshness.ParseRevision(c.SourceVersion)
+	if passageRevision > 0 && passageRevision != binding.Revision {
+		return
+	}
+	if c.ContentRevision == 0 {
+		c.ContentRevision = binding.Revision
+	}
+	if c.ContentHash == "" {
+		c.ContentHash = binding.Hash
 	}
 }
 

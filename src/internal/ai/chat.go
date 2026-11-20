@@ -139,6 +139,10 @@ func (s *Service) chat(ctx context.Context, in ChatRequest, emit func(string) er
 		source = runResult.Context
 		citationPassages = runResult.Passages
 	}
+	// Capture the snapshot this context was read from before generation.
+	// The stamp below compares it with a second lookup so a Save during
+	// generation cannot label the earlier answer current.
+	binding := s.bindGenerationSource(ctx, in, citationPassages)
 
 	var answer string
 	streamCompleted := false
@@ -307,7 +311,7 @@ func (s *Service) chat(ctx context.Context, in ChatRequest, emit func(string) er
 
 	assistant := ChatMessage{Role: "assistant", Content: strings.TrimSpace(cleanAnswer), Model: c.Model, Citations: citations}
 	current, lookupErr := lookupCurrent(ctx, s.contentVersionReader(), in.ContentID)
-	stampFreshness(&assistant, in.ContentID, current, lookupErr)
+	stampFreshness(&assistant, in.ContentID, binding, current, lookupErr)
 	history = append(history, assistant)
 	value, _ := json.Marshal(history)
 	if err := s.results.PutAIResult(ctx, StoredResult{Kind: chatResultKind, SourceHash: key, Value: string(value), Target: "", Model: c.Model, CreatedAt: time.Now().Unix()}); err != nil {
