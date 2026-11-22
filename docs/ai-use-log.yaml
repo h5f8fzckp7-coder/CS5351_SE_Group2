@@ -1074,3 +1074,52 @@ entries:
       for 刘若轩; those have not been produced on this branch (see debt E-D04).
       Implementation acceptance and test approval remain with a non-author
       reviewer. No credentials were placed in the repository.
+  - id: E-AI-002
+    date: "2026-11-20"
+    owner: "刘若轩 (E)"
+    tool: "OpenCode"
+    model: "CityU gateway DeepSeek V4 Flash"
+    purpose: >-
+      Official course OpenCode session for Owner E: review and verify the
+      Owner E implementation and PR #11 against the requested freshness and
+      CI-gate corrections, then re-check fix branch
+      cursor/freshness-ci-gates-4fd7 at a3bd25e. This same continuous
+      session also contains earlier case-study / requirements discussion
+      (from the owner's Q0 requirements list through grouping, fit
+      criteria, conflicts, conflict resolution, and responsibility
+      relations). It is a review and verification session, not the
+      implementation session that produced the PR #11 code (see E-AI-001).
+    scope:
+      read:
+        - "PR #11 head aaba126 and fix branch cursor/freshness-ci-gates-4fd7 at a3bd25e"
+        - "chat freshness binding and CI gate scripts under review"
+      executed:
+        - "Independent review of PR #11 (F-01 / F-02 / F-03) and a re-check of a3bd25e, including temporary probe tests that were deleted with the worktree restored"
+        - "Read-only export of this session from the local OpenCode SQLite database (mode=ro); the export script was not added to the repository"
+    generated_code: false
+    original_session_id: ses_e64cc8050ffe1Zrfm7Snor6D2e
+    original_export: owner-local docs/transcripts/owner-e/ea-case-study-session-ses_e64cc8050ffe1Zrfm7Snor6D2e.json
+    original_export_sha256: ad8bbe11add4ac36b2789b2e54447d510c363d699abb6226c40c463d406af64b
+    transcript: >-
+      owner-local docs/transcripts/owner-e/ea-case-study-session-ses_e64cc8050ffe1Zrfm7Snor6D2e.json
+      (raw OpenCode session export, 104 messages, seq 4-801, retained
+      outside git; sha256
+      ad8bbe11add4ac36b2789b2e54447d510c363d699abb6226c40c463d406af64b;
+      can be supplied for course review without altering its contents)
+    transcript_status: "exported"
+    official_course_transcripts: exported
+    human_review: "pending"
+    notes: >-
+      This entry records the official OpenCode + CityU gateway DeepSeek V4
+      Flash raw transcript. It does not replace E-AI-001, which remains the
+      disclosure of earlier Grok Bot implementation assistance. The session
+      is not a pre-implementation approval. Non-author test approval remains
+      pending. The export was taken read-only from
+      ~/.local/share/opencode/opencode.db (session_v2 + session_message),
+      with each message kept field-for-field (id, type, seq, timestamps,
+      original data payload); counts were user 11, assistant 78, idle 10,
+      system 2, synthetic 3. The owner's 11 user turns were checked against
+      the session. The export turn's assistant reply may not be in this
+      file; a later re-export would have a new hash. The subsequent
+      approval-gate tighten at d064280 was not part of this OpenCode
+      session. No credentials were placed in the repository.
