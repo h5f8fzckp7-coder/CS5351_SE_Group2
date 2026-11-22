@@ -359,28 +359,32 @@ class TestApprovalGate(unittest.TestCase):
         right = run_gate(repo, base)
         self.assertEqual(right.returncode, 0, right.stdout + right.stderr)
 
-    def test_this_pr_rejects_unrelated_baseline_approval(self) -> None:
-        project = SCRIPT.parents[1]
-        gate = load_gate(project)
-        base = gate.git("merge-base", "main", "HEAD")
+    def test_isolated_fixture_rejects_unrelated_baseline_approval(self) -> None:
+        """A baseline approval for other requirements does not bind a later change.
+
+        The subject is a temporary repository. It does not call
+        ``git merge-base main HEAD`` on the checkout running the tests, and it
+        does not assert anything about this pull request's diff. A detached
+        pull-request checkout has no local ``main``, and a push of the merged
+        commit has an empty diff against ``main``; either shape used to make
+        the old live-checkout case fail.
+        """
+        repo, base = self._historical_unrelated()
+        gate = load_gate(repo)
         files = gate.changed_files(base)
         implementation = [path for path in files if gate.is_implementation(path)]
         scope = gate.changed_requirement_scope(base, implementation)
-        self.assertNotIn("FR-01", scope, sorted(scope))
-        self.assertNotIn("FR-02", scope, sorted(scope))
-        self.assertIn("FR-05", scope, sorted(scope))
-        baseline = "8fd03bf8c1c881520d239962732deb3e94ec5061"
-        test_file = "src/internal/adapters/aichat/budget_test.go"
-        self.assertTrue(gate.commit_has_path(baseline, test_file))
-        self.assertFalse(
-            gate.approval_bound(
-                "docs/evidence/test-approvals/unrelated.yaml",
-                {"requirement_ids": ["FR-01", "FR-02"], "plan": test_file},
-                files,
-                scope,
-                True,
-            )
-        )
+        self.assertEqual(scope, {"FR-05"})
+        record = "docs/evidence/test-approvals/kefan.yaml"
+        self.assertNotIn(record, files)
+        data = gate.parse_record(repo / record)
+        self.assertEqual(set(data["requirement_ids"]), {"FR-01", "FR-02"})
+        self.assertTrue(gate.commit_has_path(data["approved_commit"], str(data["plan"])))
+        self.assertFalse(gate.approval_bound(record, data, files, scope, True))
+        result = run_gate(repo, base)
+        self.assertNotEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertIn("not part of this diff", result.stdout + result.stderr)
+        self.assertNotIn("accepted approval", result.stdout)
 
 
 if __name__ == "__main__":

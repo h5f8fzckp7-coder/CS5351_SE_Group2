@@ -61,6 +61,17 @@ Result: all executed Go packages passed, exit 0. The FFmpeg exact-duration case 
 
 Without the skip, that tools package test still fails on this machine with a duration of `1.020998` versus the expected exact timeline, matching Owner A's earlier exception.
 
+## Approval-gate self-test checkout shapes
+
+`test_this_pr_rejects_unrelated_baseline_approval` called `git merge-base main HEAD` and required this pull request's FR-05 diff. That case was replaced by `test_isolated_fixture_rejects_unrelated_baseline_approval`, which builds a temporary repository and does not read the host branch. The other gate cases were not changed. These runs used separate clones so the working branch was left in place. They are local reproductions of the two checkout shapes, not a GitHub Actions log.
+
+On `d064280`, before the replacement, `python3 scripts/ci/test_approval_gate.py`:
+
+- Detached HEAD, remote-tracking `origin/main` present, no local `main`. `git merge-base main HEAD` exited 128 (`fatal: Not a valid object name main`). The suite exited 1: the coupled case errored, and the other nine cases passed.
+- Local `main` pointed at the same commit as HEAD, so `git diff --name-only main HEAD` was empty. The suite exited 1: the coupled case failed because `FR-05` was not in the empty requirement scope, and the other nine cases passed.
+
+After the replacement, the same command exited 0 (10 tests) in both shapes, and in the normal checkout where local `main` is still the pull-request base.
+
 ## Gates not satisfied on this branch
 
 - Test-approval CI job: expected to fail until a non-author writes an APPROVED record in `docs/evidence/test-approvals/`.
