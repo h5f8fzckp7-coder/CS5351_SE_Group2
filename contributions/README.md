@@ -17,7 +17,7 @@ Records start with this fork's first group commit. Each entry states the actual 
 | [011](011-owner-a-budget-implementation.md) | `feat: add per-invocation AI provider call budgets` | Kefan CHEN | Invocation ledger, adapter/service/HTTP/UI integration, tests and measured comparison |
 | [012](012-owner-a-stream-review-fixes.md) | `fix: preserve AI stream and summary terminal states` | Kefan CHEN | Strict limited-stream completion, usage-only chunks and summary failure snapshots |
 | [013](013-owner-b-implementation.md) | `docs: record B retrieval approval and phase-0 gate` (phase 0; later phases append) | WANG Jiaqi | B implementation of FR-02/NFR-02/INV-04/INV-05: approval gate, baselines, then phased retrieval implementation |
-| [014](014-owner-d-comparison-implementation.md) | implementation uncommitted | Wenlong Lu | FR-04 comparison, source preparation, verified evidence, budget integration, functional verification; NFR-04 pending |
+| [014](014-owner-d-comparison-implementation.md) | `99c38dd` | Wenlong Lu | FR-04 comparison, source preparation, verified evidence, budget integration and functional verification; NFR-04 local assisted self-evaluation passed; independent review pending |
 
 The upstream history predates this group record and is not reconstructed here.
 Numbering is append-only and shared by all owners; a new owner takes the next free
