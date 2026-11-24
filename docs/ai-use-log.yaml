@@ -1038,3 +1038,1090 @@ entries:
       validation, never for the claim. No src/ implementation code changed;
       A's budget files untouched. PR + non-author review remain human actions;
       no push in this session.
+  - id: D-AI-001
+    date: "2026-11-20"
+    recorded_on: "2026-11-22"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "Exact model build identifier not captured"
+    purpose: >-
+      Retrospective disclosure of the initial FR-04 implementation explicitly
+      requested in this conversation: saved multi-source comparison, bounded
+      retrieval, source/citation validation, invocation budgeting, HTTP and UI.
+    scope:
+      wrote:
+        - "src/internal/ai/comparison*.go and translation_types.go"
+        - "src/internal/app/comparison*.go and feature_services.go"
+        - "src/internal/retrieval/snapshot_passages.go"
+        - "src/internal/adapters/aichat/comparison*.go"
+        - "src/internal/transport/http/ai_comparison.go and routes_ai.go"
+        - "src/web/src/features/ai/comparison* and ComparisonPanel*"
+        - "src/web/src/app/App.tsx"
+        - "src/web/tests/reader-chat.spec.ts and tests/server/main.go"
+        - "docs/plans/d-comparison-plan.md"
+    verification: >-
+      Historical checks in the conversation: full Go suite, focused race/vet,
+      292 frontend tests and production build passed. Playwright could not
+      launch under the sandbox; isolated in-app browser checks verified the
+      comparison and original highlighting. These are not NFR accuracy scores.
+    network_writes:
+      - "Loopback synthetic test setup and local Ollama smoke requests only; no remote repository or hosted-provider writes."
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript: "Current Codex conversation; raw owner-local export pending."
+    transcript_status: "pending_export"
+    human_review: "pending"
+    generated_code: true
+    notes: >-
+      This entry was added after the work, as disclosed by recorded_on. It is
+      not a reconstructed prior test approval, an independent review, or an
+      exported raw transcript. Model smoke checks exposed semantic errors and
+      invalid/missing evidence; NFR-04 acceptance was not claimed.
+  - id: D-AI-002
+    date: "2026-11-22"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "Exact model build identifier not captured"
+    purpose: >-
+      Continue FR-04 at the user's request: inspect saved-source readiness,
+      explain unsupported/missing-text items, provide preparation links and
+      refresh, constrain short source/passage handles, reject foreign snapshots,
+      invalidate stale source jumps, and complete functional delivery records.
+    scope:
+      wrote:
+        - "src/internal/ai/comparison*.go"
+        - "src/internal/adapters/aichat/comparison*.go"
+        - "src/internal/app/comparison_integration_test.go"
+        - "src/internal/transport/http/ai_comparison.go and routes_ai.go"
+        - "src/web/src/features/ai/ComparisonPanel*, ComparisonSourceOption.tsx, comparison*"
+        - "src/web/tests/reader-chat.spec.ts"
+        - "test/offline/d-comparison/"
+        - "docs/plans/d-comparison-plan.md and docs/evidence/d-fr-verification.md"
+        - "README.md (D checklist only)"
+        - "contributions/014-owner-d-comparison-implementation.md and contributions/README.md"
+        - "docs/ai-use-log.yaml (D entries only)"
+    verification: "See docs/evidence/d-fr-verification.md for executed checks and limits."
+    network_writes:
+      - "Loopback-only synthetic fixture setup, isolated UI tests, and local Ollama smoke checks; no real user text sent to a hosted model."
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript: "Current Codex conversation; raw owner-local export pending."
+    transcript_status: "pending_export"
+    human_review: "pending"
+    generated_code: true
+    notes: >-
+      Canonical tests were extended and the actual browser workflow was checked
+      with isolated synthetic data. Playwright launch remains sandbox-blocked.
+      No NFR-04 pass, independent human approval, commit, push or PR is claimed.
+  - id: D-AI-003
+    date: "2026-11-22"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "Exact model build identifier not captured"
+    purpose: >-
+      Fix the reported FR-04 cross-source quotation failure by binding each
+      output source to its own passage handles and explaining invalid attribution.
+    scope:
+      wrote:
+        - "src/internal/ai/comparison.go, comparison_evidence.go, comparison_types.go, comparison_schema.go and comparison tests"
+        - "src/web/src/features/ai/comparison.ts and ComparisonPanel.test.tsx"
+        - "docs/evidence/d-fr-verification.md and docs/ai-use-log.yaml"
+    verification: >-
+      AI, aichat, app and HTTP tests and vet passed. Two focused UI test files
+      passed (8 tests); the frontend production build passed. The isolated
+      full-text local-model smoke returned HTTP 504 after about 30 seconds;
+      this does not establish improved model accuracy or NFR-04 acceptance.
+    network_writes:
+      - "Comparison against a loopback server with a database copy and the already configured local Ollama; no hosted-provider or remote-repository writes."
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript: "Current Codex conversation; raw owner-local export pending."
+    transcript_status: "pending_export"
+    human_review: "pending"
+    generated_code: true
+    notes: >-
+      The source-binding fix does not repair the separate subtitle acquisition
+      or RSS-summary readiness issues. No model configuration or owner source
+      data was changed, and no commit or push was requested.
+  - id: D-AI-004
+    date: "2026-11-22"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "Exact agent model build identifier not captured"
+    purpose: >-
+      Correct the reported Same classification for unrelated article topics:
+      allow Different without conflating it with incompatible factual claims,
+      clarify equivalence in the prompt, and distinguish citation matching
+      from semantic agreement in the UI.
+    scope:
+      wrote:
+        - "src/internal/ai/comparison.go, comparison_evidence.go, comparison_schema.go and comparison_relation_test.go"
+        - "src/web/src/features/ai/comparison.ts, ComparisonPanel.tsx and ComparisonPanel.test.tsx"
+        - "docs/plans/d-comparison-plan.md, docs/evidence/d-fr-verification.md and docs/ai-use-log.yaml"
+        - "docs/evidence/d-comparison-topic-smoke-20261122.json"
+    verification: >-
+      AI, aichat, app and HTTP tests and vet passed; two focused frontend test
+      files passed (9 tests); production frontend build passed. An isolated
+      full-text smoke with configured model openai/gpt-5.4-mini returned
+      Different in about 5.1 seconds. All 10 citations and exact evidence
+      reopens passed. This is one regression, not NFR-04 accuracy acceptance.
+    network_writes:
+      - "One comparison through the owner's configured Ofox provider with the same two public RSS full-text articles and question as the reported case; 14559 prompt tokens and 476 completion tokens were reported."
+      - "Loopback evidence reopen requests against an isolated database backup; no remote repository writes."
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript: "Current Codex conversation; raw owner-local export pending."
+    transcript_status: "pending_export"
+    human_review: "pending"
+    generated_code: true
+    notes: >-
+      The extra Different presentation label leaves the existing requirement
+      categories and NFR targets intact. Semantic classification remains a
+      model judgment; citation verification does not prove entailment. No
+      model configuration or owner article data was changed. No commit or push.
+  - id: D-AI-005
+    date: "2026-11-22"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "Exact agent model build identifier not captured"
+    purpose: >-
+      Honor the owner's request for a one-sentence model answer instead of
+      fixed comparison verdicts; retain source attribution and citation checks.
+    scope:
+      wrote:
+        - "src/internal/ai/comparison*.go, including comparison_answer_test.go"
+        - "src/internal/app/comparison_integration_test.go"
+        - "src/web/src/features/ai/comparison.ts, comparison.css, ComparisonPanel.tsx and ComparisonPanel.test.tsx"
+        - "src/web/tests/reader-chat.spec.ts and tests/server/main.go"
+        - "docs/plans/d-comparison-plan.md, docs/evidence/d-fr-verification.md and docs/ai-use-log.yaml"
+        - "docs/evidence/d-comparison-answer-smoke-20261122.json"
+    verification: >-
+      AI, aichat, app and HTTP tests and vet passed; two focused frontend files
+      passed (10 tests), and production frontend build passed. The final
+      isolated real-model run returned one Chinese answer in about 6.4 seconds,
+      no categorical relation, and 9 verified citations with successful exact
+      evidence reopens. Browser E2E assertions were updated but not executed.
+      These checks do not establish NFR-04 acceptance.
+    network_writes:
+      - "Two user-configured Ofox comparisons using the same public full-text article pair; each started one provider call, with 29731 total reported tokens across both checks."
+      - "Loopback evidence reopen checks against an isolated SQLite backup; no remote repository writes."
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript: "Current Codex conversation; raw owner-local export pending."
+    transcript_status: "pending_export"
+    human_review: "pending"
+    generated_code: true
+    notes: >-
+      The current model schema requests sources plus a free-text answer,
+      without a relationship enum. Legacy relationship metadata remains
+      readable for earlier fixtures. A failed source check or stale evidence
+      clears the synthesized answer. No owner source data, model settings,
+      requirement thresholds or frozen acceptance cases were changed.
+      No commit or push was requested.
+  - id: D-AI-006
+    date: "2026-11-22"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "Exact agent model build identifier not captured"
+    purpose: >-
+      Distinguish unrelated selected sources from failed evidence so a focused
+      question can retain its verified answer while preserving failure guards.
+    scope:
+      wrote:
+        - "src/internal/ai/comparison.go, comparison_evidence.go, comparison_schema.go, comparison_schema_test.go and comparison_relevance_test.go"
+        - "src/web/src/features/ai/comparison.ts, ComparisonPanel.tsx and ComparisonPanel.test.tsx"
+        - "docs/plans/d-comparison-plan.md, docs/evidence/d-fr-verification.md and docs/ai-use-log.yaml"
+        - "docs/evidence/d-comparison-relevance-smoke-20261122.json"
+    verification: >-
+      AI, aichat, app and HTTP tests passed; final comparison tests and vet
+      passed. Two focused frontend files passed (11 tests); production frontend
+      build passed. Isolated real-model focused and all-source questions both
+      returned answers; all 12 cited evidence ranges across the runs reopened
+      successfully. Browser E2E was not run; NFR-04 acceptance remains pending.
+    network_writes:
+      - "Two configured Ofox comparisons with the three selected public RSS items and focused/all-source questions; one provider call per invocation, 30965 reported total tokens across both."
+      - "Loopback citation reopens against an isolated SQLite backup; no remote repository writes."
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript: "Current Codex conversation; raw owner-local export pending."
+    transcript_status: "pending_export"
+    human_review: "pending"
+    generated_code: true
+    notes: >-
+      not_relevant is a model relevance judgment, not an absence assertion or
+      independent semantic validation. Server guards require complete supplied
+      text, fresh source/range checks, no excluded claims, and at least one
+      relevant supported or validated-absence row. Real source failures cannot
+      use this state to bypass answer withholding. The GTA source was a saved
+      excerpt; no owner source data or model settings were changed.
+      No commit or push was requested.
+  - id: D-AI-007
+    date: "2026-11-22"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "Exact agent model build identifier not captured"
+    purpose: >-
+      Investigate intermittent withholding of focused comparison answers and
+      reject repeated/missing model source rows with a fixed-key schema.
+    scope:
+      wrote:
+        - "src/internal/ai/comparison.go, comparison_types.go, comparison_evidence.go, comparison_schema.go and comparison_schema_test.go"
+        - "src/internal/ai/comparison_answer_scope_test.go"
+        - "src/internal/app/comparison_integration_test.go and src/web/tests/server/main.go"
+        - "src/web/src/features/ai/comparison.ts, ComparisonPanel.tsx and ComparisonPanel.test.tsx"
+        - "docs/plans/d-comparison-plan.md, docs/evidence/d-fr-verification.md and docs/ai-use-log.yaml"
+        - "docs/evidence/d-comparison-scope-smoke-20261122.json"
+    verification: >-
+      AI, aichat, app and HTTP tests and vet passed; the browser fixture server
+      compiles. Twelve focused UI tests and the production frontend build
+      passed. Four final real-model requests returned scoped or all-source
+      answers with one provider call each and 31 successful exact evidence
+      reopens. Intermediate format failures remain recorded, including a
+      captured duplicate-S2/missing-S3 output. Browser E2E was not executed;
+      this does not establish NFR-04 semantic accuracy acceptance.
+    network_writes:
+      - "Thirteen comparison invocations via the configured Ofox gateway: two baseline, seven diagnostic/intermediate and four final requests with the same selected public articles."
+      - "Loopback citation reopens; diagnostic proxy captured model content and usage only, without credentials."
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript: "Current Codex conversation; raw owner-local export pending."
+    transcript_status: "pending_export"
+    human_review: "pending"
+    generated_code: true
+    notes: >-
+      Explicit answer dependencies separate answer scope from source evidence
+      state. Fixed source keys reduce duplicate/missing rows; invalid outputs
+      remain rejected. Scope, relevance and entailment remain model judgments.
+      Owner model settings and article data were not modified; isolated test
+      data and copied credentials were removed after stopping test servers.
+      No commit or push was requested.
+  - id: D-AI-008
+    date: "2026-11-22"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "Exact agent model build identifier not captured"
+    purpose: >-
+      Reproduce the GTA title-as-body quotation failure and move exact quote
+      extraction to the server while retaining source/range/version checks.
+    scope:
+      wrote:
+        - "src/internal/ai/comparison.go, comparison_types.go, comparison_evidence.go and comparison_schema.go"
+        - "src/internal/ai/comparison_passage_ids_test.go, comparison_schema_test.go and comparison_test.go"
+        - "src/internal/app/comparison_integration_test.go and src/web/tests/server/main.go"
+        - "docs/plans/d-comparison-plan.md, docs/evidence/d-fr-verification.md and docs/ai-use-log.yaml"
+        - "docs/evidence/d-comparison-passage-selection-smoke-20261122.json"
+    verification: >-
+      AI, aichat, app and HTTP tests and vet passed, browser fixture server
+      compiles, and 12 focused UI tests passed. First baseline request
+      reproduced the screenshot's bad title quote. Ten final GTA questions
+      and two controls returned answers with one provider call each and 43
+      exact citation reopens. These are functional observations, not semantic
+      accuracy passes; browser E2E and NFR-04 acceptance remain pending.
+    network_writes:
+      - "Thirteen configured Ofox comparisons using the same saved public sources: one failing baseline and twelve final checks; one provider call per invocation."
+      - "Loopback diagnostic and citation reopen requests; model response and public evidence captured without credentials."
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript: "Current Codex conversation; raw owner-local export pending."
+    transcript_status: "pending_export"
+    human_review: "pending"
+    generated_code: true
+    notes: >-
+      The model selects per-source passage IDs; server text extraction still
+      goes through original C verification. Invalid legacy quote text remains
+      rejected rather than repaired. Source selection and entailment remain
+      model judgments; some outputs repeat title-only high-score claims, so
+      no semantic-accuracy pass is claimed. GTA evidence remains a saved RSS
+      excerpt. Owner settings/data were not modified; isolated credential
+      copies were removed after stopping test servers. No commit or push.
+  - id: D-AI-009
+    date: "2026-11-22"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "Exact agent model build identifier not captured"
+    purpose: >-
+      Run the owner's original ten comparison questions ten consecutive times
+      each against the same three saved articles and inspect failures.
+    scope:
+      wrote:
+        - "Owner-local outputs/comparison-100-20261122: manifest, runner, 100 API/model records, assistant review, annotated cases, summary and report"
+        - "docs/evidence/d-comparison-100-repeat-20261122.json"
+        - "docs/evidence/d-fr-verification.md and docs/ai-use-log.yaml"
+    verification: >-
+      Exactly 100 sequential comparisons and 100 provider calls completed;
+      every original question had ten consecutive submissions without result
+      retries. Ninety-seven top answers returned and three were withheld.
+      All 901 citation reopens matched exact saved text. Source versions and
+      executable/source hashes were stable. Assistant source-guided review
+      recorded 80 cases with no observed issue, 14 warnings and 6 failures;
+      this is not independent semantic accuracy or NFR-04 acceptance.
+    network_writes:
+      - "Exactly 100 configured Ofox provider requests using the original ten questions and three selected public sources; 1,508,571 reported tokens."
+      - "901 loopback evidence reopens and read-only chat history access to recover the exact original questions."
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript: "Current Codex conversation; raw owner-local export pending."
+    transcript_status: "pending_export"
+    human_review: "pending"
+    generated_code: true
+    notes: >-
+      Product logic, owner model settings and source text were held fixed.
+      Errors and warnings were retained, not replaced by successful retries.
+      Diagnostic captures omit credentials; isolated credential copies were
+      removed after stopping the test servers. GTA input remains a saved RSS
+      excerpt. There was no independent human second scorer, no browser E2E,
+      and no commit or push.
+  - id: D-AI-010
+    date: "2026-11-22"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "Exact agent model build identifier not captured"
+    purpose: >-
+      Honor the owner's explicit instruction to display generated answers
+      regardless of per-source verification outcomes.
+    scope:
+      wrote:
+        - "src/internal/ai/comparison.go and comparison answer/relevance/passage-selection regression tests"
+        - "src/internal/app/comparison_integration_test.go"
+        - "src/web/src/features/ai/comparison.ts, ComparisonPanel.tsx and ComparisonPanel.test.tsx"
+        - "src/web/tests/reader-chat.spec.ts"
+        - "contributions/014-owner-d-comparison-implementation.md"
+        - "docs/plans/d-comparison-plan.md, docs/evidence/d-fr-verification.md and docs/ai-use-log.yaml"
+        - "docs/evidence/d-comparison-answer-display-replay-20261122.json"
+        - "Owner-local outputs/comparison-answer-display-20261122 replay records"
+    verification: >-
+      AI, aichat, app and HTTP tests and vet passed. Thirteen frontend tests
+      and production frontend/backend builds passed. A local HTTP provider
+      replayed all 100 captured model responses against the same supplied
+      evidence hashes: all model sentences were retained exactly, including
+      previously withheld sequences 83, 90 and 91, with unchanged per-source
+      verification diagnostics. Browser E2E was not run.
+    network_writes:
+      - "One hundred loopback-only production comparisons with captured model responses; zero additional paid provider calls."
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript: "Current Codex conversation; raw owner-local export pending."
+    transcript_status: "pending_export"
+    human_review: "pending"
+    generated_code: true
+    notes: >-
+      Answer display is independent of evidence verification, including when
+      failed reopen marks a previously displayed reference stale. Structural
+      generation-format checks and per-source verification remain. This
+      policy change does not improve model reasoning or make failed citations
+      verified. Replay settings contained no API key; owner data/configuration
+      were not modified. No commit or push.
+  - id: D-AI-011
+    date: "2026-11-23"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "Exact agent model build identifier not captured"
+    purpose: >-
+      Generate ten new diagnostic questions and run all twenty questions ten
+      consecutive times each against the same three saved sources.
+    scope:
+      wrote:
+        - "Owner-local outputs/comparison-200-20261123: manifest, runner, 200 API/model records, source proof, review, annotated cases and report"
+        - "docs/evidence/d-comparison-200-repeat-20261123.json"
+        - "docs/evidence/d-fr-verification.md and docs/ai-use-log.yaml"
+    verification: >-
+      Exactly 200 real comparison/provider calls completed, with ten
+      consecutive submissions per question and no result-replacement retries.
+      All 200 answers were retained exactly. All 1,457 evidence reopens
+      matched source ranges. Source versions, supplied-evidence hashes and
+      executable/source hashes stayed fixed. Assistant review recorded 172
+      cases with no observed issue, 16 warnings and 12 answer problems,
+      including nine false exclusive numeric claims in Q20. This is not
+      independent semantic accuracy or NFR-04 acceptance; no browser E2E.
+    network_writes:
+      - "Exactly 200 configured Ofox provider requests; 3,016,518 reported tokens."
+      - "1,457 loopback evidence reopens and local-only source/config checks."
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript: "Current Codex conversation; raw owner-local export pending."
+    transcript_status: "pending_export"
+    human_review: "pending"
+    generated_code: true
+    notes: >-
+      The frozen executable includes the owner's unconditional answer-display
+      policy. Product logic, original source data and owner model settings
+      were not modified during this batch. New questions target known weak
+      points; repeats are not 200 independent prompts. Diagnostic captures
+      omit credentials, and the isolated settings/data copy was removed after
+      test servers stopped. GTA input remains a saved RSS excerpt. No commit
+      or push was requested.
+  - id: D-AI-012
+    date: "2026-11-23"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "Exact agent model build identifier not captured"
+    purpose: >-
+      Diagnose the owner's failed Bilibili transcription retest and repair
+      the verified download and local recognition failures.
+    scope:
+      wrote:
+        - "src/internal/adapters/tools/transcription_fetch.go and transcription_fetch_test.go"
+        - "src/internal/adapters/tools/transcription_local.go and transcription_local_test.go"
+        - "docs/evidence/d-transcription-retest-20261123.json and docs/ai-use-log.yaml"
+        - "Owner-local outputs/transcription-retest-20261123 diagnostic report and live records"
+    verification: >-
+      Same signed media URLs returned HTTP 403/567 without Range and 206 with
+      Range. The generic extractor now receives an open byte range for
+      Bilibili only. A subsequent Metal allocation failure was reproduced;
+      the same model ran on CPU, prompting one bounded CPU retry. New tests
+      failed on original source through a Go overlay and passed after fixes.
+      Go tests and vet passed for tools, transcription, bilibili and app.
+      Two real isolated production jobs completed: the spoken-video preview
+      matched eight anchors in existing subtitles; the trailer produced
+      repetitive unrelated text and is not counted as a usable transcript.
+    network_writes:
+      - "Real Bilibili metadata/media reads and loopback transcription jobs; local whisper.cpp inference, with no paid model-provider calls."
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript: "Current Codex conversation; raw owner-local export pending."
+    transcript_status: "pending_export"
+    human_review: "pending"
+    generated_code: true
+    notes: >-
+      Owner subtitles, model settings and login data were not changed. The
+      startup executable was updated with a rollback copy. The existing owner
+      process could not be stopped because the system sandbox denied SIGINT;
+      restart remains necessary before that instance uses the fix. Temporary
+      credential copies and raw signed diagnostics are removed after the
+      isolated test server stops. No commit or push.
+  - id: D-AI-013
+    date: "2026-11-23"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "Exact agent model build identifier not captured"
+    purpose: "Start the fixed local service after the owner stopped the old process and verify live transcription."
+    scope:
+      wrote:
+        - "docs/evidence/d-transcription-retest-20261123.json and docs/ai-use-log.yaml"
+        - "Owner-local transcription diagnostic report and owner-live-after-restart.json"
+    verification: >-
+      Confirmed the executable hash matches the tested repair, started it on
+      loopback port 7380 with the original owner-d directory, and checked HTTP
+      200 and all 11 saved items. A real 60-second spoken-video transcription
+      completed in 48.07 seconds; four text anchors matched, and existing
+      Bilibili subtitles remained unchanged. Service is left running.
+    network_writes:
+      - "One real local whisper.cpp preview job and Bilibili media reads; no paid AI provider calls."
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript: "Current Codex conversation; raw owner-local export pending."
+    transcript_status: "pending_export"
+    human_review: "pending"
+    generated_code: false
+    notes: "A new whisper-preview subtitle track was saved on the spoken control video. No product code, model settings or login changes in this follow-up; no commit or push."
+  - id: D-AI-014
+    date: "2026-11-23"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "Exact agent model build identifier not captured"
+    purpose: "Repair the comparison track-required journey with an inline saved-subtitle selector."
+    scope:
+      wrote:
+        - "src/web/src/features/ai/ComparisonSubtitlePicker.tsx, ComparisonSourceOption.tsx, ComparisonPanel.tsx, comparison.ts, comparison.css and comparisonSources.test.tsx"
+        - "src/web/tests/comparison-subtitles.spec.ts"
+        - "docs/evidence/d-comparison-subtitle-selection-20261123.json and docs/ai-use-log.yaml"
+        - "Owner-local outputs/comparison-subtitle-picker-20261123 report and verification"
+    verification: >-
+      Fifteen frontend unit tests, TypeScript/frontend production build and
+      Go production build passed. An isolated real HTTP test confirmed
+      track_required becomes ready after explicit selection, and stale writes
+      return 409 without overwriting tracks. A browser interaction test was
+      written but could not launch Chromium because macOS sandbox denied
+      Mach-port bootstrap registration; no browser E2E pass is claimed.
+      Restarted the local service and verified served asset index-BvEnG5GX.js
+      contains the inline controls. Owner subtitles and selection unchanged.
+    network_writes:
+      - "Loopback-only isolated saved-subtitle operations and source checks; no paid provider calls."
+      - "Downloaded Playwright headless browser tooling into a task-specific temporary directory for attempted browser verification."
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript: "Current Codex conversation; raw owner-local export pending."
+    transcript_status: "pending_export"
+    human_review: "pending"
+    generated_code: true
+    notes: "Selection remains explicit, uses revision checks and excludes translated/mismatched tracks. Existing tracks are retained. A selection change clears the previous comparison. No commit or push."
+  - id: D-AI-015
+    date: "2026-11-23"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "Exact agent model build identifier not captured"
+    purpose: "Test real comparisons between several saved-video subtitle sources."
+    scope:
+      wrote:
+        - "Owner-local outputs/video-comparison-20261123 runners, source snapshots, all results, evidence reopens and report"
+        - "docs/evidence/d-video-comparison-live-20261123.json and docs/ai-use-log.yaml"
+    verification: >-
+      Fifteen real API comparisons made fourteen configured-provider calls
+      (121340 reported tokens); one all-no-text case made zero model calls.
+      All 72 citation reopens matched source text and returned subtitle time
+      locators. Two-video and prepared three-video workflows returned answers.
+      One title/subtitle consistency answer incorrectly flags the math video;
+      citation validity did not imply semantic correctness. Source-guided
+      assistant review is not independent NFR accuracy or browser E2E.
+    network_writes:
+      - "Fourteen real Ofox model requests using saved/public Bilibili subtitle text."
+      - "Bilibili recommendation/metadata/subtitle reads and isolated loopback source/selection/comparison requests."
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript: "Current Codex conversation; raw owner-local export pending."
+    transcript_status: "pending_export"
+    human_review: "pending"
+    generated_code: true
+    notes: >-
+      Product code and owner subtitle content/selections were unchanged. The
+      added food video and subtitle selection existed only in an isolated
+      database. An initial runner setup used POST instead of PUT to save its
+      track; four affected missing-text observations are retained. After
+      correcting setup, only those four questions were rerun; no outputs
+      were replaced. The unrelated Sima Yi track was a bad-input diagnostic,
+      not a positive source. Temporary credential/data copies are removed
+      after the test server stops. No commit or push.
+  - id: D-AI-016
+    date: "2026-11-23"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "Exact agent model build identifier not captured"
+    purpose: >-
+      Reduce comparison-answer source swaps and unsupported title-mismatch
+      conclusions, retaining natural-language answers and unconditional display.
+    scope:
+      wrote:
+        - "src/internal/ai/comparison.go, comparison_schema.go, comparison_answer_render.go and comparison_answer_render_test.go"
+        - "docs/plans/d-comparison-plan.md, docs/evidence/d-comparison-consistency-20261123.json and docs/ai-use-log.yaml"
+        - "Owner-local outputs/comparison-consistency-20261123 diagnostic stages, snapshots, runners and report"
+    verification: >-
+      Final production strategy completed 19 isolated real comparisons with
+      one model call each and 192 valid evidence reopens, plus one live owner
+      service smoke with one call. Ten repeated target questions and two
+      reordered-source cases did not reproduce the previous definite math
+      mismatch/source-order errors. Remaining scope, entity-role, incomplete
+      enumeration and source-language issues are recorded rather than scored
+      as fully correct. Four Go packages test/vet, 15 frontend tests and
+      production builds passed. New tests cover identity rendering, title
+      reference injection, length bounds, legacy sentences and answer retention
+      with invalid citations. Browser E2E and independent NFR scoring not run.
+    network_writes:
+      - "119 provider calls in captured completed comparisons across all exploratory/final stages and owner smoke; 719990 reported tokens."
+      - "One additional interrupted comparison has no captured response/usage and may have started 0-2 further provider calls; no exact all-attempt total is claimed."
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript: "Current Codex conversation; raw owner-local export pending."
+    transcript_status: "pending_export"
+    human_review: "pending"
+    generated_code: true
+    notes: >-
+      Prompt-only and two-call LLM-review explorations are retained in evidence.
+      The additional reviewer was removed because it did not reliably improve
+      output and introduced failures/cost. The shipped strategy uses stable
+      source references rendered by the server and remains single-call, with
+      original budget handling and no restored evidence gate. The local service
+      was updated/restarted; owner saved subtitles and selections were unchanged.
+      Temporary credential copies are removed after diagnostic servers stop.
+      No commit or push.
+  - id: D-AI-017
+    date: "2026-11-24"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "Exact agent model build identifier not captured"
+    purpose: >-
+      Publish a self-contained FR-04 specification describing the current
+      requirements and acceptance criteria without a change-history narrative.
+    scope:
+      wrote:
+        - "docs/req/fr-04-multi-content-comparison.md and docs/req/requirements.yaml"
+        - "README.md and docs/plans/d-comparison-plan.md"
+        - "Current summaries in docs/evidence/d-fr-verification.md, contributions/014-owner-d-comparison-implementation.md and test/offline/d-comparison/README.md"
+        - "Owner-local outputs/d-requirements.yaml FR-04 export and docs/ai-use-log.yaml"
+    verification: >-
+      Registry and owner export pass the requirements JSON Schema. All eleven
+      requirement IDs and ordering, FR-04 acceptance IDs/test mapping, approval
+      state and every non-FR-04 registry entry are preserved. Twenty-seven local
+      document links resolve. The 20-case evaluation fixture hash is unchanged.
+      Git whitespace validation passes. This documentation task executes no
+      application tests or model requests and starts no local service.
+    network_writes: []
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript: "Current Codex conversation; raw owner-local export pending."
+    transcript_status: "pending_export"
+    human_review: "pending"
+    generated_code: false
+    notes: >-
+      FR-04 covers saved articles and original video subtitle text, one-sentence
+      model answers, source preparation, ordered evidence, unconditional display
+      of decoded answers and verified navigation. NFR-04, other owners' registry
+      entries, historical executed-check records and acceptance fixture data are
+      unchanged. Independent acceptance and NFR scoring remain pending.
+      No application code, owner data, commit or push.
+  - id: D-AI-018
+    date: "2026-11-24"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "Exact agent model build identifier not captured"
+    purpose: >-
+      Define NFR-04 as a locally completable author self-evaluation and provide
+      executable collection, regression-recording and manual-score aggregation.
+    scope:
+      wrote:
+        - "docs/req/nfr-04-local-evaluation.md, docs/req/requirements.yaml and docs/plans/d-comparison-plan.md"
+        - "README.md, FR-04 NFR reference, verification/contribution scope summaries and offline comparison guide"
+        - "test/local/d-comparison/README.md, evaluate.py and test_evaluate.py"
+        - "Owner-local outputs/d-requirements.yaml, outputs/d-comparison-plan.md and docs/ai-use-log.yaml"
+    verification: >-
+      Sixteen scoring-tool tests passed using synthetic responses and mocked
+      collection/regression. Checks cover separate per-run thresholds, missing
+      records, duplicate IDs/rows, immutable snapshots, collection without gold
+      data, preserving observations, local-only API targets and regression
+      failures. Registry/owner-export schema and local-link checks pass; all
+      non-NFR-04 registry entries, IDs, acceptance/test IDs, approval status and
+      the 0.80 threshold remain unchanged. Original synthetic fixture hashes
+      are unchanged. This turn runs no actual quality evaluation or real model
+      request, starts no local application service and asserts no NFR pass.
+    network_writes: []
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript: "Current Codex conversation; raw owner-local export pending."
+    transcript_status: "pending_export"
+    human_review: "pending"
+    generated_code: true
+    notes: >-
+      Both full 20-case real-model rounds must each reach 16/20 for answer
+      correctness and complete-case source attribution, with a mandatory
+      recorded controlled failure regression. Author scoring replaces the
+      second-scorer dependency; upstream comparison is supplementary. Labels
+      do not constrain the natural-language answer. A local model or a configured
+      remote model may be used; collect explicitly invokes the configured model
+      through an already-running loopback app. PR/test-plan approvals and CI
+      records remain separate. No production application code or saved owner
+      data changes, commit or push.
+  - id: D-AI-019
+    date: "2026-11-24"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "Exact agent model build identifier not captured"
+    purpose: >-
+      Present a single current NFR-04 definition and a self-contained local
+      evaluation procedure without historical requirement comparisons.
+    scope:
+      wrote:
+        - "docs/req/nfr-04-local-evaluation.md and docs/req/requirements.yaml"
+        - "README.md, docs/plans/d-comparison-plan.md and test/local/d-comparison/README.md"
+        - "Owner-local outputs/d-requirements.yaml, outputs/d-comparison-plan.md and docs/ai-use-log.yaml"
+    verification: >-
+      Requirements registry and owner export pass JSON Schema validation.
+      There is one NFR-04 registry entry and exports match the current entries.
+      Current NFR text, plan and local guide contain no upstream-baseline,
+      supplementary-old-plan or revision narrative. Local links resolve.
+      Metrics, 0.80 threshold, acceptance criteria, approval state, all other
+      requirement entries and synthetic evidence fixtures are unchanged.
+      Git whitespace validation passes. No application or model tests run.
+    network_writes: []
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript: "Current Codex conversation; raw owner-local export pending."
+    transcript_status: "pending_export"
+    human_review: "pending"
+    generated_code: false
+    notes: >-
+      Current NFR material specifies author-run local testing, two complete
+      20-case rounds, separate per-run answer/attribution thresholds and the
+      controlled failure gate. Measured NFR self-evaluation remains pending.
+      No application source, evaluator logic, saved data, service startup,
+      provider calls, commit or push.
+  - id: D-AI-020
+    date: "2026-11-24"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "Exact agent model build identifier not captured"
+    purpose: >-
+      Maintain the project's English NFR-04 specification and check the owner D
+      README task statuses against available implementation and evaluation records.
+    scope:
+      wrote:
+        - "docs/req/nfr-04-local-evaluation.md, docs/req/requirements.yaml and docs/plans/d-comparison-plan.md"
+        - "Owner-local outputs/d-requirements.yaml, outputs/d-comparison-plan.md and docs/ai-use-log.yaml"
+    verification: >-
+      NFR-04 requirement prose and the linked specification are English.
+      Registry schema, document links, owner exports and whitespace checks pass.
+      Local NFR thresholds remain two complete 20-case rounds, at least 16/20
+      per metric per round, plus controlled failure regression. README owner D
+      has three implemented tasks checked and the measured NFR task unchecked.
+      Existing browser E2E and implementation-review limitations remain explicit.
+      No real-model evaluation, application test or service startup this turn.
+    network_writes: []
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript: "Current Codex conversation; raw owner-local export pending."
+    transcript_status: "pending_export"
+    human_review: "pending"
+    generated_code: false
+    notes: >-
+      Current NFR text describes the local author self-evaluation without a
+      requirement-revision narrative. Documentation/tool availability does not
+      constitute a measured NFR pass. No production code, saved owner data,
+      commit or push.
+  - id: D-AI-024
+    date: "2026-11-24"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "Exact agent model build identifier not captured"
+    purpose: >-
+      Enter source-grounded scores for all 120 retained NFR observations after
+      the owner confirmed inspection and explicitly delegated scoring based on
+      original texts and recorded errors.
+    scope:
+      wrote:
+        - "Owner-local profile scores.csv, review.csv, reports and scoring-provenance.json; build/grade-nfr-20261124.py"
+        - "docs/evidence/d-nfr-scoring-20261124.json and current profile/index results"
+        - "README.md, current NFR verification status, plan, functional/contribution records, debt register, owner English exports and docs/ai-use-log.yaml"
+    verification: >-
+      All 120 rows have separate binary answer/source scores and source-based
+      rationale; frozen gold, original snapshots, source code and responses
+      are unchanged. Article/article rounds score 19/20 and 20/20, then 17/20
+      and 18/20. Video/video scores 18/20 and 16/20, then 17/20 and 15/20.
+      Video/article scores 17/20 and 16/20, then 16/20 and 19/20. The order in
+      each pair is answer correctness then case-level source attribution.
+      Existing controlled regressions pass. Overall NFR FAIL is retained
+      because video/video round 2 source attribution is below 16/20.
+    network_writes: []
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript: "Current Codex conversation; raw owner-local export pending."
+    transcript_status: "pending_export"
+    human_review: "Owner confirmed output inspection and delegated score entry; no independent numerical review or implementation PR approval claimed."
+    generated_code: true
+    notes: >-
+      Owner messages: inspected/completed, no issue; then explicitly selected
+      scoring from originals and recorded errors. Exact numerical judgments
+      were prepared by Codex, not claimed as manually supplied by the owner.
+      Wrong synthesis and correct per-source findings are scored separately.
+      Non-injected unresolved source states lose attribution credit. Twelve
+      multiple-sentence presentation findings remain open FR defects and are
+      separate from the NFR semantic metrics. No threshold/gold modification,
+      new provider calls, service startup, production fix, signed approval,
+      commit or push.
+  - id: D-AI-021
+    date: "2026-11-24"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "Exact agent model build identifier not captured"
+    purpose: >-
+      Maintain the current English FR-04 specification and present the project
+      FR-04 and NFR-04 definitions together for the owner.
+    scope:
+      wrote:
+        - "docs/req/fr-04-multi-content-comparison.md and docs/ai-use-log.yaml"
+        - "Owner-local outputs/d-requirements.yaml and outputs/d-comparison-plan.md"
+    verification: >-
+      Both linked requirement specifications are English and retain all six
+      FR-04 and both NFR-04 acceptance IDs/test mappings. The project registry
+      and owner export pass JSON Schema validation and contain one entry per
+      requirement. Local references resolve and whitespace checks pass. The
+      registry's functional contract, NFR metrics, 0.80 threshold, two-round
+      requirement and pending acceptance states are unchanged. No application
+      tests, provider requests or service startup this turn.
+    network_writes: []
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript: "Current Codex conversation; raw owner-local export pending."
+    transcript_status: "pending_export"
+    human_review: "pending"
+    generated_code: false
+    notes: >-
+      The English documents describe current selection, subtitle preparation,
+      natural-language answer display, source evidence and local author-scored
+      quality evaluation. Documentation synchronization is not measured NFR
+      acceptance. No production code, saved owner data, commit or push.
+  - id: D-AI-022
+    date: "2026-11-24"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "Exact agent model build identifier not captured"
+    purpose: >-
+      Start the formal local NFR-04 self-evaluation: freeze source-grounded
+      annotations, collect two complete real-model rounds and run controlled
+      failure regression while retaining all observations for author scoring.
+    scope:
+      wrote:
+        - "Owner-local build/d-nfr-04-20261124-001 annotations, original snapshots, frozen manifest, 40 raw responses, review.csv, empty author scores.csv, evidence checks and reports"
+        - "docs/evidence/d-nfr-local-20261124.json, current verification status, README.md and docs/ai-use-log.yaml"
+        - "Fresh build/tangentry-server-nfr-20261124 binary and temporary isolated runtime"
+    verification: >-
+      Both complete rounds returned 20/20 HTTP 200 completed answers. The 40
+      model calls report 622389 total tokens. All 423 original-evidence reopens
+      passed source/version/exact-text checks, with zero frozen source-version
+      mismatches. Controlled regression exited zero: three Go packages and
+      two frontend files with 15 tests passed. Author score rows remain blank;
+      the evaluator reports INCOMPLETE, not a semantic quality pass. Original
+      and isolated source payloads match the frozen originals. The temporary
+      server is stopped and its credential/data copies removed after collection.
+    network_writes:
+      - "40 Ofox comparison requests using the configured openai/gpt-5.4-mini model and saved article text."
+      - "423 loopback evidence reopens, plus local comparison/settings/readiness requests; no new platform retrieval."
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript: "Current Codex conversation; raw owner-local export pending."
+    transcript_status: "pending_export"
+    human_review: "pending"
+    generated_code: true
+    notes: >-
+      The entire previously used 20-question set was retained, not selected by
+      prior success. Pre-annotations were prepared by Codex against original
+      saved text before collection, with author review pending. Three article
+      sources are covered; video/two-source model quality and unseen-question
+      generalization are not established. GTA has only a saved RSS excerpt.
+      Review flags include list completeness, an unsupported length qualifier,
+      a multi-sentence answer, runtime scope and a developer-name typo. These
+      are assistant observations, not author-assigned scores. No production
+      source/settings change, signed human review, NFR pass, commit or push.
+  - id: D-AI-023
+    date: "2026-11-24"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "Exact agent model build identifier not captured"
+    purpose: >-
+      Evaluate saved video/video and video/article comparisons with 20 frozen
+      questions and two complete rounds per profile, and synchronize English
+      NFR scope and execution records with the three tested input profiles.
+    scope:
+      wrote:
+        - "Owner-local build/d-nfr-media-20261124 profile annotations, originals, raw responses, review.csv, unscored scores.csv, evidence reopens and reports"
+        - "docs/evidence/d-nfr-video-video-20261124.json, d-nfr-video-article-20261124.json and d-nfr-index-20261124.json"
+        - "English NFR specification/registry/plan, README.md, local evaluation guide, functional verification, contribution scope and docs/debt-register.md"
+        - "Owner English requirement/plan exports and docs/ai-use-log.yaml"
+    verification: >-
+      Both new profiles completed 20/20 HTTP 200 answers in each of two rounds:
+      80 new comparisons and provider calls reporting 552728 total tokens.
+      Final evidence validation passed all 518 citations, including 373 subtitle
+      locators with saved track revision and time checks. Both profile-controlled
+      regressions exited zero. Frozen code, source payloads, subtitle revisions
+      and selected flags match owner and isolated stores after collection.
+      Formal reports remain INCOMPLETE because all author grades are pending.
+      Verified citations do not conceal observed semantic errors. The isolated
+      server is stopped and temporary credentials/data are removed.
+    network_writes:
+      - "80 real Ofox comparison calls using the saved openai/gpt-5.4-mini configuration, revision 7."
+      - "518 final evidence reopens plus 325 interim reopens, and local readiness/settings/comparison requests; no new platform download or transcription."
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript: "Current Codex conversation; raw owner-local export pending."
+    transcript_status: "pending_export"
+    human_review: "pending"
+    generated_code: true
+    notes: >-
+      The two videos and three article sources are existing owner-saved items.
+      The selected math track has 280 cues; the game track has 40 cues covering
+      0.16-90.14 seconds of a 455-second video. All new cases select exactly two
+      sources. Pre-annotations were prepared by Codex before collection, and
+      owner scoring is pending. Scope includes three 20-case profiles with two
+      rounds each, separately scored at unchanged 80 percent thresholds.
+      Defects include 100% versus 60% damage, unsupported non-GTA identity,
+      positive comparison with missing game duration, and swapped human/AI
+      manuscript roles. No model/prompt/production-code changes or answer gate
+      were introduced. No owner text/track changes, human sign-off, NFR pass,
+      commit or push.
+  - id: D-AI-025
+    date: "2026-11-24"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "Exact agent model build identifier not captured"
+    purpose: >-
+      Repeat video/video evaluation at the owner's request, retaining the same
+      two saved subtitle tracks, 20 pre-annotated questions, model settings,
+      implementation and per-round quality thresholds.
+    scope:
+      wrote:
+        - "Owner-local build/d-nfr-vv-retest-20261124-001: frozen cases/originals, 40 fresh responses, regression logs, evidence checks, scores/review/rationale, provenance and repeat summaries"
+        - "docs/evidence/d-nfr-video-video-retest-20261124.json and a separate repeat entry in d-nfr-index-20261124.json"
+        - "README.md, docs/evidence/d-fr-verification.md, docs/debt-register.md, contributions/014-owner-d-comparison-implementation.md and docs/ai-use-log.yaml"
+    verification: >-
+      Forty sequential real-provider calls returned HTTP 200 and completed
+      answers; reported total usage is 229356 tokens. Controlled regression
+      exits zero. All 225 source/quote/revision/subtitle-time reopen checks pass,
+      without establishing semantic correctness. Under the unchanged rubric,
+      assisted answer/source scores are 16/20 and 15/20 in round 1, then 18/20
+      and 16/20 in round 2. The repeat fails the first-round source threshold.
+      All 40 rows have explicit grading rationale. Same snapshot/case bytes,
+      production hash and selected-track revisions are verified; saved source
+      items/tracks and AI settings match owner and isolated stores. The earlier
+      failed attempt is preserved. Six sentence-format findings remain separate.
+    network_writes:
+      - "40 owner-authorized configured-model comparison requests to https://api.ofox.ai/v1; saved subtitle excerpts and questions only"
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript: "Current Codex conversation; raw owner-local export pending."
+    transcript_status: "pending_export"
+    human_review: "Fresh outputs not claimed as human-reviewed; scoring follows standing owner delegation: 按原文和错误记录补齐评分. No independent review or PR approval claimed."
+    generated_code: true
+    notes: >-
+      Both rounds invent exact 12:01 from ambiguous ASR and describe early
+      saved gameplay as the full video's latter half. Other failures include
+      an unsupported AI verification role, inapplicable mathematical combat
+      setup, and unresolved unused-source scope. All decoded answers remain
+      displayed; no withholding rule, production fix, model/configuration,
+      threshold or gold change. Isolated local service stopped, port 7380
+      closed, and temporary credentials/data copies removed; owner data kept.
+      No commit or push.
+  - id: D-AI-026
+    date: "2026-11-24"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "Exact agent model build identifier not captured"
+    purpose: >-
+      Diagnose why the retained video/video repeat still fails, tracing saved
+      subtitle input, prompt/schema, model output rendering and source validation.
+    scope:
+      wrote:
+        - "Owner-local build/d-nfr-vv-diagnosis-20261124-001 overlay tests, 20 reconstructed prompts, source-state/fact replay observations and diagnostic logs"
+        - "docs/evidence/d-video-comparison-diagnosis-20261124.json and docs/ai-use-log.yaml"
+    verification: >-
+      Three offline diagnostic tests pass: 20 prompts contain every saved cue
+      but omit cue time, coverage interval and video duration; four retained
+      erroneous facts remain supported with genuine verified quotations; the
+      same subtitle input yields limited_search for injected not_mentioned or
+      insufficient_evidence states, while a valid not_relevant exclusion passes.
+      Production implementation, frozen evaluation inputs and grades are
+      unchanged. No local application service or real model calls were started.
+    network_writes: []
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript: "Current Codex conversation; raw owner-local export pending."
+    transcript_status: "pending_export"
+    human_review: "pending; diagnosis and controlled reproductions are Codex-assisted, not independent human approval"
+    generated_code: true
+    notes: >-
+      Passing diagnostics reproduce defects and contract gaps, not a quality
+      pass or repair. complete=true describes saved-text inclusion, not complete
+      video coverage. Prompt each-source fact instruction conflicts with focused
+      exclusion needs; schema permits video not_mentioned that runtime rejects.
+      Ambiguous ASR 12.1 is not evidence of exact 12:01. No claim that historical
+      provider states were recovered: retained HTTP results are post-validation.
+      Raw-provider logging and model-ablation limits are explicit. Existing
+      generated-answer display behavior, owner data and services are untouched.
+      No production fix, acceptance change, commit or push.
+  - id: D-AI-027
+    date: "2026-11-24"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "Exact agent model build identifier not captured"
+    purpose: "Fix comparison scope/applicability logic and rerun the same video/video quality profile."
+    scope:
+      wrote:
+        - "src/internal/ai/comparison.go, comparison_types.go, comparison_evidence.go, comparison_schema.go and comparison_video_scope_test.go"
+        - "Owner-local build/d-nfr-vv-fixed-20261124-002, docs/evidence/d-nfr-video-video-fixed-20261124.json, index, verification, README and AI-use log"
+    verification: >-
+      Controlled Go comparison regressions and 15 frontend tests pass. A new
+      deterministic regression verifies video duration, saved coverage metadata,
+      unmodified ambiguous ASR and video state schema. Forty real-model calls
+      use unchanged questions, sources, configured model and thresholds. Assisted
+      answer/source scores are 18/20 and 19/20, then 19/20 and 18/20. All 193
+      quotation/time reopens pass. Video/video passes this attempt; residual
+      timestamp precision, person attribution and source-state errors remain.
+      Owner subtitle bytes/revisions/selections match the frozen originals.
+    network_writes:
+      - "40 owner-authorized configured-model comparison calls to https://api.ofox.ai/v1"
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript: "Current Codex conversation; raw owner-local export pending."
+    transcript_status: "pending_export"
+    human_review: "Fresh human inspection not claimed; scoring follows standing owner delegation. Independent PR review pending."
+    generated_code: true
+    notes: >-
+      Prompt shortened after 8000-character regression failure before collecting
+      any model responses; preparation 001 is marked aborted with zero calls.
+      Complete attempt 002 is separately frozen under the final implementation.
+      Earlier failed runs remain immutable. Generated answers remain displayed;
+      no semantic guarantee is added to quote verification. Other two profiles
+      have not been rerun under the changed implementation, so no overall NFR
+      pass is claimed. Temporary service stopped and credential/data copies
+      removed. No owner-source edit, commit or push.
+  - id: D-AI-028
+    date: "2026-11-25"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "Exact agent model build identifier not captured"
+    purpose: "Complete the first full three-profile evaluation under the changed implementation."
+    scope:
+      wrote:
+        - "build/d-nfr-full-20261124-001, docs/evidence/d-nfr-full-20261125.json and latest-complete index reference"
+    verification: >-
+      All 120 real-model responses scored under standing owner delegation;
+      1149687 reported tokens. All regressions and 778 evidence checks pass.
+      Overall FAIL: video/article second-round answers score 15/20. Exact
+      numerical and per-case records remain preserved; no gold change or retry.
+      Owner and runtime source integrity verified; service and temporary copies
+      cleaned. Documentation log entry completed alongside the subsequent repeat.
+    network_writes:
+      - "120 owner-authorized configured-model comparison requests"
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript_status: "pending_export"
+    human_review: "Standing owner delegation to assisted scoring; no fresh human numerical review claimed."
+    generated_code: true
+    notes: "No independent acceptance, commit or push; all failed outputs retained."
+  - id: D-AI-029
+    date: "2026-11-25"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "Exact agent model build identifier not captured"
+    purpose: "Repeat all three profiles under the same code, model, original sources, questions and thresholds."
+    scope:
+      wrote:
+        - "build/d-nfr-full-20261125-002: fresh freezes, 120 responses, scores/review/rationales, regressions, reopens and summaries"
+        - "docs/evidence/d-nfr-full-repeat-20261125-002.json, evaluation index, README, current NFR status, plan/export, verification, contribution and AI-use log"
+    verification: >-
+      Exactly 120 new provider calls, 1149130 reported tokens. All regressions
+      and 732 source/quote/version/time checks pass. Assisted answer/source
+      scores: article/article 18/20 and 20/20, then 20/20 and 20/20; video/video
+      18/20 and 19/20, then 20/20 and 20/20; video/article 17/20 and 18/20, then
+      18/20 and 18/20. All six metric pairs reach 16/20; latest attempt PASS.
+      Every original source payload and selected track/revision matches owner
+      and isolated stores. Production hash and original case/source bytes match
+      the previous failed complete attempt. Four sentence-format observations
+      and all semantic errors remain retained. No claim of stable error freedom.
+    network_writes:
+      - "120 owner-authorized configured-model comparison requests"
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript_status: "pending_export"
+    human_review: "Fresh human review not claimed; original-text scoring follows owner delegation: 按原文和错误记录补齐评分. Independent review pending."
+    generated_code: true
+    notes: >-
+      Current session explicitly granted desktop project write and network
+      permissions after sandbox initially blocked preparation and loopback bind;
+      zero provider calls preceded that grant. Successful attempt used an isolated
+      copy; temporary service stopped and all temporary data/credentials removed.
+      No production logic, gold, threshold or model change in this repeat.
+      Latest passing result does not replace earlier failures or waive residual
+      FR defects. No signed independent acceptance, commit or push.
+  - id: D-AI-030
+    date: "2026-11-25"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "Exact agent model build identifier not captured"
+    purpose: "Retain only the owner-selected complete passing NFR evaluation and delete earlier D NFR test records at the owner's explicit request."
+    scope:
+      wrote:
+        - "Current NFR report/summary retention scope, self-contained grading helper, README, NFR status, plan/export, functional verification, contribution and open findings"
+      deleted:
+        - "Seven earlier owner-local D NFR evaluation/diagnosis directories and old grading helper"
+        - "Eight superseded D NFR JSON reports/index/scoring records and the associated video comparison diagnosis record"
+    verification: >-
+      Only docs/evidence/d-nfr-full-repeat-20261125-002.json remains as the D NFR
+      evaluation report; only build/d-nfr-full-20261125-002 remains as the raw
+      evaluation directory. All 176 current per-profile artifacts retain their
+      original hashes. The current 120 responses, scores, rationale, source
+      snapshots, freezes, regression logs and citation reopen records remain.
+      Active documentation links reference the retained evaluation; residual
+      errors and the assisted-grading provenance remain explicit.
+    network_writes: []
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript_status: "pending_export"
+    human_review: "Deletion explicitly requested by owner; no new independent review or PR approval claimed."
+    generated_code: true
+    notes: >-
+      Project AI-use history is retained as an audit of actual operations and
+      may reference intentionally deleted historical artifacts. No claim that
+      prior evaluations never occurred, all answers are correct, or repeated
+      outputs are stable. No production logic, model, threshold or scoring
+      change; no additional provider calls, service startup, commit or push.
+  - id: D-AI-031
+    date: "2026-11-25"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "Exact agent model build identifier not captured"
+    purpose: "Prepare and commit the owner-authorized D comparison implementation, transcription fixes, tests and requirements/evidence documentation."
+    scope:
+      wrote:
+        - "Implementation contribution commit-status text and this AI-use entry"
+      staged:
+        - "69 reviewed modified/new D implementation, test and documentation files; ignored build/raw owner-data directories excluded"
+    verification: >-
+      Comparison Go regression packages and 15 frontend tests pass. Targeted
+      transcription/Whisper/platform-audio tests pass. All 16 evaluation-tool
+      unit tests pass. TypeScript no-emit compilation and git diff --check pass.
+      Scanned all 69 candidate files for common key/private-key patterns without
+      printing sensitive matches; none found. This is pre-commit validation,
+      not independent code review or an assertion that browser E2E ran.
+    network_writes: []
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript_status: "pending_export"
+    human_review: "Owner explicitly authorized commit; independent PR review remains pending."
+    generated_code: true
+    notes: "Local commit only; no push or PR requested. Owner data, credentials and ignored raw evaluation artifacts are excluded."

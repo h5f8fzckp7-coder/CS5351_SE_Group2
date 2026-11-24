@@ -1,0 +1,59 @@
+{
+  "date": "2026-11-23",
+  "causes": [
+    {
+      "stage": "fetching",
+      "cause": "Bilibili CDN initial generic-extractor probe lacks Range; valid signed URLs returned HTTP 403/567 without it and 206 with it.",
+      "fix": "Send Range:bytes=0- on Bilibili yt-dlp invocations, retaining chunk bounds, retries and CDN cookie isolation."
+    },
+    {
+      "stage": "recognizing",
+      "cause": "whisper.cpp Metal model-buffer allocation failed in this runtime. A same-model CPU invocation completed. This does not establish insufficient total system RAM.",
+      "fix": "Retry that specific Metal allocation failure once on CPU using the same model and local audio; clear failed-attempt JSON before retry."
+    }
+  ],
+  "liveResults": [
+    {
+      "contentId": "bilibili:BV15aytzcENP",
+      "preview": true,
+      "state": "completed",
+      "elapsedSeconds": 48.17
+    },
+    {
+      "contentId": "bilibili:BV1eJs86MEat",
+      "preview": false,
+      "state": "completed",
+      "elapsedSeconds": 42.08
+    }
+  ],
+  "quality": {
+    "speechControl": "Eight named/numeric anchors match the existing Bilibili subtitle. Not an independent listening test or measured word error rate.",
+    "trailer": "Completed but repeated unrelated text, with last cue ending at 90 seconds for a 71-second video. Not accepted as a usable transcript."
+  },
+  "deployment": {
+    "localBinaryUpdated": true,
+    "ownerRunningProcessRestarted": true,
+    "ownerSavedSubtitlesModified": true,
+    "restartFailureHistorical": "System sandbox denied SIGINT to existing PID 80635 (Operation not permitted).",
+    "restartNote": "After the owner stopped the old process, Codex started the tested fixed executable on 127.0.0.1:7380 using the original owner-d directory. Homepage HTTP 200 and original 11 library items verified.",
+    "ownerSubtitleChange": "Successful whisper-preview track added for BV15aytzcENP during requested live verification; existing platform subtitles unchanged."
+  },
+  "verification": [
+    "New regression tests fail on original source via Go overlay and pass with both fixes.",
+    "Go tests passed for tools, transcription, bilibili and app packages; go vet passed.",
+    "Production binary builds; both real fixed jobs completed in an isolated SQLite/credential copy."
+  ],
+  "report": "/Users/lwl/Documents/Codex/2026-11-14/fen-xi/outputs/transcription-retest-20261123/report.md",
+  "binarySHA256": "467d1f533cf1f2068847f689fb2eea52b971ec63df92b64684b650bc02b286f6",
+  "ownerLiveVerification": {
+    "state": "completed",
+    "elapsedSeconds": 48.07,
+    "checks": {
+      "黎曼猜想": true,
+      "25万页": true,
+      "940页": true,
+      "图灵": true
+    },
+    "originalPlatformSubtitleUnchanged": true
+  }
+}

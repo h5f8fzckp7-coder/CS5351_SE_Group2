@@ -445,6 +445,37 @@ func (f *aiFixture) Chat(ctx context.Context, c ai.Config, contextText string, _
 	if err := ctx.Err(); err != nil {
 		return "", err
 	}
+	if c.Model == "fixture-comparison" {
+		if err := ai.ReserveCompletion(ctx); err != nil {
+			return "", err
+		}
+		var sources []struct {
+			ContentID string `json:"contentId"`
+			Passages  []struct {
+				ID   string `json:"id"`
+				Text string `json:"text"`
+			} `json:"passages"`
+		}
+		_, data, _ := strings.Cut(contextText, "\nSOURCES\n")
+		if err := json.Unmarshal([]byte(data), &sources); err != nil {
+			return "", err
+		}
+		rows := map[string]any{}
+		dependencies := []string{}
+		for _, source := range sources {
+			dependencies = append(dependencies, source.ContentID)
+			row := map[string]any{"contentId": source.ContentID, "state": "insufficient_evidence", "passageIds": []string{}}
+			if len(source.Passages) > 0 {
+				passage := source.Passages[0]
+				row["state"], row["fact"] = "supported", passage.Text
+				row["passageIds"] = []string{passage.ID}
+			}
+			rows[source.ContentID] = row
+		}
+		ai.RecordCompletionUsage(ctx, ai.Usage{Prompt: 5, Output: 5, Total: 10})
+		encoded, _ := json.Marshal(map[string]any{"answer": "两份资料分别规定了不同的退款期限，适用条件需要结合原文确认。", "answerSources": dependencies, "sources": rows})
+		return string(encoded), nil
+	}
 	return "当前字幕内容：\n\n" + contextText, nil
 }
 

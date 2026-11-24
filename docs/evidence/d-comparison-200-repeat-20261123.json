@@ -1,0 +1,333 @@
+{
+  "date": "2026-11-23",
+  "timezone": "Asia/Hong_Kong",
+  "dateSource": "client context; raw execution timestamps retained separately",
+  "firstRawExecutionTimestamp": "2026-11-23T00:26:17+08:00",
+  "lastRawExecutionTimestamp": "2026-11-23T00:43:38+08:00",
+  "model": "openai/gpt-5.4-mini",
+  "gateway": "https://api.ofox.ai/v1",
+  "displayPolicy": "Generated answers are displayed independently of source-verification states.",
+  "comparisons": 200,
+  "providerCalls": 200,
+  "capturedProviderResponses": 200,
+  "http200": 200,
+  "answersReturned": 200,
+  "answersMatchRawModelText": 200,
+  "casesWithMechanicalIssues": 0,
+  "casesWithSourceDiagnostics": 23,
+  "evidenceReopens": 1457,
+  "evidenceReopenFailures": 0,
+  "unverifiedCitations": 0,
+  "reportedTokens": 3016518,
+  "meanSecondsIncludingReopens": 5.259,
+  "medianSecondsIncludingReopens": 4.675,
+  "p95SecondsNearestRankIncludingReopens": 8.602,
+  "maxSecondsIncludingReopens": 24.094,
+  "assistantReview": {
+    "pass": 172,
+    "warning": 16,
+    "fail": 12
+  },
+  "perQuestion": [
+    {
+      "questionId": 1,
+      "question": "这三篇文章的主题分别是什么？",
+      "group": "original",
+      "runs": 10,
+      "answersReturned": 10,
+      "pass": 10,
+      "warning": 0,
+      "fail": 0,
+      "warningRepetitions": [],
+      "failedRepetitions": []
+    },
+    {
+      "questionId": 2,
+      "question": "哪篇文章介绍了鸿蒙应用开发？",
+      "group": "original",
+      "runs": 10,
+      "answersReturned": 10,
+      "pass": 10,
+      "warning": 0,
+      "fail": 0,
+      "warningRepetitions": [],
+      "failedRepetitions": []
+    },
+    {
+      "questionId": 3,
+      "question": "鸿蒙那篇主要关注哪些现实问题？",
+      "group": "original",
+      "runs": 10,
+      "answersReturned": 10,
+      "pass": 9,
+      "warning": 1,
+      "fail": 0,
+      "warningRepetitions": [
+        8
+      ],
+      "failedRepetitions": []
+    },
+    {
+      "questionId": 4,
+      "question": "影视那篇推荐了哪些类型的作品？",
+      "group": "original",
+      "runs": 10,
+      "answersReturned": 10,
+      "pass": 10,
+      "warning": 0,
+      "fail": 0,
+      "warningRepetitions": [],
+      "failedRepetitions": []
+    },
+    {
+      "questionId": 5,
+      "question": "GTA 那篇主要讨论什么？",
+      "group": "original",
+      "runs": 10,
+      "answersReturned": 10,
+      "pass": 9,
+      "warning": 1,
+      "fail": 0,
+      "warningRepetitions": [
+        10
+      ],
+      "failedRepetitions": []
+    },
+    {
+      "questionId": 6,
+      "question": "鸿蒙和 GTA 两篇的关注点有什么不同？",
+      "group": "original",
+      "runs": 10,
+      "answersReturned": 10,
+      "pass": 7,
+      "warning": 3,
+      "fail": 0,
+      "warningRepetitions": [
+        4,
+        5,
+        9
+      ],
+      "failedRepetitions": []
+    },
+    {
+      "questionId": 7,
+      "question": "影视推荐和 GTA 两篇有哪些共同点？",
+      "group": "original",
+      "runs": 10,
+      "answersReturned": 10,
+      "pass": 8,
+      "warning": 1,
+      "fail": 1,
+      "warningRepetitions": [
+        7
+      ],
+      "failedRepetitions": [
+        6
+      ]
+    },
+    {
+      "questionId": 8,
+      "question": "哪些文章偏技术应用，哪些偏娱乐？",
+      "group": "original",
+      "runs": 10,
+      "answersReturned": 10,
+      "pass": 10,
+      "warning": 0,
+      "fail": 0,
+      "warningRepetitions": [],
+      "failedRepetitions": []
+    },
+    {
+      "questionId": 9,
+      "question": "这三篇文章分别适合什么读者？",
+      "group": "original",
+      "runs": 10,
+      "answersReturned": 10,
+      "pass": 6,
+      "warning": 4,
+      "fail": 0,
+      "warningRepetitions": [
+        2,
+        3,
+        4,
+        6
+      ],
+      "failedRepetitions": []
+    },
+    {
+      "questionId": 10,
+      "question": "仅凭这三篇文章，能确定 GTA 6 的售价吗？",
+      "group": "original",
+      "runs": 10,
+      "answersReturned": 10,
+      "pass": 10,
+      "warning": 0,
+      "fail": 0,
+      "warningRepetitions": [],
+      "failedRepetitions": []
+    },
+    {
+      "questionId": 11,
+      "question": "鸿蒙那篇提到了哪些具体应用？",
+      "group": "new",
+      "runs": 10,
+      "answersReturned": 10,
+      "pass": 10,
+      "warning": 0,
+      "fail": 0,
+      "warningRepetitions": [],
+      "failedRepetitions": []
+    },
+    {
+      "questionId": 12,
+      "question": "哪篇提到了视障人士的出行问题？",
+      "group": "new",
+      "runs": 10,
+      "answersReturned": 10,
+      "pass": 9,
+      "warning": 1,
+      "fail": 0,
+      "warningRepetitions": [
+        8
+      ],
+      "failedRepetitions": []
+    },
+    {
+      "questionId": 13,
+      "question": "《银龄心语》和《卧安智护》分别解决什么问题？",
+      "group": "new",
+      "runs": 10,
+      "answersReturned": 10,
+      "pass": 10,
+      "warning": 0,
+      "fail": 0,
+      "warningRepetitions": [],
+      "failedRepetitions": []
+    },
+    {
+      "questionId": 14,
+      "question": "影视那篇是单部作品评测，还是多部作品推荐？",
+      "group": "new",
+      "runs": 10,
+      "answersReturned": 10,
+      "pass": 10,
+      "warning": 0,
+      "fail": 0,
+      "warningRepetitions": [],
+      "failedRepetitions": []
+    },
+    {
+      "questionId": 15,
+      "question": "影视那篇除了推荐作品，还包含哪些内容？",
+      "group": "new",
+      "runs": 10,
+      "answersReturned": 10,
+      "pass": 10,
+      "warning": 0,
+      "fail": 0,
+      "warningRepetitions": [],
+      "failedRepetitions": []
+    },
+    {
+      "questionId": 16,
+      "question": "哪篇明确提到了“10分”评价？",
+      "group": "new",
+      "runs": 10,
+      "answersReturned": 10,
+      "pass": 10,
+      "warning": 0,
+      "fail": 0,
+      "warningRepetitions": [],
+      "failedRepetitions": []
+    },
+    {
+      "questionId": 17,
+      "question": "“时隔13年”能证明 GTA 6 开发了13年吗？",
+      "group": "new",
+      "runs": 10,
+      "answersReturned": 10,
+      "pass": 8,
+      "warning": 1,
+      "fail": 1,
+      "warningRepetitions": [
+        10
+      ],
+      "failedRepetitions": [
+        8
+      ]
+    },
+    {
+      "questionId": 18,
+      "question": "仅凭现有内容，能比较 GTA 6 和影视作品的时长吗？",
+      "group": "new",
+      "runs": 10,
+      "answersReturned": 10,
+      "pass": 9,
+      "warning": 0,
+      "fail": 1,
+      "warningRepetitions": [],
+      "failedRepetitions": [
+        4
+      ]
+    },
+    {
+      "questionId": 19,
+      "question": "哪篇主要介绍技术如何服务老年人？",
+      "group": "new",
+      "runs": 10,
+      "answersReturned": 10,
+      "pass": 7,
+      "warning": 3,
+      "fail": 0,
+      "warningRepetitions": [
+        2,
+        3,
+        10
+      ],
+      "failedRepetitions": []
+    },
+    {
+      "questionId": 20,
+      "question": "这三篇分别提供了哪些可直接核对的数字信息？",
+      "group": "new",
+      "runs": 10,
+      "answersReturned": 10,
+      "pass": 0,
+      "warning": 1,
+      "fail": 9,
+      "warningRepetitions": [
+        9
+      ],
+      "failedRepetitions": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        10
+      ]
+    }
+  ],
+  "sourceVersions": {
+    "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b": [
+      "article-revision:1:f309169f1a91e7b4d5ae3475d93da488ea30a5118e644aad26133d08a5a7647b"
+    ],
+    "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a": [
+      "article-revision:1:c7cf1a3e0d002d4bf30c9dd5d7c9a95c4423439203878223c9ca1458bcd266b2"
+    ],
+    "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e": [
+      "content-revision:1:d9677b77bf439bd1650a64f506a5cd03382850a6b3ec238b1b813b3e9625e05e"
+    ]
+  },
+  "sourceVersionsStable": true,
+  "distinctSuppliedEvidenceHashes": 1,
+  "binaryUnchanged": true,
+  "sourceFilesUnchanged": true,
+  "limitations": "Assistant source-guided review, not independent human scoring or NFR-04 accuracy acceptance. Twenty repeated prompts are not 200 independent questions; new questions target previously observed weaknesses. GTA input is a saved RSS excerpt; no browser E2E.",
+  "artifactDirectory": "/Users/lwl/Documents/Codex/2026-11-14/fen-xi/outputs/comparison-200-20261123",
+  "report": "/Users/lwl/Documents/Codex/2026-11-14/fen-xi/outputs/comparison-200-20261123/report.md",
+  "note": "User-requested 20 questions x 10 consecutive real generations each; includes original ten plus ten new targeted prompts. Not independent NFR-04 accuracy acceptance."
+}

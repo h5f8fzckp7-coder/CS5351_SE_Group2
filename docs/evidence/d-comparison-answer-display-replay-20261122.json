@@ -1,0 +1,16 @@
+{
+  "date": "2026-11-22",
+  "kind": "Deterministic loopback replay of captured model outputs, not new real-model generation",
+  "cases": 100,
+  "answersPreservedExactly": 100,
+  "sourceVerificationUnchanged": 100,
+  "restoredPreviouslyWithheld": [
+    83,
+    90,
+    91
+  ],
+  "paidProviderCalls": 0,
+  "notes": "Original questions and supplied-evidence hashes matched the prior frozen 100-request batch. Original answer-quality findings remain unresolved; this change only removes answer suppression.",
+  "artifacts": "/Users/lwl/Documents/Codex/2026-11-14/fen-xi/outputs/comparison-answer-display-20261122",
+  "builtBinarySHA256": "6a6df89c363b3577bbfdb9aef516e0407bab2a2cc7b28f9da14083d0ba8b659c"
+}

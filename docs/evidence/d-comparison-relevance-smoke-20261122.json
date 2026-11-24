@@ -1,0 +1,106 @@
+{
+  "date": "2026-11-22",
+  "configuredModel": "openai/gpt-5.4-mini",
+  "environment": "isolated SQLite backup, no owner settings or source data changed",
+  "cases": [
+    {
+      "name": "focused",
+      "question": "解释一下gta那篇相关文章的主题",
+      "seconds": 5.3,
+      "answer": "第三篇文章的主题是《GTA 6》评测与游玩体验回顾，强调它“时隔13年”带来的等待感和“游戏史最高分”的评价，核心是在讲这款新作为何值得高分与长久期待。",
+      "message": null,
+      "sources": [
+        {
+          "title": "这群在鸿蒙写应用的年轻人，只想做点「用得上」的",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": 0
+        },
+        {
+          "title": "本周看什么 | 最近值得一看的 10 部作品",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": 0
+        },
+        {
+          "title": "游戏史最高分，不负 13 年的等待：《GTA 6》游玩体验",
+          "state": "supported",
+          "reason": null,
+          "fact": "文章主题是《GTA 6》的游戏评测/游玩体验，聚焦这款系列新作时隔13年后的表现。",
+          "citations": 2
+        }
+      ],
+      "evidenceReopens": 2,
+      "budget": {
+        "max": 2,
+        "started": 1,
+        "usageKnown": true,
+        "perCall": [
+          {
+            "prompt": 14988,
+            "output": 266,
+            "total": 15254
+          }
+        ],
+        "cumulative": {
+          "prompt": 14988,
+          "output": 266,
+          "total": 15254
+        },
+        "status": "completed"
+      }
+    },
+    {
+      "name": "all_sources",
+      "question": "分别概括这三篇文章的主题",
+      "seconds": 4.9,
+      "answer": "第一篇主要讲鸿蒙高校创新赛中学生围绕无障碍、养老、陪伴和日常交互等真实需求开发实用应用；第二篇是本周影视推荐，集中介绍多部电影、剧集和预告资讯；第三篇只是转载导语，说明《GTA 6》评测来自篝火营地并指出这是 Rockstar 时隔 13 年推出的新作。",
+      "message": null,
+      "sources": [
+        {
+          "title": "这群在鸿蒙写应用的年轻人，只想做点「用得上」的",
+          "state": "supported",
+          "reason": null,
+          "fact": "主题是鸿蒙高校创新赛中学生围绕无障碍、养老、陪伴和日常交互等真实需求开发实用应用",
+          "citations": 5
+        },
+        {
+          "title": "本周看什么 | 最近值得一看的 10 部作品",
+          "state": "supported",
+          "reason": null,
+          "fact": "主题是本周影视推荐，集中介绍多部电影、剧集和预告资讯",
+          "citations": 3
+        },
+        {
+          "title": "游戏史最高分，不负 13 年的等待：《GTA 6》游玩体验",
+          "state": "supported",
+          "reason": null,
+          "fact": "主题是《GTA 6》游玩体验/评测转载，强调这是 Rockstar 时隔 13 年推出的新作",
+          "citations": 2
+        }
+      ],
+      "evidenceReopens": 10,
+      "budget": {
+        "max": 2,
+        "started": 1,
+        "usageKnown": true,
+        "perCall": [
+          {
+            "prompt": 14988,
+            "output": 723,
+            "total": 15711
+          }
+        ],
+        "cumulative": {
+          "prompt": 14988,
+          "output": 723,
+          "total": 15711
+        },
+        "status": "completed"
+      }
+    }
+  ],
+  "limitations": "Two regression scenarios, not NFR-04 accuracy acceptance. The first two articles have saved fetched full text; the GTA item has only its saved RSS excerpt. Relevance is a model judgment and citations verify source/range/version, not entailment."
+}

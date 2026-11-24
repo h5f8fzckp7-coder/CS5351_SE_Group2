@@ -80,6 +80,31 @@ func TestBackupDoesNotAppendToPrimaryPartialFile(t *testing.T) {
 	}
 }
 
+func TestBilibiliSpeechProbeUsesRangeBeforeChunkedDownload(t *testing.T) {
+	// Model the CDN's initial probe: --http-chunk-size alone only affects the
+	// later download, so the extractor must receive a Range header as well.
+	binary, _ := speechDownloaderFixture(t, "assert '--http-chunk-size' in args\nassert any(args[i] == '--add-header' and args[i+1] == 'Range:bytes=0-' for i in range(len(args)-1)), 'HTTP Error 403: initial probe needs Range'\npath.write_bytes(b'complete audio')\n")
+	engine := Transcriber{YTDLP: binary}
+	path := filepath.Join(t.TempDir(), "source.media")
+	if err := engine.fetchSpeechAudio(context.Background(), transcription.Audio{Platform: "bilibili", URL: "https://media.bilivideo.com/audio.m4s"}, path); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestOtherPlatformsDoNotReceiveBilibiliProbeRange(t *testing.T) {
+	binary, _ := speechDownloaderFixture(t, "assert '--add-header' not in args\npath.write_bytes(b'complete audio')\n")
+	engine := Transcriber{YTDLP: binary}
+	for _, source := range []transcription.Audio{
+		{Platform: "youtube", URL: "https://media.googlevideo.com/audio"},
+		{Platform: "douyin", URL: "https://media.douyinvod.com/audio"},
+		{Platform: "xiaohongshu", URL: "https://media.xhscdn.com/audio"},
+	} {
+		if err := engine.fetchSpeechAudio(context.Background(), source, filepath.Join(t.TempDir(), "source.media")); err != nil {
+			t.Fatal(source.Platform, err)
+		}
+	}
+}
+
 func TestSpeechDownloadRejectsUntrustedPlatformSourceBeforeLaunchingTool(t *testing.T) {
 	binary, record := speechDownloaderFixture(t, "path.write_bytes(b'should not run')\n")
 	engine := Transcriber{YTDLP: binary}
