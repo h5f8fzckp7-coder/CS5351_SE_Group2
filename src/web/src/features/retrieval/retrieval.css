@@ -1,0 +1,486 @@
+/* Standalone retrieval workbench (owner B's FR-02 as its own page).
+   Status hues match features/ai/ai.css so the workbench and the chat panel
+   speak the same visual language. */
+
+.retrieval-workbench {
+  display: flex; flex-direction: column; gap: 14px;
+  padding: var(--page-gutter, 24px);
+  max-width: var(--page-max, 1100px); margin: 0 auto; width: 100%;
+}
+
+/* ---------- header ---------- */
+.retrieval-header { display: flex; align-items: flex-start; gap: 12px; }
+.retrieval-header-icon {
+  display: grid; place-items: center; flex: none;
+  width: 38px; height: 38px; border-radius: var(--radius-md);
+  background: var(--accent-soft); border: 1px solid var(--accent-line); color: var(--accent-ink);
+}
+.retrieval-header h1 { margin: 0 0 4px; font-size: 21px; font-family: var(--font-display); color: var(--ink); letter-spacing: -0.01em; }
+.retrieval-header p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+
+/* ---------- collapsible shells (guide + options) ---------- */
+.retrieval-guide, .retrieval-options {
+  border: 1px solid var(--line); border-radius: var(--radius-lg);
+  background: var(--card); overflow: hidden;
+}
+.retrieval-guide { background: var(--surface); border-color: var(--line-strong); border-left: 3px solid var(--accent); }
+
+.retrieval-guide-toggle, .retrieval-options-toggle {
+  display: flex; align-items: center; gap: 10px; width: 100%;
+  padding: 12px 16px; background: none; border: 0; cursor: pointer;
+  font: inherit; text-align: left; color: var(--ink);
+}
+.retrieval-guide-toggle:hover, .retrieval-options-toggle:hover { background: var(--hover); }
+.retrieval-guide-toggle:focus-visible, .retrieval-options-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+.retrieval-guide-icon { display: grid; place-items: center; flex: none; color: var(--accent-ink); }
+.retrieval-guide-title, .retrieval-options-title { font-weight: 650; font-size: 14px; flex: none; }
+.retrieval-guide-teaser, .retrieval-options-summary {
+  color: var(--muted); font-size: 12px; margin-left: auto;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.retrieval-guide-chevron, .retrieval-options-chevron { flex: none; color: var(--muted); transition: transform var(--ease-out, 160ms); }
+.retrieval-guide.is-open .retrieval-guide-chevron,
+.retrieval-options.is-open .retrieval-options-chevron { transform: rotate(180deg); }
+
+.retrieval-guide-body, .retrieval-options-body {
+  display: flex; flex-direction: column; gap: 14px;
+  padding: 4px 16px 16px; border-top: 1px solid var(--line);
+}
+.retrieval-guide-body { border-top-color: var(--line); }
+
+/* ---------- onboarding steps ---------- */
+.retrieval-steps { display: grid; gap: 12px; list-style: none; margin: 12px 0 0; padding: 0; }
+.retrieval-steps li { display: flex; gap: 10px; align-items: flex-start; }
+.retrieval-step-num {
+  display: grid; place-items: center; flex: none; width: 22px; height: 22px;
+  border-radius: var(--radius-full); background: var(--accent); color: var(--inverse);
+  font-size: 12px; font-weight: 700;
+}
+.retrieval-steps strong { display: block; font-size: 13px; color: var(--ink); margin-bottom: 2px; }
+.retrieval-steps p { margin: 0; font-size: 12.5px; line-height: 1.65; color: var(--muted); }
+
+.retrieval-guide-notes { display: grid; gap: 8px; }
+.retrieval-guide-note {
+  display: flex; gap: 8px; align-items: flex-start; margin: 0;
+  padding: 10px 12px; border-radius: var(--radius-md);
+  background: var(--card); border: 1px solid var(--line);
+  font-size: 12.5px; line-height: 1.65; color: var(--muted);
+}
+.retrieval-guide-note svg { flex: none; margin-top: 2px; color: var(--warning); }
+.retrieval-guide-note strong { color: var(--ink); }
+.retrieval-guide-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* ---------- search form ---------- */
+.retrieval-form {
+  display: flex; flex-direction: column; gap: 12px; padding: 16px;
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
+}
+.retrieval-form-row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px; }
+.retrieval-field { display: flex; flex-direction: column; gap: 6px; min-width: 190px; flex: 1 1 190px; }
+.retrieval-field-wide { flex: 2 1 320px; }
+.retrieval-field > span { font-size: 12px; font-weight: 600; color: var(--muted); }
+.retrieval-form-row > button { flex: none; }
+
+.retrieval-quick { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px dashed var(--line); }
+
+.retrieval-segmented { display: inline-flex; padding: 3px; gap: 2px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-full); }
+.retrieval-segment {
+  padding: 5px 14px; border: 0; border-radius: var(--radius-full); background: none;
+  font: inherit; font-size: 12.5px; color: var(--muted); cursor: pointer;
+  transition: background var(--ease-out, 160ms), color var(--ease-out, 160ms);
+}
+.retrieval-segment:hover:not(:disabled) { color: var(--ink); }
+.retrieval-segment.is-active { background: var(--card); color: var(--accent-ink); font-weight: 650; box-shadow: var(--shadow-sm); }
+.retrieval-segment:disabled { opacity: 0.55; cursor: default; }
+
+.retrieval-presets { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.retrieval-presets-label { font-size: 12px; color: var(--muted); margin-right: 2px; }
+.retrieval-preset {
+  padding: 4px 10px; border-radius: var(--radius-full);
+  border: 1px solid var(--line); background: var(--surface);
+  font: inherit; font-size: 11.5px; color: var(--muted); cursor: pointer;
+}
+.retrieval-preset:hover:not(:disabled) { color: var(--ink); border-color: var(--line-strong); }
+.retrieval-preset.is-active { background: var(--accent-soft); border-color: var(--accent-line); color: var(--accent-ink); font-weight: 600; }
+.retrieval-preset.is-custom { cursor: default; }
+.retrieval-preset:disabled { opacity: 0.55; cursor: default; }
+
+/* ---------- advanced knobs ---------- */
+.retrieval-knob-group { display: flex; flex-direction: column; gap: 10px; }
+.retrieval-knob-group h3 { margin: 12px 0 0; font-size: 12px; font-weight: 650; color: var(--muted); letter-spacing: 0.02em; }
+.retrieval-knobs { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.retrieval-knob { display: flex; flex-direction: column; gap: 5px; }
+.retrieval-knob-label { display: flex; align-items: baseline; gap: 8px; font-size: 12px; font-weight: 600; color: var(--ink); }
+.retrieval-knob-ceiling { font-style: normal; font-size: 11px; font-weight: 500; color: var(--faint); margin-left: auto; }
+.retrieval-knob-hint { font-size: 11.5px; line-height: 1.55; color: var(--muted); }
+.retrieval-knob-warning {
+  margin: 0; padding: 9px 12px; border-radius: var(--radius-md);
+  background: var(--warning-soft); border: 1px solid var(--warning);
+  font-size: 12px; line-height: 1.6; color: var(--ink);
+}
+
+.retrieval-display-prefs { display: flex; flex-direction: column; gap: 10px; }
+.retrieval-knob-inline { flex-direction: row; align-items: center; gap: 10px; }
+.retrieval-knob-inline .retrieval-knob-label { flex: none; }
+.retrieval-page-size { max-width: 120px; }
+.retrieval-more { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+
+.retrieval-options-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding-top: 12px; border-top: 1px solid var(--line); }
+.retrieval-options-note { font-size: 11.5px; color: var(--faint); margin-right: auto; }
+
+/* ---------- notices ---------- */
+.retrieval-empty { margin: 0; padding: 12px 16px; color: var(--muted); font-size: 13px; line-height: 1.6; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); }
+.retrieval-error { margin: 0; padding: 10px 14px; color: var(--danger); font-size: 13px; background: var(--danger-soft); border: 1px solid var(--danger); border-radius: var(--radius-md); }
+.retrieval-hidden { margin: 0; padding: 9px 14px; color: var(--muted); font-size: 12px; line-height: 1.6; background: var(--warning-soft); border: 1px solid var(--warning); border-radius: var(--radius-md); }
+
+/* ---------- result ---------- */
+.retrieval-result { display: flex; flex-direction: column; gap: 14px; }
+
+.retrieval-status { display: flex; align-items: flex-start; gap: 10px; padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid var(--line); }
+.retrieval-status-icon { flex: none; display: grid; place-items: center; margin-top: 1px; }
+.retrieval-status-body { display: flex; flex-direction: column; gap: 3px; }
+.retrieval-status-label { font-weight: 650; font-size: 13.5px; }
+.retrieval-status-hint { font-size: 12px; line-height: 1.6; color: var(--muted); }
+/* Same hues as the chat panel's ai-retrieval-* tones. */
+.retrieval-status-ok { border-color: #16a34a55; background: #16a34a0d; }
+.retrieval-status-ok .retrieval-status-icon { color: #16a34a; }
+.retrieval-status-info { border-color: #2563eb44; background: #2563eb08; }
+.retrieval-status-info .retrieval-status-icon { color: #2563eb; }
+.retrieval-status-warning { border-color: #d9770655; background: #d977060d; }
+.retrieval-status-warning .retrieval-status-icon { color: #d97706; }
+.retrieval-status-error { border-color: #dc262655; background: #dc26260d; }
+.retrieval-status-error .retrieval-status-icon { color: #dc2626; }
+
+.retrieval-metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(136px, 1fr)); gap: 10px; margin: 0; }
+.retrieval-metrics > div { padding: 10px 12px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); }
+.retrieval-metrics dt { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+.retrieval-metrics dd { margin: 0; font-size: 14px; font-weight: 650; color: var(--ink); font-variant-numeric: tabular-nums; word-break: break-word; }
+
+/* ---------- passage cards ---------- */
+.retrieval-passages { display: flex; flex-direction: column; gap: 12px; list-style: none; margin: 0; padding: 0; }
+.retrieval-passage {
+  display: flex; flex-direction: column; gap: 10px; padding: 14px 16px;
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
+  transition: border-color var(--ease-out, 160ms);
+}
+.retrieval-passage:hover { border-color: var(--line-strong); }
+
+.retrieval-passage-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.retrieval-rank {
+  display: grid; place-items: center; flex: none; width: 20px; height: 20px;
+  border-radius: var(--radius-xs); background: var(--surface); border: 1px solid var(--line);
+  font-size: 11px; font-weight: 700; color: var(--muted); font-variant-numeric: tabular-nums;
+}
+.retrieval-chip { padding: 2px 10px; border-radius: var(--radius-full); background: var(--accent-soft); border: 1px solid var(--accent-line); color: var(--accent-ink); font-size: 11px; font-weight: 650; }
+.retrieval-position { font-size: 12.5px; font-weight: 650; color: var(--ink); }
+.retrieval-locator { font-family: var(--font-mono); font-size: 11px; color: var(--faint); word-break: break-all; }
+.retrieval-copy {
+  display: grid; place-items: center; flex: none; width: 24px; height: 24px; margin-left: auto;
+  border-radius: var(--radius-xs); border: 1px solid var(--line); background: var(--surface);
+  color: var(--muted); cursor: pointer;
+}
+.retrieval-copy:hover { color: var(--ink); border-color: var(--line-strong); }
+
+.retrieval-scores { display: flex; flex-wrap: wrap; gap: 14px; }
+.retrieval-score { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--muted); }
+.retrieval-score-label { flex: none; }
+.retrieval-score-track { display: block; width: 56px; height: 5px; border-radius: var(--radius-full); background: var(--surface); border: 1px solid var(--line); overflow: hidden; }
+.retrieval-score-fill { display: block; height: 100%; border-radius: inherit; background: var(--accent); }
+.retrieval-score-lexical .retrieval-score-fill { background: #2563eb; }
+.retrieval-score-semantic .retrieval-score-fill { background: #7c3aed; }
+.retrieval-score-rerank .retrieval-score-fill { background: #d97706; }
+.retrieval-score-value { flex: none; min-width: 30px; font-variant-numeric: tabular-nums; }
+
+.retrieval-text { margin: 0; font-size: 14px; line-height: 1.8; color: var(--ink); white-space: pre-wrap; }
+/* The theme's accent wash is only 7% ink, far too faint for a match highlight;
+   use an explicit highlighter pair so matched terms are obvious in both themes. */
+.retrieval-mark { background: #fde68a; color: #422006; font-weight: 600; border-radius: 3px; padding: 0 2px; }
+:root[data-theme='dark'] .retrieval-mark { background: rgb(250 204 21 / .3); color: #fef3c7; }
+
+/* Labels stay in the UI font: the mono stack has no CJK glyphs. */
+.retrieval-passage-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-size: 11px; color: var(--faint); }
+.retrieval-passage-foot code { font-family: var(--font-mono); }
+.retrieval-passage-foot > button { margin-left: auto; }
+
+@media (max-width: 720px) {
+  .retrieval-field, .retrieval-field-wide { flex: 1 1 100%; }
+  .retrieval-form-row > button { width: 100%; }
+  .retrieval-guide-teaser, .retrieval-options-summary { display: none; }
+  .retrieval-copy { margin-left: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .retrieval-guide-chevron, .retrieval-options-chevron, .retrieval-segment, .retrieval-passage { transition: none; }
+}
+
+/* ---------- retrieval settings, kept on the page ---------- */
+.retrieval-settings-panel { border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--card); overflow: hidden; }
+.retrieval-settings-toggle {
+  display: flex; align-items: center; gap: 10px; width: 100%;
+  padding: 12px 16px; background: none; border: 0; cursor: pointer;
+  font: inherit; text-align: left; color: var(--ink);
+}
+.retrieval-settings-toggle:hover { background: var(--hover); }
+.retrieval-settings-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.retrieval-settings-title { font-weight: 650; font-size: 14px; flex: none; }
+.retrieval-settings-summary { color: var(--muted); font-size: 12px; margin-left: auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.retrieval-settings-chevron { flex: none; color: var(--muted); transition: transform var(--ease-out, 160ms); }
+.retrieval-settings-panel.is-open .retrieval-settings-chevron { transform: rotate(180deg); }
+.retrieval-settings-body { padding: 0 16px 16px; border-top: 1px solid var(--line); }
+.retrieval-settings-body .ai-retrieval-settings { padding: 12px 0 0; }
+
+/* ---------- grounded answer ---------- */
+.retrieval-answer {
+  display: flex; flex-direction: column; gap: 10px; padding: 16px;
+  background: var(--card); border: 1px solid var(--accent-line); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+.retrieval-answer.is-error { border-color: var(--danger); background: var(--danger-soft); }
+.retrieval-answer-head { display: flex; align-items: center; gap: 8px; font-weight: 650; font-size: 14px; color: var(--ink); }
+.retrieval-answer-head svg { color: var(--accent-ink); }
+.retrieval-answer.is-error .retrieval-answer-head svg { color: var(--danger); }
+.retrieval-answer-badge {
+  margin-left: 4px; padding: 1px 6px; border-radius: var(--radius-xs);
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  font-size: 10px; font-weight: 700; letter-spacing: 0.04em; color: var(--accent-ink);
+}
+.retrieval-answer-question { margin: 0; font-size: 12.5px; color: var(--muted); }
+.retrieval-answer-body { font-size: 14px; line-height: 1.8; color: var(--ink); }
+.retrieval-answer-body > :first-child { margin-top: 0; }
+.retrieval-answer-body > :last-child { margin-bottom: 0; }
+.retrieval-answer-hint { margin: 0; font-size: 12.5px; color: var(--muted); }
+.retrieval-answer-error { margin: 0; font-size: 13px; line-height: 1.6; color: var(--ink); }
+.retrieval-answer-link {
+  align-self: flex-start; padding: 0; border: 0; background: none;
+  font: inherit; font-size: 12.5px; color: var(--accent-ink); text-decoration: underline; cursor: pointer;
+}
+.retrieval-answer-provenance {
+  display: flex; align-items: flex-start; gap: 6px; margin: 0;
+  padding-top: 10px; border-top: 1px dashed var(--line);
+  font-size: 11.5px; line-height: 1.6; color: var(--faint);
+}
+.retrieval-answer-provenance svg { flex: none; margin-top: 2px; }
+
+@media (max-width: 720px) {
+  .retrieval-settings-summary { display: none; }
+}
+
+/* ---------- actionable states ---------- */
+.retrieval-noresult { text-align: left; }
+.retrieval-noresult-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+
+.retrieval-skeleton { display: flex; flex-direction: column; gap: 10px; padding: 16px; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--card); }
+.retrieval-skeleton > span { display: block; height: 14px; border-radius: var(--radius-xs); background: var(--surface); animation: retrieval-pulse 1.2s ease-in-out infinite; }
+.retrieval-skeleton > span:nth-child(2) { width: 82%; animation-delay: .15s; }
+.retrieval-skeleton > span:nth-child(3) { width: 64%; animation-delay: .3s; }
+@keyframes retrieval-pulse { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .retrieval-skeleton > span { animation: none; } }
+
+/* ---------- keyboard ---------- */
+.retrieval-kbd-hint { font-size: 11px; color: var(--faint); margin-left: auto; }
+.retrieval-skip {
+  align-self: flex-start; padding: 6px 12px; border-radius: var(--radius-full);
+  border: 1px solid var(--accent-line); background: var(--accent-soft);
+  color: var(--accent-ink); font-size: 12.5px; font-weight: 600; text-decoration: none;
+}
+.retrieval-skip:hover { background: var(--hover); }
+.retrieval-result:focus { outline: none; }
+.retrieval-result:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: var(--radius-md); }
+.retrieval-segment:focus-visible,
+.retrieval-preset:focus-visible,
+.retrieval-copy:focus-visible,
+.retrieval-skip:focus-visible,
+.retrieval-answer-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (max-width: 720px) { .retrieval-kbd-hint { display: none; } }
+
+/* ---------- result toolbar, recent queries ---------- */
+.retrieval-result-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.retrieval-sort { padding: 2px; }
+.retrieval-more-metrics {
+  margin-left: auto; padding: 4px 10px; border-radius: var(--radius-full);
+  border: 1px solid var(--line); background: var(--surface); color: var(--muted);
+  font: inherit; font-size: 11.5px; cursor: pointer;
+}
+.retrieval-more-metrics:hover { color: var(--ink); border-color: var(--line-strong); }
+.retrieval-more-metrics:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.retrieval-recent { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding-top: 10px; border-top: 1px dashed var(--line); }
+.retrieval-recent .retrieval-preset { max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* ---------- page context ---------- */
+.retrieval-context-toggle {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 10px; border-radius: var(--radius-full);
+  border: 1px solid var(--line); background: var(--surface); color: var(--muted);
+  font: inherit; font-size: 11.5px; cursor: pointer;
+}
+.retrieval-context-toggle:hover { color: var(--ink); border-color: var(--line-strong); }
+.retrieval-context-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.retrieval-context-toggle svg { transition: transform var(--ease-out, 160ms); }
+.retrieval-context-toggle svg.is-open { transform: rotate(180deg); }
+.retrieval-context {
+  padding: 10px 12px; border: 1px dashed var(--line-strong); border-radius: var(--radius-md);
+  background: var(--surface);
+}
+.retrieval-context-text { margin: 0; font-size: 12.5px; line-height: 1.8; color: var(--muted); white-space: pre-wrap; }
+.retrieval-context-cut { color: var(--faint); }
+.retrieval-context-note { display: flex; align-items: center; gap: 5px; margin: 6px 0 0; font-size: 11px; color: var(--faint); }
+.retrieval-context-error { margin: 0; font-size: 11.5px; color: var(--danger); }
+
+/* ==========================================================================
+   Layout polish. The search card is the anchor of the page: it sits on the
+   raised surface and carries the only accent border, while the three utility
+   panels recede onto the quieter surface so they read as configuration, not as
+   the main action.
+   ========================================================================== */
+
+.retrieval-workbench { gap: 18px; }
+.retrieval-header { padding-bottom: 2px; }
+.retrieval-header h1 { font-size: 22px; }
+
+/* Utility panels recede. */
+.retrieval-guide,
+.retrieval-options,
+.retrieval-settings-panel { background: var(--surface); border-color: var(--line); }
+.retrieval-guide-toggle,
+.retrieval-options-toggle,
+.retrieval-settings-toggle { padding: 11px 14px; }
+.retrieval-guide-body,
+.retrieval-options-body,
+.retrieval-settings-body { padding: 12px 14px 14px; }
+
+/* Search card carries the weight. */
+.retrieval-form {
+  padding: 18px;
+  border-color: var(--accent-line);
+  box-shadow: var(--shadow-md);
+}
+.retrieval-search-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; }
+.retrieval-search-head h2 { margin: 0; font-size: 15px; font-family: var(--font-display); color: var(--ink); }
+.retrieval-search-scope {
+  margin-left: auto; max-width: 62%; font-size: 12px; color: var(--muted);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.retrieval-form-row { align-items: flex-end; }
+.retrieval-form-row > .ui-button { min-width: 116px; }
+.retrieval-field > span { line-height: 18px; }
+.retrieval-field .ui-select,
+.retrieval-field .field { min-height: 38px; }
+.retrieval-field .field { padding-inline: 12px; }
+.retrieval-field-wide .field input { font-size: 15px; }
+.retrieval-form-row > .ui-button { height: 38px; }
+.retrieval-quick { padding-top: 14px; }
+
+/* Results read as one block under the card. */
+.retrieval-result { gap: 12px; }
+.retrieval-metrics > div { background: var(--card); border-color: var(--line); }
+.retrieval-passage { transition: box-shadow var(--ease-out, 160ms), border-color var(--ease-out, 160ms); }
+.retrieval-passage:hover { border-color: var(--line-strong); box-shadow: var(--shadow-md); }
+.retrieval-result-bar { padding-bottom: 2px; }
+.retrieval-skip { margin-top: -4px; }
+
+@media (max-width: 720px) {
+  .retrieval-search-scope { display: none; }
+  .retrieval-form-row > .ui-button { flex: 1 1 auto; min-width: 0; }
+}
+
+/* ---------- restore the design-system button chrome on this page ----------
+   tokens.css resets `button { background: none; border: 0 }` with an element
+   selector, which outranks the design system's :where(.ui-button-*) variants.
+   Other pages work around it by adding the legacy .button class; scoping the
+   restoration here keeps the fix local instead of changing global behaviour. */
+.retrieval-workbench .ui-button-primary {
+  background: var(--action);
+  border-color: var(--action);
+  color: var(--inverse);
+}
+.retrieval-workbench .ui-button-secondary {
+  background: var(--card);
+  border-color: var(--line-strong);
+  color: var(--ink);
+  box-shadow: var(--shadow-sm);
+}
+.retrieval-workbench .ui-button-danger {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: var(--canvas);
+}
+.retrieval-workbench .ui-button-quiet {
+  background: transparent;
+  border: 0;
+  color: var(--muted);
+}
+.retrieval-workbench .ui-button-quiet:hover:not(:disabled) { color: var(--ink); }
+.retrieval-workbench .ui-button-primary:hover:not(:disabled) { background: color-mix(in srgb, var(--action) 88%, var(--card)); }
+.retrieval-workbench .ui-button-secondary:hover:not(:disabled) { background: var(--surface); border-color: var(--control-line); }
+.retrieval-workbench .ui-button:disabled { opacity: .45; }
+
+.retrieval-initial-hint { margin: -6px 2px 0; }
+
+/* In dark mode --card is darker than --surface, so the search card would sit
+   behind the utility panels. Lift it onto --raised to keep the same hierarchy. */
+:root[data-theme='dark'] .retrieval-form { background: var(--raised); }
+:root[data-theme='dark'] .retrieval-form .field { background: var(--card); }
+:root[data-theme='dark'] .retrieval-form .ui-select { background: var(--card); }
+
+/* ---------- always-visible number steppers ----------
+   Chromium does not render native spinners unless hovered/focused (and not at
+   all in some builds), so every adjustable number carries its own up/down
+   controls. Native spinners are suppressed to avoid a second affordance. */
+.number-stepper { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.number-stepper-box { position: relative; display: block; min-width: 0; }
+.number-stepper-input { width: 100%; padding-right: 30px; }
+.retrieval-settings-body .number-stepper-input { padding-right: 30px; }
+.number-stepper-buttons {
+  position: absolute; right: 4px; top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 1px;
+}
+.number-stepper-button {
+  display: grid; place-items: center; width: 18px; height: 12px; padding: 0;
+  border: 1px solid var(--line); border-radius: 3px;
+  background: var(--surface); color: var(--muted); cursor: pointer; line-height: 0;
+}
+.number-stepper-button:hover:not(:disabled) { color: var(--ink); border-color: var(--line-strong); }
+.number-stepper-button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.number-stepper-button:disabled { opacity: .4; cursor: not-allowed; }
+.number-stepper-hint { font-size: 11.5px; line-height: 1.55; color: var(--muted); }
+.number-stepper-input::-webkit-outer-spin-button,
+.number-stepper-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.number-stepper-input { -moz-appearance: textfield; appearance: textfield; }
+
+/* Enumerated numeric setting (embedding dimension): the select keeps the
+   allowed set, the arrows step through it. */
+.number-stepper-select .number-stepper-box select { width: 100%; }
+.number-stepper-select .number-stepper-input,
+.number-stepper-select select { padding-right: 30px; }
+
+/* The settings form lays fields out full width; keep a number and its arrows
+   together instead of pushing the controls to the far edge of the row. */
+.retrieval-settings-body .number-stepper,
+.retrieval-settings-body .number-stepper-select { max-width: 240px; }
+
+/* ---------- per-paragraph citations on the answer ---------- */
+.retrieval-answer-body { display: flex; flex-direction: column; gap: 12px; }
+.retrieval-answer-block { display: flex; flex-direction: column; gap: 6px; }
+.retrieval-answer-block > :first-child { margin-top: 0; }
+.retrieval-answer-block > :last-child { margin-bottom: 0; }
+.retrieval-answer-citation {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+  margin: 0; padding-left: 2px; font-size: 11.5px; color: var(--muted);
+}
+.retrieval-answer-citation > svg { flex: none; color: var(--faint); }
+.retrieval-answer-citation-label { color: var(--faint); }
+.retrieval-answer-citation-chip {
+  padding: 2px 9px; border-radius: var(--radius-full);
+  border: 1px solid var(--accent-line); background: var(--accent-soft);
+  color: var(--accent-ink); font: inherit; font-size: 11.5px; font-weight: 600; cursor: pointer;
+}
+.retrieval-answer-citation-chip:hover { border-color: var(--accent); }
+.retrieval-answer-citation-chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* The card a citation points at flashes once, so the jump is visible. */
+.retrieval-passage.is-focused { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+@media (prefers-reduced-motion: reduce) { .retrieval-passage.is-focused { transition: none; } }

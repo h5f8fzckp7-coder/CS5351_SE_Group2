@@ -250,6 +250,18 @@ The hybrid path passes NFR-02 only if all of the following hold:
 - two frozen runs are byte-identical;
 - the model/vector hashes and hybrid weights are recorded.
 
+### Configuration scope
+
+The decision is bound to the configuration that was actually replayed. The
+current frozen replay uses the rerank-off default (weights 0.35/0.65/0, no
+rerank requests). Enabling text rerank changes the hybrid weights and the
+ordering before passage assembly; it is a distinct configuration and does not
+inherit the rerank-off recall result. Extending the decision to a rerank-enabled
+configuration requires a separate frozen replay with frozen rerank scores (or a
+pinned rerank model), the same confirmed set and budgets, and the same
+byte-identical double-run check. Until then a rerank-enabled run is a
+diagnostic, never pooled with or substituted for the rerank-off denominator.
+
 If the threshold is not met, the ADR must be reopened. Do not "fix" the result by
 changing the gold labels, dropping hard questions, changing the budget without
 reporting it, or switching from hybrid to lexical-only while calling it hybrid.
@@ -298,7 +310,10 @@ This document does not claim that:
 - PDF extraction or PaddleOCR is implemented;
 - a PaddleOCR job/token was used;
 - the baseline comparison has been run;
-- lexical-only or hybrid is better than the other before measurement.
+- lexical-only or hybrid is better than the other before measurement;
+- the rerank-enabled configuration has NFR-02 recall: the current decision
+  covers the rerank-off configuration only, and a separate frozen rerank replay
+  is required before any extension is claimed.
 
 It is the measurement contract that must be approved before the implementation
 phase and executed only after that approval.

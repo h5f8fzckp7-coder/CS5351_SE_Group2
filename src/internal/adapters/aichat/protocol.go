@@ -97,6 +97,19 @@ func rejectedRequest(body io.Reader) error {
 	return ai.ErrRequestRejected
 }
 
+// chatCompletionTokenLimit leaves room for a reasoning model to finish its
+// hidden reasoning before it writes the visible answer. Without an explicit
+// limit some OpenAI-compatible providers default low enough that reasoning
+// consumes the whole budget and the stream ends with no content.
+const chatCompletionTokenLimit = 8192
+
+func chatLimitParameter(protocol string) string {
+	if protocol == "compatible" {
+		return "max_tokens"
+	}
+	return "max_completion_tokens"
+}
+
 func (c *Client) Chat(ctx context.Context, config ai.Config, source string, messages []ai.ChatMessage) (string, error) {
 	if !ai.ValidEndpoint(config.BaseURL) || strings.TrimSpace(config.Model) == "" {
 		return "", ai.ErrInvalid
@@ -106,7 +119,8 @@ func (c *Client) Chat(ctx context.Context, config ai.Config, source string, mess
 	for _, message := range messages {
 		chat = append(chat, map[string]string{"role": message.Role, "content": message.Content})
 	}
-	payload := map[string]any{"model": config.Model, "stream": false, "messages": chat}
+	limitParameter := chatLimitParameter(config.Protocol)
+	payload := map[string]any{"model": config.Model, "stream": false, limitParameter: chatCompletionTokenLimit, "messages": chat}
 	return c.complete(ctx, config, payload)
 }
 
@@ -122,7 +136,8 @@ func (c *Client) ChatStream(ctx context.Context, config ai.Config, source string
 	for _, message := range messages {
 		chat = append(chat, map[string]string{"role": message.Role, "content": message.Content})
 	}
-	payload := map[string]any{"model": config.Model, "stream": true, "messages": chat}
+	limitParameter := chatLimitParameter(config.Protocol)
+	payload := map[string]any{"model": config.Model, "stream": true, limitParameter: chatCompletionTokenLimit, "messages": chat}
 	if err := reserveCompletion(ctx); err != nil {
 		return err
 	}

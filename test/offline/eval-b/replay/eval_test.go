@@ -13,6 +13,7 @@ import (
 	"testing"
 
 	"tangentry/eval-b-gen/evalutil"
+	"tangentry/internal/retrieval"
 )
 
 const evalRoot = ".."
@@ -35,6 +36,26 @@ func aggFor(t *testing.T, h *harness, runID string) ([]questionResult, aggregate
 	}
 	t.Fatalf("unknown run %s", runID)
 	return nil, aggregate{}
+}
+
+// The NFR-02 recall replay is the rerank-off configuration. Enabling text
+// rerank changes the hybrid weights and the passage ordering before assembly,
+// so it is a different configuration: it must not silently reuse this replay.
+// A rerank-enabled run needs its own frozen rerank scores and the same
+// byte-identical double-run check before any recall result is extended to it.
+func TestNFR02ReplayIsRerankOff(t *testing.T) {
+	h := &harness{}
+	off := retrieval.DefaultWeights()
+	for _, cfg := range recallConfigs() {
+		sc := h.selectorConfig(cfg)
+		if sc.Reranker != nil {
+			t.Fatalf("%s: the NFR-02 replay must not configure a reranker", cfg.ID)
+		}
+		if sc.Weights != off {
+			t.Fatalf("%s: weights = %+v, want rerank-off default %+v", cfg.ID, sc.Weights, off)
+		}
+	}
+	t.Log("NFR-02 recall runs use rerank-off weights and no reranker")
 }
 
 // B-T12: two frozen-vector replays produce byte-identical per-question JSON.

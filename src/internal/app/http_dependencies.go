@@ -65,7 +65,7 @@ func (p youtubeSearchProvider) Search(ctx context.Context, query, cursor string)
 
 func httpLibraryDependencies(s *services) httptransport.LibraryDependencies {
 	return httptransport.LibraryDependencies{
-		Content: s.features.content, Documents: s.runtime.documents, Articles: s.features.articles, ArticleImageHTTP: s.adapters.network.public,
+		Content: s.features.content, Documents: s.runtime.documents, Articles: s.features.articles, ArticleImageHTTP: s.adapters.network.public, PageText: newPageTextService(s.runtime.store),
 	}
 }
 
@@ -74,7 +74,7 @@ func httpAIDependencies(s *services) httptransport.AIDependencies {
 	if s.features.api.ai != nil {
 		languageAI = s.features.api.ai
 	}
-	return httptransport.AIDependencies{AI: languageAI, RetrievalSettings: s.features.api.retrievalSettings, Transcription: s.features.transcription, ModelDownloads: s.features.modelDownloads, Automatic: s.features.automaticSubtitles}
+	return httptransport.AIDependencies{AI: languageAI, RetrievalSettings: s.features.api.retrievalSettings, Retrieval: s.features.api.retrievalEngine, Transcription: s.features.transcription, ModelDownloads: s.features.modelDownloads, Automatic: s.features.automaticSubtitles}
 }
 
 func httpPodcastDependencies(s *services, adapters httpAdapterBundle, episodeID func(context.Context, string) string) httptransport.PodcastDependencies {
