@@ -91,19 +91,22 @@ func (s *Service) chat(ctx context.Context, in ChatRequest, emit func(string) er
 		}
 		return ChatResult{ContentID: in.ContentID, Messages: []ChatMessage{}, Budget: budgetReportFor(ctx)}, nil
 	}
-	var history []ChatMessage
+	var stored []ChatMessage
 	if row, err := s.results.AIResult(ctx, chatResultKind, key, ""); err == nil {
-		_ = json.Unmarshal([]byte(row.Value), &history)
+		_ = json.Unmarshal([]byte(row.Value), &stored)
 	} else if !errors.Is(err, ErrNotFound) {
 		return ChatResult{}, ErrStorage
 	}
+	history := stored
 	if len(in.Messages) > 0 {
 		history = append([]ChatMessage(nil), in.Messages...)
 
 		// Client-supplied citations and freshness labels are untrusted.
-		// Only server-generated citations and server-assessed version
-		// status may be retained.
+		// Strip them, then restore evidence for earlier turns from the
+		// server-stored transcript. A resend must not drop that snapshot,
+		// and it must not be able to replace it.
 		stripUntrustedEvidence(history)
+		restoreServerEvidence(history, stored)
 	}
 	if len(history) == 0 || history[len(history)-1].Role != "user" {
 		return ChatResult{}, ErrInvalid

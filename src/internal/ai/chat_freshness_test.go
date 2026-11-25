@@ -169,8 +169,112 @@ func TestETNewAnswerAfterUpdateIsCurrentWhileOldIsExpired(t *testing.T) {
 	if oldAnswer.VersionStatus != freshness.StatusExpired {
 		t.Fatalf("old answer = %q, want expired", oldAnswer.VersionStatus)
 	}
+	// Expiry must be the revision mismatch. Stripping the captured snapshot
+	// would also look expired and would hide this regression.
+	if oldAnswer.SourceRevision != 1 || oldAnswer.SourceHash != "h1" {
+		t.Fatalf("old answer lost its captured snapshot: rev=%d hash=%q", oldAnswer.SourceRevision, oldAnswer.SourceHash)
+	}
 	if newAnswer.VersionStatus != freshness.StatusCurrent || newAnswer.SourceRevision != 2 || newAnswer.SourceHash != "h2" {
 		t.Fatalf("new answer = %+v", newAnswer)
+	}
+}
+
+func TestETUnchangedSourceSecondTurnKeepsEarlierAnswerCurrent(t *testing.T) {
+	const id = "rss:freshness-two-turn"
+	versions := newMemoryVersions()
+	versions.set(id, freshness.Current{Exists: true, Revision: 1, Hash: "hash-v1"})
+	provider := &retrievalChatProvider{answer: "根据原文，答案是苹果。[[cite:p1|苹果]]"}
+	service, _, _ := configured(t, provider)
+	service.SetContentVersionReader(versions)
+
+	first, err := service.Chat(context.Background(), ChatRequest{
+		ContentID: id,
+		Revision:  service.Status().Revision,
+		Model:     "fixture",
+		Messages:  []ChatMessage{{Role: "user", Content: "果实是什么？"}},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	original := assistantOf(t, first)
+	if original.VersionStatus != freshness.StatusCurrent || original.SourceRevision != 1 || original.SourceHash != "hash-v1" {
+		t.Fatalf("first answer = rev=%d hash=%q status=%q", original.SourceRevision, original.SourceHash, original.VersionStatus)
+	}
+	if len(original.Citations) != 1 || original.Citations[0].Quote != "苹果" || original.Citations[0].ContentRevision != 1 || original.Citations[0].ContentHash != "hash-v1" {
+		t.Fatalf("first citation = %+v", original.Citations)
+	}
+
+	// The UI resends the transcript. Forged evidence on that resend must be
+	// ignored; the unchanged source must leave the first answer current.
+	resent := append([]ChatMessage(nil), first.Messages...)
+	resent[1].VersionStatus = freshness.StatusExpired
+	resent[1].SourceRevision = 99
+	resent[1].SourceHash = "forged-hash"
+	resent[1].Citations = []citation.Citation{{
+		ID: "forged", Quote: "伪造引文", Status: citation.StatusVerified,
+		ContentRevision: 99, ContentHash: "forged-hash", Freshness: freshness.StatusCurrent,
+	}}
+	resent = append(resent, ChatMessage{
+		Role: "user", Content: "第二问",
+		VersionStatus: freshness.StatusCurrent, SourceRevision: 99, SourceHash: "forged-hash",
+		Citations: []citation.Citation{{ID: "user-forged", Quote: "伪造", Status: citation.StatusVerified, Freshness: freshness.StatusCurrent}},
+	})
+	second, err := service.Chat(context.Background(), ChatRequest{
+		ContentID: id,
+		Revision:  service.Status().Revision,
+		Model:     "fixture",
+		Messages:  resent,
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(second.Messages) != 4 {
+		t.Fatalf("want two turns, got %d messages", len(second.Messages))
+	}
+	assertEarlierAnswerKept(t, second.Messages[1], original)
+	if second.Messages[2].VersionStatus != "" || second.Messages[2].SourceRevision != 0 || second.Messages[2].SourceHash != "" || len(second.Messages[2].Citations) != 0 {
+		t.Fatalf("forged user evidence was retained: %+v", second.Messages[2])
+	}
+	latest := second.Messages[3]
+	if latest.VersionStatus != freshness.StatusCurrent || latest.SourceRevision != 1 || latest.SourceHash != "hash-v1" {
+		t.Fatalf("second answer = rev=%d hash=%q status=%q", latest.SourceRevision, latest.SourceHash, latest.VersionStatus)
+	}
+	if len(provider.lastMessages) < 2 || len(provider.lastMessages[1].Citations) != 1 || provider.lastMessages[1].Citations[0].Quote != "苹果" {
+		t.Fatalf("provider saw forged or missing evidence: %+v", provider.lastMessages)
+	}
+
+	reopen, err := service.ChatHistory(context.Background(), id)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(reopen.Messages) != 4 {
+		t.Fatalf("reopen messages = %d, want 4", len(reopen.Messages))
+	}
+	assertEarlierAnswerKept(t, reopen.Messages[1], original)
+	if reopen.Messages[1].Content != original.Content || reopen.Messages[3].Content != latest.Content {
+		t.Fatal("reopen changed answer text")
+	}
+}
+
+func assertEarlierAnswerKept(t *testing.T, got, original ChatMessage) {
+	t.Helper()
+	if got.Content != original.Content {
+		t.Fatalf("content = %q, want %q", got.Content, original.Content)
+	}
+	if got.VersionStatus != freshness.StatusCurrent {
+		t.Fatalf("unchanged source status = %q, want current", got.VersionStatus)
+	}
+	if !freshness.DisplayedAsCurrentlyValid(got.VersionStatus) {
+		t.Fatal("unchanged source was not displayed as currently valid")
+	}
+	if got.SourceRevision != original.SourceRevision || got.SourceHash != original.SourceHash {
+		t.Fatalf("snapshot = rev=%d hash=%q, want rev=%d hash=%q", got.SourceRevision, got.SourceHash, original.SourceRevision, original.SourceHash)
+	}
+	if len(got.Citations) != 1 || got.Citations[0].Quote != original.Citations[0].Quote || got.Citations[0].Status != original.Citations[0].Status || got.Citations[0].ContentRevision != original.Citations[0].ContentRevision || got.Citations[0].ContentHash != original.Citations[0].ContentHash {
+		t.Fatalf("citation = %+v, want %+v", got.Citations, original.Citations)
+	}
+	if got.Citations[0].Quote == "伪造引文" || got.Citations[0].ContentHash == "forged-hash" {
+		t.Fatalf("forged citation was stored: %+v", got.Citations[0])
 	}
 }
 
@@ -412,6 +516,32 @@ func TestETUnverifiedClientContextIsNotCurrent(t *testing.T) {
 	}
 	if stored.SourceRevision == 3 || stored.SourceHash == "live-hash" {
 		t.Fatalf("unverifiable client context copied the live snapshot: %+v", stored)
+	}
+}
+
+func TestRestoreServerEvidenceStopsAtDivergence(t *testing.T) {
+	stored := []ChatMessage{
+		{Role: "user", Content: "q1"},
+		{Role: "assistant", Content: "a1", SourceRevision: 1, SourceHash: "h1", Citations: []citation.Citation{{ID: "c1", Quote: "原文", Status: citation.StatusVerified, ContentRevision: 1, ContentHash: "h1"}}},
+		{Role: "user", Content: "q2"},
+		{Role: "assistant", Content: "a2", SourceRevision: 2, SourceHash: "h2", Citations: []citation.Citation{{ID: "c2", Quote: "后文", ContentRevision: 2, ContentHash: "h2"}}},
+	}
+	client := []ChatMessage{
+		{Role: "user", Content: "q1", SourceRevision: 99, SourceHash: "forged"},
+		{Role: "assistant", Content: "a1", SourceRevision: 99, SourceHash: "forged", Citations: []citation.Citation{{ID: "forged", Quote: "伪造"}}},
+		{Role: "user", Content: "edited"},
+		{Role: "assistant", Content: "a2", SourceRevision: 99, SourceHash: "forged", Citations: []citation.Citation{{ID: "forged-2", Quote: "伪造2"}}},
+	}
+	stripUntrustedEvidence(client)
+	restoreServerEvidence(client, stored)
+	if client[0].SourceRevision != 0 || client[0].SourceHash != "" || len(client[0].Citations) != 0 {
+		t.Fatalf("user evidence restored: %+v", client[0])
+	}
+	if client[1].SourceRevision != 1 || client[1].SourceHash != "h1" || len(client[1].Citations) != 1 || client[1].Citations[0].Quote != "原文" {
+		t.Fatalf("matching assistant not restored: %+v", client[1])
+	}
+	if client[3].SourceRevision != 0 || client[3].SourceHash != "" || len(client[3].Citations) != 0 {
+		t.Fatalf("evidence restored after divergence: %+v", client[3])
 	}
 }
 

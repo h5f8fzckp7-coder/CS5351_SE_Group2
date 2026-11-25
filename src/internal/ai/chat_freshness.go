@@ -229,7 +229,9 @@ func citationSnapshot(c citation.Citation, fallbackContentID string) freshness.S
 }
 
 // stripUntrustedEvidence clears client-supplied citations and freshness so
-// only server-assessed values are stored or returned.
+// only server-assessed values are stored or returned. It does not consult
+// the stored transcript; restoreServerEvidence puts that evidence back
+// onto turns the client still repeated verbatim.
 func stripUntrustedEvidence(messages []ChatMessage) {
 	for i := range messages {
 		messages[i].Citations = nil
@@ -237,6 +239,39 @@ func stripUntrustedEvidence(messages []ChatMessage) {
 		messages[i].SourceRevision = 0
 		messages[i].SourceHash = ""
 	}
+}
+
+// restoreServerEvidence copies server-owned snapshots and citations onto
+// client messages that still match the stored transcript. A message inherits
+// that evidence only when every message up to and including it has the same
+// position, role, and exact content. Client-supplied evidence was already
+// stripped and is never read here. Version status is left unset so the
+// following assessment recomputes it from the restored snapshot.
+func restoreServerEvidence(client, stored []ChatMessage) {
+	n := len(client)
+	if len(stored) < n {
+		n = len(stored)
+	}
+	for i := 0; i < n; i++ {
+		if client[i].Role != stored[i].Role || client[i].Content != stored[i].Content {
+			return
+		}
+		if stored[i].Role != "assistant" {
+			continue
+		}
+		client[i].SourceRevision = stored[i].SourceRevision
+		client[i].SourceHash = stored[i].SourceHash
+		client[i].Citations = cloneCitations(stored[i].Citations)
+	}
+}
+
+func cloneCitations(in []citation.Citation) []citation.Citation {
+	if len(in) == 0 {
+		return nil
+	}
+	out := make([]citation.Citation, len(in))
+	copy(out, in)
+	return out
 }
 
 func (s *Service) assessHistory(ctx context.Context, contentID string, messages []ChatMessage) []ChatMessage {
