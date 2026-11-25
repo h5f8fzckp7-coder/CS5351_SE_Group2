@@ -370,8 +370,10 @@ load/split → lexical → sweep → embed → dedupe/verify.
 
 ### Verification (raw logs retained)
 
-- **NFR-02: PASS** — hybrid-split 120k **23/24 = 0.9583** (≥0.80, ≥ baseline
-  0.2500, ≥ lexical-only 0.7917); 8k 23/24 with explicit `degraded_budget`;
+- **NFR-02: PASS (rerank off)** — hybrid-split 120k **23/24 = 0.9583** (≥0.80,
+  ≥ baseline 0.2500, ≥ lexical-only 0.7917); 8k 23/24 with explicit
+  `degraded_budget`; the result is not extended to rerank-enabled selection
+  (`b-eval-report.md` §3 "Measurement scope: rerank off");
   the only miss (BQ-021) is the intentional coverage-limited outcome and
   stays in the denominator. Zero-overlap paraphrases and the on-sample
   distractor gold all hit via the bounded sweep at recorded coverage.

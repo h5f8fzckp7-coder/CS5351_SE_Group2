@@ -9,6 +9,12 @@
 - **Content policy:** all documents are fictional, manually constructed
   templates (no real user data, credentials, cookies or private URLs); BMP
   characters only, so UTF-16 and code-point counts agree (protocol §4).
+- **Measurement scope:** the frozen replay and its 23/24 result are the
+  **rerank-off** configuration (weights 0.35/0.65/0, `maxRerankRequests=0`,
+  zero rerank requests). Enabling text rerank changes the hybrid weights and
+  the passage ordering before assembly; it is a separate configuration and must
+  not reuse this result. A rerank-enabled recall claim requires its own frozen
+  rerank scores and a separate replay.
 - **This is not an evaluation report.** The Phase-7 run writes
   `docs/evidence/b-eval-report.md` separately.
 

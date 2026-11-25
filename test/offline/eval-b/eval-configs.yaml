@@ -33,7 +33,11 @@ stable_defaults:
     top_k: 100
     sweep_candidates: 90
     weights: {lexical: 0.35, embedding: 0.65, rerank: 0.0}
-    rerank: off
+    rerank: off                     # measurement scope: these recall runs are
+                                    # rerank-off. Enabling text rerank changes
+                                    # hybrid scores and ordering before assembly;
+                                    # a rerank-enabled replay is a separate
+                                    # configuration and is not included here.
     max_embedding_chars: 100000
   ocr: local-paddleocr              # UNAVAILABLE in this environment; OCR subset
                                     # reported as pdf_ocr_unavailable, never pooled
