@@ -404,3 +404,41 @@ load/split → lexical → sweep → embed → dedupe/verify.
   https://github.com/orangesummertime/CS5351_SE_Group2/pull/7 — non-author
   human review is arranged by the owner; the agent does not self-approve or
   merge.
+
+## Review round — NFR-02 measurement scope (2026-11-25)
+
+### Review outcome
+
+The measurement-scope finding is closed. Review confirmed that the NFR-02
+decision is stated for the rerank-off configuration only, and that the report,
+protocol, phase report and run configuration all carry that boundary. The
+follow-up comment asks for a non-author APPROVED review of the current head;
+acceptance therefore remains a human action and no approval is claimed or
+self-recorded here.
+
+Scope statements and their checks:
+
+- `docs/evidence/b-eval-report.md:67` — "Measurement scope: rerank off";
+  `docs/evidence/b-eval-report.md:325` — the report makes no recall claim for
+  rerank-enabled selection.
+- `docs/evidence/b-eval-protocol.md:314` — explicit non-claim for the
+  rerank-enabled configuration.
+- `docs/evidence/b-impl-phase7-report.md:6` — configuration-scope header on the
+  phase-7 result.
+- `test/offline/eval-b/eval-configs.yaml:35` and
+  `test/offline/eval-b/README.md:12` — rerank-off run configuration and its
+  scope note.
+- `src/internal/retrieval/rerank_scope_test.go:19` (shipped defaults are the
+  frozen rerank-off configuration), `:38` (rerank-off selection replay),
+  `:106` (rerank-enabled is a separate configuration) and
+  `test/offline/eval-b/replay/eval_test.go:46` (the NFR-02 replay refuses a
+  reranker) pin the boundary in tests.
+
+### Limits
+
+- NFR-02 remains measured for the rerank-off configuration only. Extending it
+  to rerank-enabled selection requires a separate frozen replay with frozen
+  rerank scores, the same confirmed set and budgets, and the same
+  byte-identical double-run check.
+- Acceptance and APPROVE are human non-author actions; this record claims
+  neither.
