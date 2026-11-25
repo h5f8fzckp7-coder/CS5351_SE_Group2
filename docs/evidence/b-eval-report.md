@@ -64,6 +64,12 @@ d173a6660aace2993cc1dc5aa04a477894432d93739162777b9683a60142b111  fixtures/pdf-r
 
 **Deviation from protocol §5 local-first default (recorded):** no local embedding server/model exists in this environment. With explicit human authorization (protocol §9, see §8) one live pass generated frozen vectors via Bailian `text-embedding-v4`. All recall/budget replays are offline and deterministic. `hybrid-shared` is a **simulation** of a text_type-less server using document-type vectors for every text (labeled diagnostic, not a real local-server run); `hybrid-split` is the authorized provider configuration and carries the NFR-02 decision.
 
+### Measurement scope: rerank off
+
+The frozen recall replay is the **no-reranker** configuration: hybrid weights lexical 0.35 / embedding 0.65 / rerank 0, `rerank: off`, `maxRerankRequests: 0`, and zero rerank requests in every run. The 23/24 result (and the 8k stress result) applies to that configuration only.
+
+A rerank-enabled run is a different configuration: the rerank-on default weights are lexical 0.25 / embedding 0.55 / rerank 0.20, and request-relative rerank relevance changes the hybrid scores and passage ordering before assembly. No rerank-enabled frozen replay exists, so this report does **not** extend the NFR-02 result to enabled reranking. Any such extension requires a separate frozen replay over the same confirmed set and budgets with the rerank model identity, top-N, weight and per-question frozen scores recorded, plus the same byte-identical double-run check. Until then, rerank-enabled selection is reported as a separate, unmeasured configuration and is never presented as carrying the rerank-off NFR-02 result.
+
 ## 4. Results at 120000 characters (primary)
 
 Per-question table (full selected passage IDs/locators in `docs/evidence/b-eval-per-question.json`):
@@ -316,6 +322,7 @@ This live pass is separate from the frozen offline evidence (protocol §9); its 
 - BQ-016 exposes the single-term lexical proximity artifact (lexical-only miss; hybrid reaches it via sampled index 0).
 - Recall ceiling with a perfect embedder is 23/24 (BQ-021 unreachable by design).
 - No claim is made about live chat answer quality, latency, or token-cost parity; the controlled variable is the character budget.
+- NFR-02 is decided only for the rerank-off configuration; no recall claim is made for rerank-enabled selection (see §3, "Measurement scope: rerank off").
 
 ## 10. Determinism evidence (B-T12)
 

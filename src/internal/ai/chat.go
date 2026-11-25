@@ -139,7 +139,7 @@ func (s *Service) chat(ctx context.Context, in ChatRequest, emit func(string) er
 		if rerr != nil {
 			return ChatResult{ContentID: in.ContentID, Retrieval: retrievalResp}, rerr
 		}
-		source = runResult.Context
+		source = withCitationInstruction(runResult.Context, in.CiteParagraphs)
 		citationPassages = runResult.Passages
 	}
 	// Capture the snapshot this context was read from before generation.

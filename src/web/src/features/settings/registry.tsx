@@ -56,7 +56,7 @@ export const settingsRegistry: readonly SettingsRegistryItem[] = [
   },
   {
     id: 'ai', group: '连接', label: 'AI 服务', icon: <Sparkles size={16} aria-hidden="true" />, keywords: ['服务商', '翻译', '摘要', '字幕', '转录', '模型', '密钥', '提示词', 'whisper', '检索', '嵌入', '向量', '百炼'],
-    tabs: [{ id: 'provider', label: '服务商' }, { id: 'text', label: '翻译与摘要' }, { id: 'asr', label: '字幕转录' }, { id: 'retrieval', label: '原文检索' }],
+    tabs: [{ id: 'provider', label: '服务商' }, { id: 'text', label: '翻译与摘要' }, { id: 'asr', label: '字幕转录' }, { id: 'retrieval', label: 'Retrieval' }],
     render: ({ route, onTabChange }) => <AIServiceSettingsPage active value={(route.tab as AIServiceTab) || 'provider'} onChange={onTabChange} />,
   },
   {
@@ -64,7 +64,8 @@ export const settingsRegistry: readonly SettingsRegistryItem[] = [
     render: () => <AgentSettingsPage active />,
   },
   {
-    id: 'data', group: '系统', label: '数据与备份', icon: <Database size={16} aria-hidden="true" />, keywords: ['下载', '存储', '目录', '缓存', '快照', '恢复', 'webdav'],
+    id: 'data', group: '系统', label: '数据与备份', icon: <Database size={16} aria-hidden="true" />, keywords: ['下载', '存储', '目录', '缓存', '快照', '恢复', 'webdav', '示例', '样例', '内置资料'],
+    tabs: [{ id: 'storage', label: '存储' }, { id: 'backup', label: '备份' }, { id: 'samples', label: '示例资料' }],
     render: ({ downloads, route }) => <DataSettingsPage active value={(route.tab as DataTab) || 'storage'} downloads={downloads} />,
   },
   {

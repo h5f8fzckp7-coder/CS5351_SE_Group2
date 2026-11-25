@@ -3,6 +3,10 @@
 - **Date:** 2026-11-14
 - **Branch:** `owner/b-implementation`
 - **Phase status:** complete — **NFR-02: PASS** (hybrid-split, recorded deviation)
+- **Configuration scope:** rerank off (weights 0.35/0.65/0, `maxRerankRequests` 0).
+  The 23/24 result applies only to that configuration and is not extended to a
+  rerank-enabled configuration; see `b-eval-report.md` §3
+  "Measurement scope: rerank off".
 - **Preconditions met:**
   1. Evaluation set EXISTS and is human-confirmed: WANG Jiaqi sign-off in
      session ("我是人类，我签署。请你进入phase07"), `questions.yaml` status
