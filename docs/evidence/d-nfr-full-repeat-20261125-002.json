@@ -231,5 +231,10 @@
   "temporary_credentials_and_data_removed": true,
   "formal_result": "PASS for this retained local evaluation: all three profiles meet both metrics in both rounds and all controlled regressions pass. Residual errors and separate FR presentation findings remain disclosed.",
   "scope": "Saved text/subtitle comparison only; quotation matches do not establish semantic accuracy. Multiple-sentence presentation issues remain separate FR findings.",
-  "retention_scope": "Only this complete 120-response NFR evaluation is retained at the owner request; this does not assert that no prior evaluations occurred."
+  "retention_scope": "Only this complete 120-response NFR evaluation is retained at the owner request; this does not assert that no prior evaluations occurred.",
+  "published_evidence": {
+    "archive": "d-nfr-full-20261125-002.zip",
+    "sha256": "1c6ddec05c28150a83996e31114c3c93156b8076bf66f1ffdc8f6f71d6ca4c52",
+    "scope": "Historical frozen implementation; later PR-review changes not measured by this PASS."
+  }
 }

@@ -24,9 +24,11 @@ note: >-
   for implementation; final implementation acceptance still requires
   a non-author human review of the implementation PR.
 
-  D requirements (FR-04, NFR-04): Approved for implementation via PR #8
-  (owner/d) by a non-author group member. Final implementation acceptance
-  still requires a separate non-author human review of the implementation PR.
+  Earlier D requirements were approved for implementation via PR #8
+  (owner/d) by a non-author group member. The current natural-language FR-04
+  and local assisted NFR-04 contract require separate ratification; their
+  approval fields remain pending. Final implementation acceptance also
+  requires a non-author human review of the implementation PR.
 requirements:
   - id: FR-01
     type: functional

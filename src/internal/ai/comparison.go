@@ -54,7 +54,7 @@ Example: {"sources":{"S1":{"contentId":"S1","fact":"FINDING",
 "state":"supported","field":"","passageIds":["S1-P1"]}},
 "answerSources":["S1"],"answer":"[[S1]] FINDING"}
 
-Answer LAST: ONE concise sentence in user's language, one line, <=400 characters.
+Answer LAST: ONE concise sentence in user's language, one line, <=600 Unicode characters.
 Use stable [[S1]]/[[S2]]/[[S3]] tags for each source-specific clause, never renumber
 or copy titles. No headings, lists, bare categories or invented facts. Check each
 number, role, location and affirmative/negative judgment against its OWN passages

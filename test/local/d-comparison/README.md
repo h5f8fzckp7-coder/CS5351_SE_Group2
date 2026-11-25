@@ -148,3 +148,20 @@ python3 -m unittest discover -s test/local/d-comparison -p 'test_*.py' -v
 
 These tests use synthetic data and mocked collection/regression responses. They
 test the evaluator itself and are not a measured NFR-04 quality pass.
+
+## Published evaluation bundles
+
+The [PR12 measurement](../../../docs/evidence/d-nfr-pr12-20261125-001.json)
+archives the current implementation, model revision 8, all 120 responses and
+all grades, including failures. Verify its frozen implementation bytes, original
+text hashes, response hashes and per-round arithmetic without credentials:
+
+```sh
+python3 test/local/d-comparison/verify-public-evaluation.py --archive docs/evidence/d-nfr-pr12-20261125-001.zip
+```
+
+The earlier retained attempt remains a separate historical bundle, verified by
+`python3 test/local/d-comparison/verify-retained.py`. These integrity checks do
+not independently validate the assisted semantic grades or waive missing older
+attempts. Session evidence and its explicit redactions are documented in
+[the transcript directory](../../../docs/evidence/d-session-export/README.md).

@@ -1,0 +1,16 @@
+{
+  "session_id": "01a1d91d-08ff-73f1-a965-ad387d83f648",
+  "observed_turn_context_model": "gpt-6.1-sol",
+  "model_build_limit": "Runtime model label, not an immutable provider build identifier",
+  "raw_export_bytes": 181758857,
+  "raw_export_sha256": "5349903d607a99481d8889ec383a2c3ccc2313548615b2423638cf28be62a897",
+  "archive_sha256": "246999b7a484bb76e97c8b2ca2ca7e52111c47fcdded8b06009e00a85a6f5ed9",
+  "publication_status": "Private original retained with earlier cutoff; sanitized full chronological projection through this export is published with explicit redactions and actual-user annotations; owner/course acceptance pending.",
+  "previous_cutoff": {
+    "raw_export_bytes": 179838120,
+    "raw_export_sha256": "ab27c8e8ee21eb3496b2edd29fe649ade0952797e95b93bbb51881c9ff6d0cd2",
+    "archive_sha256": "df3b25e2f93f325b43cf04690414c8a86c068b3bce7e00a077df6ade84f2f900",
+    "local_archive_basename": "session.jsonl.gz"
+  },
+  "local_archive_basename": "session-pr12-complete.jsonl.gz"
+}

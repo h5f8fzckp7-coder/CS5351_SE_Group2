@@ -4,7 +4,7 @@
 - **Type:** Nonfunctional requirement.
 - **Priority:** Must.
 - **Verification:** Author-run local evaluation with original-text inspection and author scoring.
-- **Verification status:** Latest complete owner-delegated AI-assisted local repeat meets all six per-round quality gates and controlled regressions. See the [latest full record](../evidence/d-nfr-full-repeat-20261125-002.json). Residual semantic/format defects and independent review pending status remain disclosed.
+- **Verification status:** Latest complete owner-delegated AI-assisted local repeat meets all six per-round quality gates and controlled regressions. See the [latest full record](../evidence/d-nfr-pr12-20261125-001.json). Residual semantic/format defects and independent review pending status remain disclosed.
 - **Functional scope:** [FR-04](fr-04-multi-content-comparison.md).
 - **Execution guide:** [Local evaluation instructions](../../test/local/d-comparison/README.md).
 

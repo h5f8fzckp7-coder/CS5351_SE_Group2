@@ -190,7 +190,7 @@ func decodeComparison(raw string, ids []string) (comparisonDraft, error) {
 		return comparisonDraft{}, ErrFormat
 	}
 	draft.Answer = strings.TrimSpace(draft.Answer)
-	if draft.Answer == "" || utf8.RuneCountInString(draft.Answer) > 600 || strings.ContainsAny(draft.Answer, "\r\n\x00") {
+	if draft.Answer == "" || utf8.RuneCountInString(draft.Answer) > 600 || strings.ContainsAny(draft.Answer, "\r\n\x00") || !comparisonSingleSentence(draft.Answer) {
 		return comparisonDraft{}, ErrFormat
 	}
 	switch draft.Relation {

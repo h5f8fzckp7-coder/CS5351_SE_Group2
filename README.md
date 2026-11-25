@@ -85,7 +85,7 @@ FR-02 交付的是**选片段**，FR-03 交付的是**回答引用核验**，FR-
 - [x] 定义 2–3 份已保存文章或视频原文字幕的选择、字幕准备、上下文与预算分配；见 [FR-04](docs/req/fr-04-multi-content-comparison.md)及 [D 的方案](docs/plans/d-comparison-plan.md)。
 - [x] 使用已配置对话模型生成一句自然语言回答，按来源展示发现、引用核验及异常；已生成答案始终显示，核验通过的引用开放原文定位。
 - [x] 实现前后端流程与受控多文档测试，覆盖空选择、不可访问来源、冲突、长短文混合和部分失败；见 [FR 验证记录](docs/evidence/d-fr-verification.md)。实现待独立评审，不代表 NFR 已验收。
-- [x] 完成 [本地 NFR 自测](test/local/d-comparison/README.md)的三组两轮质量测量并归档证据。[最新完整复测](docs/evidence/d-nfr-full-repeat-20261125-002.json)共 120 次，作者授权 AI 辅助评分下六组指标均达门槛；本次残留错误保留，独立评审仍待完成。
+- [x] 完成 [本地 NFR 自测](test/local/d-comparison/README.md)的三组两轮质量测量并归档证据。[最新完整复测](docs/evidence/d-nfr-pr12-20261125-001.json)共 120 次，作者授权 AI 辅助评分下六组指标均达门槛；本次残留错误保留，独立评审仍待完成。
 
 
 ### E：内容版本状态与验证治理

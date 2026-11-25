@@ -1,0 +1,33 @@
+{
+  "commands": [
+    "make test-unit",
+    "make check-race"
+  ],
+  "files": [
+    {
+      "path": "test-unit.log",
+      "original_sha256": "a05d2894673a17349182dd7afd96d5b2444198657d796eafbbee56261e7fb953",
+      "published_sha256": "a787fe66994042ace4e64c82bdb3f515b7d9e3128fa5eedbf71f3af75ef4cdd3",
+      "result": "BLOCKED: dependency-cache write permission; rerun retained separately"
+    },
+    {
+      "path": "check-race.log",
+      "original_sha256": "abacad3c839cbe4380cc65aa0ee5771c011d79e6485023121a70809ffea8438a",
+      "published_sha256": "9585ce13e08de902ec9a4362657f00dde884a5cd07bbef423ed1323b8ef63d16",
+      "result": "BLOCKED: dependency-cache write permission; rerun retained separately"
+    },
+    {
+      "path": "test-unit-final.log",
+      "original_sha256": "d462bc4feddf4fb4aa42096c909e1b5242bec57e586bc2b59b4fb9f98068ae4c",
+      "published_sha256": "420992f3f93728779c64595bf321823b19942f538d3dc8e2a7f684cfb70af55e",
+      "result": "PASS"
+    },
+    {
+      "path": "check-race-final.log",
+      "original_sha256": "1cd26e5157721d1e2a230a5667070c7fe39e92716b7ba736bfdbfc324051fc34",
+      "published_sha256": "1cd26e5157721d1e2a230a5667070c7fe39e92716b7ba736bfdbfc324051fc34",
+      "result": "PASS"
+    }
+  ],
+  "redaction": "Workstation paths redacted and trailing whitespace normalized; original hashes and initial permission failures retained."
+}

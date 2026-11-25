@@ -29,7 +29,7 @@ func TestComparisonReturnsNaturalAnswerWithoutCategory(t *testing.T) {
 
 func TestComparisonRejectsMissingMultilineAndOversizedAnswer(t *testing.T) {
 	for _, tc := range []struct{ name, answer string }{
-		{"empty", ""}, {"multiline", "结论一。\n结论二。"}, {"oversized", strings.Repeat("字", 601)},
+		{"empty", ""}, {"two Chinese sentences", "第一篇谈技术。第二篇谈影视。"}, {"two English sentences", "One is technical. Another reviews films."}, {"multiline", "结论一。\n结论二。"}, {"oversized", strings.Repeat("字", 601)},
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			service, _, provider, request := newComparisonFixture(t)
@@ -60,5 +60,23 @@ func TestComparisonPreservesAnswerWhenSourceVerificationFails(t *testing.T) {
 	result, err := service.Compare(context.Background(), request)
 	if err != nil || result.Answer != "两篇文章完全一致。" || result.Sources[0].Reason != "cross_source_reference" || result.Sources[1].State != "supported" {
 		t.Fatalf("model answer hidden or verification diagnostics lost: %+v %v", result, err)
+	}
+}
+
+func TestComparisonSentenceBoundaries(t *testing.T) {
+	for _, answer := range []string{
+		"评分为9.5分，时间约13年。", "Dr. Lee gives 9.5 points.",
+		"The site example.com lists the price.", "结论是“期限不同”。", "两篇主题不同",
+	} {
+		if !comparisonSingleSentence(answer) {
+			t.Errorf("valid sentence rejected: %q", answer)
+		}
+	}
+	for _, answer := range []string{
+		"不同！第一篇谈技术。", "不同？第二篇谈影视。", "First! Second.", "“不同。”第二篇谈影视。",
+	} {
+		if comparisonSingleSentence(answer) {
+			t.Errorf("multiple sentences accepted: %q", answer)
+		}
 	}
 }

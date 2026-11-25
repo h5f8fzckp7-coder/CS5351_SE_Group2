@@ -50,6 +50,8 @@ Every selected source appears exactly once in selection order with its real iden
 - `not_relevant`: complete supplied and revalidated text is unrelated to the question; the source carries no factual claim or citation.
 - `insufficient_evidence`: missing text, read failure, limited coverage, invalid citations or changed source versions, with a specific reason.
 
+Complete-field scope recognition is deliberately limited to these explicit standalone headers (case-insensitive in English, ignoring a trailing colon or full stop): `complete fields`, `all fields`, `the following fields are the complete service card`, `完整字段`, `完整字段如下`, `全部字段`, `以下为此卡完整字段`, `以下是完整规格字段`, `本登记卡所列字段完整，仅包含下列字段`, `本活动登记卡的完整字段如下`, `本卡完整列出所有规格字段`, and `下列字段是本记录全部字段`. Other formulations fall back to limited search, even if a reader would consider them equivalent; they cannot establish absence.
+
 The absence of search results or access to only partial text does not establish field absence. A real source failure cannot be hidden as irrelevance. Citation verification establishes source identity, version, location and exact quotation matching; semantic support for a finding or answer is evaluated separately.
 
 ### Original-text navigation

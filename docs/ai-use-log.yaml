@@ -1068,7 +1068,10 @@ entries:
       - "Loopback synthetic test setup and local Ollama smoke requests only; no remote repository or hosted-provider writes."
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
     transcript: "Current Codex conversation; raw owner-local export pending."
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "pending"
     generated_code: true
     notes: >-
@@ -1104,7 +1107,10 @@ entries:
       - "Loopback-only synthetic fixture setup, isolated UI tests, and local Ollama smoke checks; no real user text sent to a hosted model."
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
     transcript: "Current Codex conversation; raw owner-local export pending."
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "pending"
     generated_code: true
     notes: >-
@@ -1133,7 +1139,10 @@ entries:
       - "Comparison against a loopback server with a database copy and the already configured local Ollama; no hosted-provider or remote-repository writes."
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
     transcript: "Current Codex conversation; raw owner-local export pending."
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "pending"
     generated_code: true
     notes: >-
@@ -1144,7 +1153,7 @@ entries:
     date: "2026-11-22"
     owner: "Wenlong Lu (D)"
     tool: "Codex"
-    model: "Exact agent model build identifier not captured"
+    model: "gpt-6.1-sol (recovered turn-context label; immutable build ID unavailable)"
     purpose: >-
       Correct the reported Same classification for unrelated article topics:
       allow Different without conflating it with incompatible factual claims,
@@ -1167,7 +1176,10 @@ entries:
       - "Loopback evidence reopen requests against an isolated database backup; no remote repository writes."
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
     transcript: "Current Codex conversation; raw owner-local export pending."
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "pending"
     generated_code: true
     notes: >-
@@ -1179,7 +1191,7 @@ entries:
     date: "2026-11-22"
     owner: "Wenlong Lu (D)"
     tool: "Codex"
-    model: "Exact agent model build identifier not captured"
+    model: "gpt-6.1-sol (recovered turn-context label; immutable build ID unavailable)"
     purpose: >-
       Honor the owner's request for a one-sentence model answer instead of
       fixed comparison verdicts; retain source attribution and citation checks.
@@ -1203,7 +1215,10 @@ entries:
       - "Loopback evidence reopen checks against an isolated SQLite backup; no remote repository writes."
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
     transcript: "Current Codex conversation; raw owner-local export pending."
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "pending"
     generated_code: true
     notes: >-
@@ -1217,7 +1232,7 @@ entries:
     date: "2026-11-22"
     owner: "Wenlong Lu (D)"
     tool: "Codex"
-    model: "Exact agent model build identifier not captured"
+    model: "gpt-6.1-sol (recovered turn-context label; immutable build ID unavailable)"
     purpose: >-
       Distinguish unrelated selected sources from failed evidence so a focused
       question can retain its verified answer while preserving failure guards.
@@ -1238,7 +1253,10 @@ entries:
       - "Loopback citation reopens against an isolated SQLite backup; no remote repository writes."
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
     transcript: "Current Codex conversation; raw owner-local export pending."
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "pending"
     generated_code: true
     notes: >-
@@ -1253,7 +1271,7 @@ entries:
     date: "2026-11-22"
     owner: "Wenlong Lu (D)"
     tool: "Codex"
-    model: "Exact agent model build identifier not captured"
+    model: "gpt-6.1-sol (recovered turn-context label; immutable build ID unavailable)"
     purpose: >-
       Investigate intermittent withholding of focused comparison answers and
       reject repeated/missing model source rows with a fixed-key schema.
@@ -1278,7 +1296,10 @@ entries:
       - "Loopback citation reopens; diagnostic proxy captured model content and usage only, without credentials."
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
     transcript: "Current Codex conversation; raw owner-local export pending."
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "pending"
     generated_code: true
     notes: >-
@@ -1292,7 +1313,7 @@ entries:
     date: "2026-11-22"
     owner: "Wenlong Lu (D)"
     tool: "Codex"
-    model: "Exact agent model build identifier not captured"
+    model: "gpt-6.1-sol (recovered turn-context label; immutable build ID unavailable)"
     purpose: >-
       Reproduce the GTA title-as-body quotation failure and move exact quote
       extraction to the server while retaining source/range/version checks.
@@ -1315,7 +1336,10 @@ entries:
       - "Loopback diagnostic and citation reopen requests; model response and public evidence captured without credentials."
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
     transcript: "Current Codex conversation; raw owner-local export pending."
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "pending"
     generated_code: true
     notes: >-
@@ -1330,7 +1354,7 @@ entries:
     date: "2026-11-22"
     owner: "Wenlong Lu (D)"
     tool: "Codex"
-    model: "Exact agent model build identifier not captured"
+    model: "gpt-6.1-sol (recovered turn-context label; immutable build ID unavailable)"
     purpose: >-
       Run the owner's original ten comparison questions ten consecutive times
       each against the same three saved articles and inspect failures.
@@ -1352,7 +1376,10 @@ entries:
       - "901 loopback evidence reopens and read-only chat history access to recover the exact original questions."
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
     transcript: "Current Codex conversation; raw owner-local export pending."
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "pending"
     generated_code: true
     notes: >-
@@ -1366,7 +1393,7 @@ entries:
     date: "2026-11-22"
     owner: "Wenlong Lu (D)"
     tool: "Codex"
-    model: "Exact agent model build identifier not captured"
+    model: "gpt-6.1-sol (recovered turn-context label; immutable build ID unavailable)"
     purpose: >-
       Honor the owner's explicit instruction to display generated answers
       regardless of per-source verification outcomes.
@@ -1391,7 +1418,10 @@ entries:
       - "One hundred loopback-only production comparisons with captured model responses; zero additional paid provider calls."
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
     transcript: "Current Codex conversation; raw owner-local export pending."
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "pending"
     generated_code: true
     notes: >-
@@ -1405,7 +1435,7 @@ entries:
     date: "2026-11-23"
     owner: "Wenlong Lu (D)"
     tool: "Codex"
-    model: "Exact agent model build identifier not captured"
+    model: "gpt-6.1-sol (recovered turn-context label; immutable build ID unavailable)"
     purpose: >-
       Generate ten new diagnostic questions and run all twenty questions ten
       consecutive times each against the same three saved sources.
@@ -1428,7 +1458,10 @@ entries:
       - "1,457 loopback evidence reopens and local-only source/config checks."
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
     transcript: "Current Codex conversation; raw owner-local export pending."
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "pending"
     generated_code: true
     notes: >-
@@ -1443,7 +1476,7 @@ entries:
     date: "2026-11-23"
     owner: "Wenlong Lu (D)"
     tool: "Codex"
-    model: "Exact agent model build identifier not captured"
+    model: "gpt-6.1-sol (recovered turn-context label; immutable build ID unavailable)"
     purpose: >-
       Diagnose the owner's failed Bilibili transcription retest and repair
       the verified download and local recognition failures.
@@ -1467,7 +1500,10 @@ entries:
       - "Real Bilibili metadata/media reads and loopback transcription jobs; local whisper.cpp inference, with no paid model-provider calls."
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
     transcript: "Current Codex conversation; raw owner-local export pending."
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "pending"
     generated_code: true
     notes: >-
@@ -1481,7 +1517,7 @@ entries:
     date: "2026-11-23"
     owner: "Wenlong Lu (D)"
     tool: "Codex"
-    model: "Exact agent model build identifier not captured"
+    model: "gpt-6.1-sol (recovered turn-context label; immutable build ID unavailable)"
     purpose: "Start the fixed local service after the owner stopped the old process and verify live transcription."
     scope:
       wrote:
@@ -1497,7 +1533,10 @@ entries:
       - "One real local whisper.cpp preview job and Bilibili media reads; no paid AI provider calls."
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
     transcript: "Current Codex conversation; raw owner-local export pending."
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "pending"
     generated_code: false
     notes: "A new whisper-preview subtitle track was saved on the spoken control video. No product code, model settings or login changes in this follow-up; no commit or push."
@@ -1505,7 +1544,7 @@ entries:
     date: "2026-11-23"
     owner: "Wenlong Lu (D)"
     tool: "Codex"
-    model: "Exact agent model build identifier not captured"
+    model: "gpt-6.1-sol (recovered turn-context label; immutable build ID unavailable)"
     purpose: "Repair the comparison track-required journey with an inline saved-subtitle selector."
     scope:
       wrote:
@@ -1527,7 +1566,10 @@ entries:
       - "Downloaded Playwright headless browser tooling into a task-specific temporary directory for attempted browser verification."
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
     transcript: "Current Codex conversation; raw owner-local export pending."
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "pending"
     generated_code: true
     notes: "Selection remains explicit, uses revision checks and excludes translated/mismatched tracks. Existing tracks are retained. A selection change clears the previous comparison. No commit or push."
@@ -1535,7 +1577,7 @@ entries:
     date: "2026-11-23"
     owner: "Wenlong Lu (D)"
     tool: "Codex"
-    model: "Exact agent model build identifier not captured"
+    model: "gpt-6.1-sol (recovered turn-context label; immutable build ID unavailable)"
     purpose: "Test real comparisons between several saved-video subtitle sources."
     scope:
       wrote:
@@ -1554,7 +1596,10 @@ entries:
       - "Bilibili recommendation/metadata/subtitle reads and isolated loopback source/selection/comparison requests."
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
     transcript: "Current Codex conversation; raw owner-local export pending."
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "pending"
     generated_code: true
     notes: >-
@@ -1570,7 +1615,7 @@ entries:
     date: "2026-11-23"
     owner: "Wenlong Lu (D)"
     tool: "Codex"
-    model: "Exact agent model build identifier not captured"
+    model: "gpt-6.1-sol (recovered turn-context label; immutable build ID unavailable)"
     purpose: >-
       Reduce comparison-answer source swaps and unsupported title-mismatch
       conclusions, retaining natural-language answers and unconditional display.
@@ -1595,7 +1640,10 @@ entries:
       - "One additional interrupted comparison has no captured response/usage and may have started 0-2 further provider calls; no exact all-attempt total is claimed."
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
     transcript: "Current Codex conversation; raw owner-local export pending."
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "pending"
     generated_code: true
     notes: >-
@@ -1611,7 +1659,7 @@ entries:
     date: "2026-11-24"
     owner: "Wenlong Lu (D)"
     tool: "Codex"
-    model: "Exact agent model build identifier not captured"
+    model: "gpt-6.1-sol (recovered turn-context label; immutable build ID unavailable)"
     purpose: >-
       Publish a self-contained FR-04 specification describing the current
       requirements and acceptance criteria without a change-history narrative.
@@ -1631,7 +1679,10 @@ entries:
     network_writes: []
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
     transcript: "Current Codex conversation; raw owner-local export pending."
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "pending"
     generated_code: false
     notes: >-
@@ -1645,7 +1696,7 @@ entries:
     date: "2026-11-24"
     owner: "Wenlong Lu (D)"
     tool: "Codex"
-    model: "Exact agent model build identifier not captured"
+    model: "gpt-6.1-sol (recovered turn-context label; immutable build ID unavailable)"
     purpose: >-
       Define NFR-04 as a locally completable author self-evaluation and provide
       executable collection, regression-recording and manual-score aggregation.
@@ -1668,7 +1719,10 @@ entries:
     network_writes: []
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
     transcript: "Current Codex conversation; raw owner-local export pending."
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "pending"
     generated_code: true
     notes: >-
@@ -1685,7 +1739,7 @@ entries:
     date: "2026-11-24"
     owner: "Wenlong Lu (D)"
     tool: "Codex"
-    model: "Exact agent model build identifier not captured"
+    model: "gpt-6.1-sol (recovered turn-context label; immutable build ID unavailable)"
     purpose: >-
       Present a single current NFR-04 definition and a self-contained local
       evaluation procedure without historical requirement comparisons.
@@ -1705,7 +1759,10 @@ entries:
     network_writes: []
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
     transcript: "Current Codex conversation; raw owner-local export pending."
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "pending"
     generated_code: false
     notes: >-
@@ -1718,7 +1775,7 @@ entries:
     date: "2026-11-24"
     owner: "Wenlong Lu (D)"
     tool: "Codex"
-    model: "Exact agent model build identifier not captured"
+    model: "gpt-6.1-sol (recovered turn-context label; immutable build ID unavailable)"
     purpose: >-
       Maintain the project's English NFR-04 specification and check the owner D
       README task statuses against available implementation and evaluation records.
@@ -1737,7 +1794,10 @@ entries:
     network_writes: []
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
     transcript: "Current Codex conversation; raw owner-local export pending."
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "pending"
     generated_code: false
     notes: >-
@@ -1749,7 +1809,7 @@ entries:
     date: "2026-11-24"
     owner: "Wenlong Lu (D)"
     tool: "Codex"
-    model: "Exact agent model build identifier not captured"
+    model: "gpt-6.1-sol (recovered turn-context label; immutable build ID unavailable)"
     purpose: >-
       Enter source-grounded scores for all 120 retained NFR observations after
       the owner confirmed inspection and explicitly delegated scoring based on
@@ -1771,7 +1831,10 @@ entries:
     network_writes: []
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
     transcript: "Current Codex conversation; raw owner-local export pending."
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "Owner confirmed output inspection and delegated score entry; no independent numerical review or implementation PR approval claimed."
     generated_code: true
     notes: >-
@@ -1788,7 +1851,7 @@ entries:
     date: "2026-11-24"
     owner: "Wenlong Lu (D)"
     tool: "Codex"
-    model: "Exact agent model build identifier not captured"
+    model: "gpt-6.1-sol (recovered turn-context label; immutable build ID unavailable)"
     purpose: >-
       Maintain the current English FR-04 specification and present the project
       FR-04 and NFR-04 definitions together for the owner.
@@ -1807,7 +1870,10 @@ entries:
     network_writes: []
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
     transcript: "Current Codex conversation; raw owner-local export pending."
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "pending"
     generated_code: false
     notes: >-
@@ -1819,7 +1885,7 @@ entries:
     date: "2026-11-24"
     owner: "Wenlong Lu (D)"
     tool: "Codex"
-    model: "Exact agent model build identifier not captured"
+    model: "gpt-6.1-sol (recovered turn-context label; immutable build ID unavailable)"
     purpose: >-
       Start the formal local NFR-04 self-evaluation: freeze source-grounded
       annotations, collect two complete real-model rounds and run controlled
@@ -1843,7 +1909,10 @@ entries:
       - "423 loopback evidence reopens, plus local comparison/settings/readiness requests; no new platform retrieval."
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
     transcript: "Current Codex conversation; raw owner-local export pending."
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "pending"
     generated_code: true
     notes: >-
@@ -1860,7 +1929,7 @@ entries:
     date: "2026-11-24"
     owner: "Wenlong Lu (D)"
     tool: "Codex"
-    model: "Exact agent model build identifier not captured"
+    model: "gpt-6.1-sol (recovered turn-context label; immutable build ID unavailable)"
     purpose: >-
       Evaluate saved video/video and video/article comparisons with 20 frozen
       questions and two complete rounds per profile, and synchronize English
@@ -1886,7 +1955,10 @@ entries:
       - "518 final evidence reopens plus 325 interim reopens, and local readiness/settings/comparison requests; no new platform download or transcription."
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
     transcript: "Current Codex conversation; raw owner-local export pending."
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "pending"
     generated_code: true
     notes: >-
@@ -1905,7 +1977,7 @@ entries:
     date: "2026-11-24"
     owner: "Wenlong Lu (D)"
     tool: "Codex"
-    model: "Exact agent model build identifier not captured"
+    model: "gpt-6.1-sol (recovered turn-context label; immutable build ID unavailable)"
     purpose: >-
       Repeat video/video evaluation at the owner's request, retaining the same
       two saved subtitle tracks, 20 pre-annotated questions, model settings,
@@ -1930,7 +2002,10 @@ entries:
       - "40 owner-authorized configured-model comparison requests to https://api.ofox.ai/v1; saved subtitle excerpts and questions only"
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
     transcript: "Current Codex conversation; raw owner-local export pending."
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "Fresh outputs not claimed as human-reviewed; scoring follows standing owner delegation: 按原文和错误记录补齐评分. No independent review or PR approval claimed."
     generated_code: true
     notes: >-
@@ -1946,7 +2021,7 @@ entries:
     date: "2026-11-24"
     owner: "Wenlong Lu (D)"
     tool: "Codex"
-    model: "Exact agent model build identifier not captured"
+    model: "gpt-6.1-sol (recovered turn-context label; immutable build ID unavailable)"
     purpose: >-
       Diagnose why the retained video/video repeat still fails, tracing saved
       subtitle input, prompt/schema, model output rendering and source validation.
@@ -1965,7 +2040,10 @@ entries:
     network_writes: []
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
     transcript: "Current Codex conversation; raw owner-local export pending."
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "pending; diagnosis and controlled reproductions are Codex-assisted, not independent human approval"
     generated_code: true
     notes: >-
@@ -1982,7 +2060,7 @@ entries:
     date: "2026-11-24"
     owner: "Wenlong Lu (D)"
     tool: "Codex"
-    model: "Exact agent model build identifier not captured"
+    model: "gpt-6.1-sol (recovered turn-context label; immutable build ID unavailable)"
     purpose: "Fix comparison scope/applicability logic and rerun the same video/video quality profile."
     scope:
       wrote:
@@ -2001,7 +2079,10 @@ entries:
       - "40 owner-authorized configured-model comparison calls to https://api.ofox.ai/v1"
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
     transcript: "Current Codex conversation; raw owner-local export pending."
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "Fresh human inspection not claimed; scoring follows standing owner delegation. Independent PR review pending."
     generated_code: true
     notes: >-
@@ -2017,7 +2098,7 @@ entries:
     date: "2026-11-25"
     owner: "Wenlong Lu (D)"
     tool: "Codex"
-    model: "Exact agent model build identifier not captured"
+    model: "gpt-6.1-sol (recovered turn-context label; immutable build ID unavailable)"
     purpose: "Complete the first full three-profile evaluation under the changed implementation."
     scope:
       wrote:
@@ -2032,7 +2113,10 @@ entries:
     network_writes:
       - "120 owner-authorized configured-model comparison requests"
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "Standing owner delegation to assisted scoring; no fresh human numerical review claimed."
     generated_code: true
     notes: "No independent acceptance, commit or push; all failed outputs retained."
@@ -2040,7 +2124,7 @@ entries:
     date: "2026-11-25"
     owner: "Wenlong Lu (D)"
     tool: "Codex"
-    model: "Exact agent model build identifier not captured"
+    model: "gpt-6.1-sol (recovered turn-context label; immutable build ID unavailable)"
     purpose: "Repeat all three profiles under the same code, model, original sources, questions and thresholds."
     scope:
       wrote:
@@ -2059,7 +2143,10 @@ entries:
     network_writes:
       - "120 owner-authorized configured-model comparison requests"
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "Fresh human review not claimed; original-text scoring follows owner delegation: 按原文和错误记录补齐评分. Independent review pending."
     generated_code: true
     notes: >-
@@ -2074,7 +2161,7 @@ entries:
     date: "2026-11-25"
     owner: "Wenlong Lu (D)"
     tool: "Codex"
-    model: "Exact agent model build identifier not captured"
+    model: "gpt-6.1-sol (recovered turn-context label; immutable build ID unavailable)"
     purpose: "Retain only the owner-selected complete passing NFR evaluation and delete earlier D NFR test records at the owner's explicit request."
     scope:
       wrote:
@@ -2092,7 +2179,10 @@ entries:
       errors and the assisted-grading provenance remain explicit.
     network_writes: []
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "Deletion explicitly requested by owner; no new independent review or PR approval claimed."
     generated_code: true
     notes: >-
@@ -2105,7 +2195,7 @@ entries:
     date: "2026-11-25"
     owner: "Wenlong Lu (D)"
     tool: "Codex"
-    model: "Exact agent model build identifier not captured"
+    model: "gpt-6.1-sol (recovered turn-context label; immutable build ID unavailable)"
     purpose: "Prepare and commit the owner-authorized D comparison implementation, transcription fixes, tests and requirements/evidence documentation."
     scope:
       wrote:
@@ -2121,7 +2211,10 @@ entries:
       not independent code review or an assertion that browser E2E ran.
     network_writes: []
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "Owner explicitly authorized commit; independent PR review remains pending."
     generated_code: true
     notes: "Local commit only; no push or PR requested. Owner data, credentials and ignored raw evaluation artifacts are excluded."
@@ -2129,7 +2222,7 @@ entries:
     date: "2026-11-25"
     owner: "Wenlong Lu (D)"
     tool: "Codex"
-    model: "Exact agent model build identifier not captured"
+    model: "gpt-6.1-sol (recovered turn-context label; immutable build ID unavailable)"
     purpose: "Synchronize the D contribution index with the implementation commit and retained passing local NFR evaluation."
     scope:
       wrote:
@@ -2144,7 +2237,95 @@ entries:
     network_writes:
       - "Owner-authorized push of this documentation correction to the current branch"
     original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
-    transcript_status: "pending_export"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
     human_review: "Owner requested the correction and push; independent review remains pending."
     generated_code: false
     notes: "Use the existing SSH identity; no merge, PR creation or review approval is claimed."
+
+  - id: D-AI-033
+    date: "2026-11-25"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "gpt-6.1-sol (recovered runtime label; immutable build ID unavailable)"
+    purpose: "Address PR 12 review findings with code, tests, published historical evidence and explicit unresolved governance items."
+    scope:
+      wrote:
+        - "Sentence-boundary decoder guard, prompt length alignment and regression tests"
+        - "Partial-result browser expectation, requirement scope vocabulary and contribution transcription scope"
+        - "Historical evidence ZIP, independent hash/arithmetic verifier and PR remediation record"
+        - "Recovered model provenance and private raw session export metadata"
+    verification: >-
+      Comparison Go regression packages and 15 frontend tests pass; layering
+      regression and all 16 Python evaluation-tool tests pass. Historical
+      archive verification checks 120 original response hashes, 120 score rows,
+      reported totals and original implementation hash against commit 99c38dd.
+      Two Playwright files attempted after matching Chromium installation:
+      one API-only test passed; five browser tests failed at macOS Mach port
+      permission-denied launch before UI assertions, including retries.
+      No new real-provider semantic evaluation or browser pass is claimed.
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript_status: "private_original_retained; sanitized_projection_published; annotation_review_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
+    human_review: "Owner requested fixes; independent ratification, historical retention exception and acceptance remain pending."
+    network_writes: []
+    generated_code: true
+    notes: >-
+      Matching Playwright browser downloaded to temporary storage. Earlier
+      deleted response sets were not recovered; available temporary backups
+      contain documents only. Three local-path strings in published regression
+      logs are redacted with original/archive hashes recorded. Original current
+      NFR files and scores are unchanged. Raw session contains credentials/media
+      and stays private; no approval, waiver, OpenCode usage or exact immutable
+      model build is fabricated. No push, merge or GitHub comment performed.
+
+  - id: D-AI-034
+    date: "2026-11-25"
+    owner: "Wenlong Lu (D)"
+    tool: "Codex"
+    model: "gpt-6.1-sol (actual session runtime label; immutable build ID unavailable)"
+    purpose: "Complete PR12 follow-up with current-model NFR measurement, full sanitized session evidence, source-grounded assisted grades and submission checks."
+    scope:
+      wrote:
+        - "Current evaluation report and full ZIP, including all observations and exact frozen implementation bytes"
+        - "Sanitized chronological session export, actual user-message annotation index and provenance"
+        - "Public evidence verifiers, complete validation logs and synchronized current-status documents"
+    verification: >-
+      Current saved model openai/gpt-5.4, settings revision 8: 120 real provider
+      calls, 1153451 reported tokens; every case and failure retained. Article
+      answer/source scores are 18/19 then 16/16; video/video 19/20 then 18/18;
+      video/article 17/17 then 17/17, each out of 20. All thresholds pass with
+      nine HTTP format failures and seven additional semantic failure cases
+      explicitly retained. All 619 evidence reopens and three controlled
+      regressions pass. Scores use the owner's existing delegation; no fresh
+      independent human grading is claimed. Complete make test-unit passes:
+      frontend build, 70 Vitest files/304 tests and all Go packages. Complete
+      make check-race passes, including vet and internal race tests. Initial
+      dependency-cache permission failures and final passing logs are archived
+      separately. The current code still matches every evaluation freeze.
+      Browser launch remains blocked by macOS Mach-port permissions; one API
+      test passed and five browser tests did not reach UI assertions.
+    original_session_id: "01a1d91d-08ff-73f1-a965-ad387d83f648"
+    transcript_status: "private_original_retained; full_sanitized_projection_published_through_record_10935; annotation_acceptance_pending"
+    sanitized_transcript: "docs/evidence/d-session-export/conversation.sanitized.jsonl.gz"
+    sanitized_transcript_sha256: "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07"
+    private_original_metadata: "docs/evidence/d-codex-session-provenance.json"
+    human_review: "Owner requested completion; independent requirement ratification, retention exception and PR acceptance remain pending."
+    network_writes:
+      - "120 owner-authorized real configured-model inference calls"
+      - "Owner-authorized follow-up commit/push is prepared; final Git outcome is reported separately"
+    generated_code: true
+    notes: >-
+      No failed observation is removed or retried. Original source bytes and
+      track revisions match before and after collection. Isolated service is
+      stopped and temporary runtime credential/data copies removed. Previous
+      evidence and both private transcript cutoffs remain retained. Public
+      transcript uses explicit hashed redactions for credentials, media,
+      private runtime content and local paths; 186 real user messages are
+      indexed. No historical lost response, approval, OpenCode attribution or
+      instructor waiver is fabricated. No GitHub message, merge or review
+      approval is submitted by this task.

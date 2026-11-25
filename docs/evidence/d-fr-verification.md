@@ -48,7 +48,7 @@ keep distinct terminal states. B embedding work is accounted separately.
 | D-T04 | Cross-source/altered/malformed/duplicate findings, unknown handles, foreign snapshots, stale/deleted/out-of-range source access; decoded answer retained when citation checks fail | `TestComparisonRejectsWrongSourceQuoteAndMalformedOutput`, `TestComparisonUnknownSourceHandleFailsClosed`, `TestComparisonForeignSnapshotNeverReachesModel`; source reopening integration and frontend stale-source tests |
 | D-T05 | A ledger across format fallbacks; inherited limits; unknown usage; cancellation; bounded long-source retrieval; schema included in context bounds | `TestComparisonStructuredOutputAndBudgetedCompatibilityFallback`, `TestComparisonBudgetUnknownCancellationAndInheritedLimit`, `TestComparisonLongSourceUsesBoundedRetrieval`, `TestComparisonStructuredContractAndContextBounds` |
 | D-T07 | Real HTTP/SQLite composition; selected original caption and timestamp; unchanged chat history; preparation refresh; partial findings and stale jumps | `comparison_integration_test.go`; existing `reader-chat.spec.ts` extended with comparison journeys; isolated in-app browser checks below |
-| D-T06 | Three separately frozen 20-question profiles, two complete rounds each; owner-delegated source-grounded scoring and controlled regression | **Latest full repeat PASS:** article/article 18/20 and 20/20, then 20/20 and 20/20; video/video 18/20 and 19/20, then 20/20 and 20/20; video/article 17/20 and 18/20, then 18/20 and 18/20 (answer then source). All regressions and 732 evidence reopens pass. [Latest record](d-nfr-full-repeat-20261125-002.json). Four separate sentence-format findings remain; no independent review is claimed. |
+| D-T06 | Three separately frozen 20-question profiles, two complete rounds each; owner-delegated original-text scoring and controlled regression | **PR12 follow-up PASS:** article/article answer/source 18/19 then 16/16; video/video 19/20 then 18/18; video/article 17/17 then 17/17, each out of 20. All controlled regressions and 619 evidence reopens pass. [Current record](d-nfr-pr12-20261125-001.json). All 9 HTTP format failures and 7 additional semantic failure cases remain archived. No independent review is claimed. |
 
 The Go service tests are in
 [`comparison_test.go`](../../src/internal/ai/comparison_test.go) and
@@ -427,3 +427,8 @@ The retained real-model NFR evaluation is available in
 all 120 responses, source snapshots, freezes, score rationales and regression
 logs under `build/d-nfr-full-20261125-002`. This is owner-delegated assisted
 local evaluation, not independent review.
+
+
+## PR12 review-fix measurement (2026-11-25)
+
+The [current full evaluation](d-nfr-pr12-20261125-001.json) uses the current saved `openai/gpt-5.4` model, revision 8, and the post-review implementation. Its published ZIP includes all 120 observations, original texts, cases, score rationales, regression results and the exact frozen implementation bytes. The previous `gpt-5.4-mini` attempt remains historical evidence; this measurement does not restore deleted older attempts. Browser verification is still blocked at macOS process launch, as documented in [review remediation](d-pr12-remediation.md).

@@ -162,7 +162,7 @@ test('comparison explains unsupported notes and refreshes saved captions before 
   await expect(start).toBeEnabled()
   await start.click()
   const results = dialog.getByRole('region', { name: '比较结果' })
-  await expect(results).toContainText('目前无法给出可核验的完整回答')
+  await expect(results).toContainText('两份资料分别规定了不同的退款期限，适用条件需要结合原文确认。')
   await expect(results.getByRole('article', { name: videos[0].title, exact: true })).toContainText(track.cues[0].text)
   await expect(results.getByRole('article', { name: videos[1].title, exact: true })).toContainText('没有可用的正文或原文字幕')
   await expect(results.getByRole('button', { name: '查看原文 · 已核验' })).toHaveCount(1)

@@ -359,6 +359,7 @@ func TestComparisonAbsenceRequiresAffirmativeScopeAndMissingField(t *testing.T) 
 		{"完整字段如下。", "客服邮箱", false},
 		{"Complete fields:", "E-mail", false},
 		{"The following is possibly complete.", "Hours", false},
+		{"Exhaustive property register:", "Hours", false},
 	} {
 		evidence := comparisonEvidence{Complete: true, snapshot: retrieval.Snapshot{Kind: retrieval.SourceArticle, Version: "1", Blocks: []retrieval.Block{{Index: 0, Text: tc.header}, {Index: 1, Text: tc.name + ": value"}}}}
 		got := comparisonAbsence("Which cards specify a support email?", "support email", evidence)

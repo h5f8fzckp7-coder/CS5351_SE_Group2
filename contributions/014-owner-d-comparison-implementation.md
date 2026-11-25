@@ -2,8 +2,8 @@
 
 - **Task owner:** Wenlong Lu (D).
 - **Branch:** `owner/d-multi-content-comparison`.
-- **Commit:** included in this implementation commit; no push or PR is claimed.
-- **AI tool:** Codex; exact model build identifier was not captured.
+- **Implementation commit:** `99c38dd`; follow-up addresses review findings on PR 12.
+- **AI tool:** Codex; recovered turn-context model label `gpt-6.1-sol`; immutable provider build identifier unavailable.
 - **Scope:** FR-04 implementation, its functional tests, and integration with
   A's generation ledger, B's retrieval engine, and C's citation validation.
 - **Related:** [requirements](../docs/req/requirements.yaml),
@@ -48,5 +48,12 @@ independent human numerical review or PR approval is claimed. All 120 raw
 responses, original snapshots, freezes, per-case rationale and residual errors
 are retained. Four multi-sentence findings remain separate FR defects.
 
-The raw Codex conversation export has not been retained as a repository artifact.
-The AI-use log records that gap rather than inventing an export or hash.
+A private original Codex session export is retained locally; a sanitized chronological projection and actual-user-intervention index are published in [session evidence](../docs/evidence/d-session-export/README.md). Original and public-artifact hashes are recorded; media/private runtime content is explicitly redacted. No course acceptance or independent signature is claimed.
+
+## Transcription integration fixes
+
+This contribution also includes the Bilibili signed-audio probe Range header and a single CPU retry after a confirmed whisper.cpp Metal allocation failure, with targeted adapter tests; these support original subtitle preparation before comparison.
+
+## PR review follow-up
+
+See [review remediation](../docs/evidence/d-pr12-remediation.md) for current fixes, published historical evidence, actual test results and unresolved approvals. The historical retained pass describes the pre-review implementation. The [new complete local evaluation](../docs/evidence/d-nfr-pr12-20261125-001.json) separately measures the current implementation and saved `openai/gpt-5.4` model: all six rounds meet both thresholds, all three controlled regressions pass, and all 619 evidence reopens pass. All nine HTTP format failures and seven additional semantic failure cases remain archived; independent acceptance is pending.
