@@ -1,0 +1,300 @@
+{
+  "date": "2026-11-22",
+  "configuredModel": "openai/gpt-5.4-mini",
+  "environment": "Baseline uses owner loopback server; intermediate/final checks use an isolated SQLite backup. A local diagnostic proxy forwarded requests to the configured gateway without logging credentials. Owner settings and source text were not changed.",
+  "baseline": {
+    "question": "影视那篇推荐了哪些类型的作品？",
+    "runs": 2,
+    "successfulAnswers": 2,
+    "note": "Both baseline reruns succeeded; screenshot withholding combination is reproduced with controlled evidence-state variants, not claimed as a reproduced live failure."
+  },
+  "intermediate": {
+    "runs": 7,
+    "formatFailures": 2,
+    "capturedFailure": {
+      "answer": "影视那篇推荐的作品类型很杂，主要包括电影、美剧、英剧、动画、纪录片、国产剧和日剧，还提到了真人秀。",
+      "answerSources": [
+        "S2"
+      ],
+      "sources": [
+        {
+          "citations": [
+            {
+              "passageId": "S2-P2",
+              "quote": "近期佳作推荐：[电影] 茫然女王、[电影] 行走之人、[美剧] 紧急呼救 第十季、[美剧] 一杆入魂 第二季、[英剧] 狐狸女士 第三季、[美剧] 圣丹尼斯医院 第三季、[电影] 窃取本书者将会…、[动画] 罗梅莉亚战记、[电影] 吉姆皇后、[纪录片] 扯淡电影史"
+            }
+          ],
+          "contentId": "S2",
+          "fact": "文章推荐了电影、美剧、英剧、动画和纪录片。",
+          "field": "",
+          "state": "supported"
+        },
+        {
+          "citations": [
+            {
+              "passageId": "S2-P94",
+              "quote": "[国产] 醉梦"
+            },
+            {
+              "passageId": "S2-P98",
+              "quote": "[日剧] LOST10"
+            },
+            {
+              "passageId": "S2-P101",
+              "quote": "[真人秀] 猎人杀"
+            }
+          ],
+          "contentId": "S2",
+          "fact": "文章还推荐了国产剧、日剧和真人秀。",
+          "field": "",
+          "state": "supported"
+        },
+        {
+          "citations": [],
+          "contentId": "S1",
+          "fact": "",
+          "field": "",
+          "state": "not_relevant"
+        }
+      ]
+    },
+    "note": "Captured source array has S2 twice and S1 once, omitting S3. It is rejected rather than repaired or accepted. This prompted fixed-key source schema."
+  },
+  "finalCases": [
+    {
+      "name": "focused_1",
+      "question": "影视那篇推荐了哪些类型的作品？",
+      "seconds": 5.5,
+      "answer": "那篇影视推荐涵盖了电影、美剧、英剧、动画、纪录片、国产剧、日剧和真人秀等类型作品。",
+      "answerSourceIds": [
+        "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a"
+      ],
+      "message": null,
+      "sources": [
+        {
+          "contentId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b",
+          "title": "这群在鸿蒙写应用的年轻人，只想做点「用得上」的",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": 0
+        },
+        {
+          "contentId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+          "title": "本周看什么 | 最近值得一看的 10 部作品",
+          "state": "supported",
+          "reason": null,
+          "fact": "推荐的作品类型包括电影、美剧、英剧、动画、纪录片、国产剧、日剧和真人秀。",
+          "citations": 6
+        },
+        {
+          "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+          "title": "游戏史最高分，不负 13 年的等待：《GTA 6》游玩体验",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": 0
+        }
+      ],
+      "evidenceReopens": 6,
+      "evidenceErrors": [],
+      "budget": {
+        "max": 2,
+        "started": 1,
+        "usageKnown": true,
+        "perCall": [
+          {
+            "prompt": 14928,
+            "output": 363,
+            "total": 15291
+          }
+        ],
+        "cumulative": {
+          "prompt": 14928,
+          "output": 363,
+          "total": 15291
+        },
+        "status": "completed"
+      }
+    },
+    {
+      "name": "focused_2",
+      "question": "影视那篇推荐了哪些类型的作品？",
+      "seconds": 7.7,
+      "answer": "影视那篇推荐了剧情、喜剧、运动、悬疑、犯罪、小说改、奇幻、冒险、科幻、历史和纪录片等类型的作品。",
+      "answerSourceIds": [
+        "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a"
+      ],
+      "message": null,
+      "sources": [
+        {
+          "contentId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b",
+          "title": "这群在鸿蒙写应用的年轻人，只想做点「用得上」的",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": 0
+        },
+        {
+          "contentId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+          "title": "本周看什么 | 最近值得一看的 10 部作品",
+          "state": "supported",
+          "reason": null,
+          "fact": "这篇影视推荐覆盖了剧情、喜剧、运动、悬疑、犯罪、小说改、奇幻、冒险、科幻、历史和纪录片等类型。",
+          "citations": 8
+        },
+        {
+          "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+          "title": "游戏史最高分，不负 13 年的等待：《GTA 6》游玩体验",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": 0
+        }
+      ],
+      "evidenceReopens": 8,
+      "evidenceErrors": [],
+      "budget": {
+        "max": 2,
+        "started": 1,
+        "usageKnown": true,
+        "perCall": [
+          {
+            "prompt": 14928,
+            "output": 417,
+            "total": 15345
+          }
+        ],
+        "cumulative": {
+          "prompt": 14928,
+          "output": 417,
+          "total": 15345
+        },
+        "status": "completed"
+      }
+    },
+    {
+      "name": "focused_3",
+      "question": "影视那篇推荐了哪些类型的作品？",
+      "seconds": 8.7,
+      "answer": "影视那篇主要推荐了电影、美剧、英剧、动画、纪录片、国产剧和真人秀，并且还列出了若干新预告和影视新闻。",
+      "answerSourceIds": [
+        "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a"
+      ],
+      "message": null,
+      "sources": [
+        {
+          "contentId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b",
+          "title": "这群在鸿蒙写应用的年轻人，只想做点「用得上」的",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": 0
+        },
+        {
+          "contentId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+          "title": "本周看什么 | 最近值得一看的 10 部作品",
+          "state": "supported",
+          "reason": null,
+          "fact": "推荐了电影、美剧、英剧、动画、纪录片、国产剧、日剧和真人秀，并包含新预告与影视新闻。",
+          "citations": 8
+        },
+        {
+          "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+          "title": "游戏史最高分，不负 13 年的等待：《GTA 6》游玩体验",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": 0
+        }
+      ],
+      "evidenceReopens": 8,
+      "evidenceErrors": [],
+      "budget": {
+        "max": 2,
+        "started": 1,
+        "usageKnown": true,
+        "perCall": [
+          {
+            "prompt": 14928,
+            "output": 416,
+            "total": 15344
+          }
+        ],
+        "cumulative": {
+          "prompt": 14928,
+          "output": 416,
+          "total": 15344
+        },
+        "status": "completed"
+      }
+    },
+    {
+      "name": "all_sources",
+      "question": "分别概括这三篇文章的主题",
+      "seconds": 6.2,
+      "answer": "第一篇讲鸿蒙高校创新赛中学生用鸿蒙和AI把视障辅助、养老照护、银龄沟通和穿搭整理等真实问题做成应用；第二篇是近期影视作品与新预告、新闻的推荐合集；第三篇是《GTA 6》游玩体验/评测文章。",
+      "answerSourceIds": [
+        "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b",
+        "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+        "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e"
+      ],
+      "message": null,
+      "sources": [
+        {
+          "contentId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b",
+          "title": "这群在鸿蒙写应用的年轻人，只想做点「用得上」的",
+          "state": "supported",
+          "reason": null,
+          "fact": "主题是鸿蒙高校创新赛中学生用AI和HarmonyOS把真实生活里的问题转化为可落地产品。",
+          "citations": 3
+        },
+        {
+          "contentId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+          "title": "本周看什么 | 最近值得一看的 10 部作品",
+          "state": "supported",
+          "reason": null,
+          "fact": "主题是本周影视作品推荐、预告和影视新闻汇总。",
+          "citations": 4
+        },
+        {
+          "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+          "title": "游戏史最高分，不负 13 年的等待：《GTA 6》游玩体验",
+          "state": "supported",
+          "reason": null,
+          "fact": "主题是《GTA 6》的游玩体验与评测。",
+          "citations": 2
+        }
+      ],
+      "evidenceReopens": 9,
+      "evidenceErrors": [],
+      "budget": {
+        "max": 2,
+        "started": 1,
+        "usageKnown": true,
+        "perCall": [
+          {
+            "prompt": 14927,
+            "output": 559,
+            "total": 15486
+          }
+        ],
+        "cumulative": {
+          "prompt": 14927,
+          "output": 559,
+          "total": 15486
+        },
+        "status": "completed"
+      }
+    }
+  ],
+  "requests": {
+    "totalComparisons": 13,
+    "finalProviderCalls": 4,
+    "reportedTokensCaptured": 186318,
+    "usageCoverage": "Token usage captured for 12 comparisons; the first intermediate format error budget was not retained by the diagnostic script."
+  },
+  "limitations": "Four final smoke requests are not an accuracy study or NFR-04 acceptance. Source relevance, answer scope, completeness of genre lists and entailment remain model judgments. Exact citation verification proves source/range/version matching only. GTA evidence remains the saved RSS excerpt. Browser E2E was not executed.",
+  "builtBinarySHA256": "40d9b693c5f1db4d4eb77acadc434e065d89dd1e1a79455b39d4407b094683e7",
+  "comparisonPromptSHA256": "facf52ddcb02e7fd34e5d92490b5f1888d4daac259fc478f6d7d6df8e392d129"
+}

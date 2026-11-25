@@ -17,6 +17,7 @@ import { PaperCard } from '../features/documents/PaperCard'
 import { SkeletonGallery } from '../shared/ui/SkeletonLoading'
 import { useFeed } from '../features/discovery/useFeed'
 import { useLibrary } from '../features/library/useLibrary'
+import { ComparisonPanel } from '../features/ai/ComparisonPanel'
 import { useGlobalNotes } from '../features/notes/useGlobalNotes'
 import { supportsProgress, useProgressOverview } from '../features/progress/useProgressOverview'
 import { CardProgress } from '../features/progress/ProgressOverview'
@@ -361,6 +362,7 @@ export function App() {
       toolbar={view === 'library' ? <div className="library-toolbar">
         <LibrarySources favorites={favorites} mode={libraryMode} localCount={library.items.length} onLocal={() => setLibraryMode('local')} onFolder={id => { favorites.setSelected(id); setLibraryMode('folder') }} onSetup={() => setLibraryMode('setup')}/>
         {showLocal && <div className="library-toolbar-controls">
+          <ComparisonPanel items={library.items}/>
           <label className="library-search"><Search size={15} aria-hidden="true"/><Input type="search" aria-label="搜索当前列表" placeholder="搜索收藏" value={filters.library} onChange={event => setFilters(current => ({ ...current, library: event.target.value }))}/></label>
           <Button variant="quiet" iconOnly type="button" className="icon-button" aria-label="刷新收藏" title="刷新收藏" disabled={library.loading || progressOverview.loading} onClick={() => { void library.reload(); void progressOverview.reload() }}><RefreshCw size={16} className={library.loading || progressOverview.loading ? 'spin' : undefined}/></Button>
           <div className="layout-switch segmented" role="group" aria-label="布局选择"><Button variant="quiet" type="button" onClick={() => setLayouts(current => ({ ...current, library: 'grid' }))} aria-label="画廊布局" title="画廊布局" aria-pressed={layouts.library === 'grid'}><Grid2X2 size={15}/></Button><Button variant="quiet" type="button" onClick={() => setLayouts(current => ({ ...current, library: 'list' }))} aria-label="列表布局" title="列表布局" aria-pressed={layouts.library === 'list'}><List size={16}/></Button></div>

@@ -109,20 +109,21 @@ type Inspection struct {
 }
 
 type Service struct {
-	mu              sync.Mutex
-	config          Config
-	settingsPath    string
-	results         ResultStore
-	summaries       *summaryStore
-	provider        Translator
-	summarizer      Summarizer
-	active          string
-	cancel          context.CancelFunc
-	closed          bool
-	wait            sync.WaitGroup
-	saveSummaryNote func(context.Context, SummaryResult) error
-	retrievalEngine *retrieval.Engine
-	contentVersions ContentVersionReader
+	mu               sync.Mutex
+	config           Config
+	settingsPath     string
+	results          ResultStore
+	summaries        *summaryStore
+	provider         Translator
+	summarizer       Summarizer
+	active           string
+	cancel           context.CancelFunc
+	closed           bool
+	wait             sync.WaitGroup
+	saveSummaryNote  func(context.Context, SummaryResult) error
+	retrievalEngine  *retrieval.Engine
+	contentVersions  ContentVersionReader
+	comparisonSource ComparisonSource
 }
 
 // SetSummaryNoteWriter connects the optional notes use case at the composition root.

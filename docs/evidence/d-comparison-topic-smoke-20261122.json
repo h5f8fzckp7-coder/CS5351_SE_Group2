@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-22",
+  "environment": "isolated SQLite backup, production server build",
+  "endpoint": "https://api.ofox.ai/v1",
+  "configuredModel": "openai/gpt-5.4-mini",
+  "question": "这两篇文章的主题一致吗",
+  "expectedRelation": "different",
+  "actualRelation": "different",
+  "elapsedSeconds": 5.1,
+  "verifiedEvidenceReopens": 10,
+  "sources": [
+    {
+      "title": "这群在鸿蒙写应用的年轻人，只想做点「用得上」的",
+      "contentId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b",
+      "state": "supported",
+      "fact": "这篇文章主题是鸿蒙高校创新赛中大学生用 AI、HarmonyOS 解决真实生活问题，涵盖视障辅助、养老照护、家庭沟通和日常交互等应用。",
+      "citationCount": 6,
+      "allCitationsVerified": true
+    },
+    {
+      "title": "本周看什么 | 最近值得一看的 10 部作品",
+      "contentId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+      "state": "supported",
+      "fact": "这篇文章主题是本周影视作品推荐、预告和影视新闻汇总。",
+      "citationCount": 4,
+      "allCitationsVerified": true
+    }
+  ],
+  "budget": {
+    "max": 2,
+    "started": 1,
+    "usageKnown": true,
+    "perCall": [
+      {
+        "prompt": 14559,
+        "output": 476,
+        "total": 15035
+      }
+    ],
+    "cumulative": {
+      "prompt": 14559,
+      "output": 476,
+      "total": 15035
+    },
+    "status": "completed"
+  },
+  "limitations": "One manually checked regression example, not a 20-case NFR-04 accuracy result. The original pre-fix observation was the user screenshot, not a controlled baseline replay."
+}

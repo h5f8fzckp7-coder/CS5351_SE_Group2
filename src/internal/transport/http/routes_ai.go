@@ -3,6 +3,9 @@ package httptransport
 import "net/http"
 
 func (h *Handler) registerAIRoutes(mux *http.ServeMux) {
+	mux.HandleFunc("POST /api/ai/compare", h.ai.aiCompare)
+	mux.HandleFunc("POST /api/ai/compare/sources", h.ai.aiComparisonSources)
+	mux.HandleFunc("POST /api/ai/compare/evidence", h.ai.aiComparisonEvidence)
 	mux.HandleFunc("GET /api/ai/settings", h.ai.aiSettingsGet)
 	mux.HandleFunc("PUT /api/ai/settings", h.ai.aiSettingsPut)
 	mux.HandleFunc("POST /api/ai/models", h.ai.aiModels)

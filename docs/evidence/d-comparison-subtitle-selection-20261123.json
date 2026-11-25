@@ -1,0 +1,32 @@
+{
+  "servedAsset": "/assets/index-BvEnG5GX.js",
+  "controlsPresent": {
+    "用于比较的字幕": true,
+    "保存用于比较": true,
+    "重新读取字幕": true
+  },
+  "modelProviderCalls": 0,
+  "savedChoices": [
+    {
+      "language": "ai-zh",
+      "label": "中文",
+      "cues": 280,
+      "selected": false
+    },
+    {
+      "language": "whisper-preview",
+      "label": "简体中文 · 前 60 秒 · 本机语音转写",
+      "cues": 2,
+      "selected": false
+    }
+  ],
+  "validation": {
+    "frontendUnitTestsPassed": 15,
+    "httpWorkflowTestPassed": 1,
+    "frontendBuild": "passed",
+    "productionBuild": "passed",
+    "browserInteractionTest": "blocked before running by macOS sandbox bootstrap_check_in Permission denied"
+  },
+  "ownerSubtitleSelectionChanged": false,
+  "report": "/Users/lwl/Documents/Codex/2026-11-14/fen-xi/outputs/comparison-subtitle-picker-20261123/report.md"
+}

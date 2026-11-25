@@ -5,6 +5,7 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"tangentry/internal/subtitles"
 	"tangentry/internal/transcription"
@@ -48,7 +49,22 @@ func (t *Transcriber) transcribeLocal(ctx context.Context, cfg transcription.Con
 	cmd.Stdout = io.Discard
 	warnings = &boundedBuffer{}
 	cmd.Stderr = warnings
-	if cmd.Run() != nil {
+	err := cmd.Run()
+	if err != nil && ctx.Err() == nil && cfg.Backend != "faster-whisper" && cfg.Backend != "qwen3-asr" && whisperMetalAllocationFailed(warnings.String()) {
+		// Some macOS hosts cannot allocate the Metal model buffer. Retry the
+		// same model/audio once on CPU, without downloading or changing settings.
+		if removeErr := os.Remove(output + ".json"); removeErr != nil && !os.IsNotExist(removeErr) {
+			return subtitles.Track{}, storageFailure(removeErr)
+		}
+		args := append(append([]string(nil), cmd.Args[1:]...), "-ng")
+		cmd = command(ctx, cmd.Path, args...)
+		cmd.Env = toolEnvironment()
+		cmd.Stdout = io.Discard
+		warnings = &boundedBuffer{}
+		cmd.Stderr = warnings
+		err = cmd.Run()
+	}
+	if err != nil {
 		return subtitles.Track{}, toolFailure("recognizing", warnings.String())
 	}
 	jsonFile, err := os.Open(output + ".json")
@@ -61,4 +77,9 @@ func (t *Transcriber) transcribeLocal(ctx context.Context, cfg transcription.Con
 		return subtitles.Track{}, subtitles.ErrFormat
 	}
 	return parseWhisper(data, limit, cfg.Language)
+}
+
+func whisperMetalAllocationFailed(output string) bool {
+	text := strings.ToLower(output)
+	return strings.Contains(text, "ggml") && strings.Contains(text, "metal") && strings.Contains(text, "failed to allocate")
 }

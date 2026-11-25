@@ -1,0 +1,240 @@
+{
+  "completion_date": "2026-11-25",
+  "timezone": "Asia/Hong_Kong",
+  "collection_directory_date": "2026-11-25",
+  "owner": "Wenlong Lu (D)",
+  "model": "openai/gpt-5.4-mini",
+  "settings_revision": 7,
+  "outcome": "PASS",
+  "protocol": "Each of three profiles: same frozen 20 questions, two full rounds, each metric each round >=16/20, all controlled regressions pass. No pooling or dropped failures.",
+  "profiles": [
+    {
+      "input_profile": "article_article",
+      "outcome": "PASS",
+      "runs": {
+        "1": {
+          "answer_correct": 18,
+          "source_attribution_correct": 20,
+          "denominator": 20,
+          "unscored": 0
+        },
+        "2": {
+          "answer_correct": 20,
+          "source_attribution_correct": 20,
+          "denominator": 20,
+          "unscored": 0
+        }
+      },
+      "controlled_regression": "passed",
+      "provider_calls": 40,
+      "reported_tokens": 611191,
+      "evidence_checks": {
+        "checks": 296,
+        "failed": 0,
+        "model_calls": 0,
+        "semantic_support": "Not established by exact source/quotation matching."
+      },
+      "failed_cases": [
+        {
+          "run": 1,
+          "case_id": "D-18",
+          "answer_correct": 0,
+          "source_attribution_correct": 1,
+          "notes": "Answer says all film/TV works have runtimes; additional recommendation entries do not. Source fact correctly only says multiple works have runtimes."
+        },
+        {
+          "run": 1,
+          "case_id": "D-20",
+          "answer_correct": 0,
+          "source_attribution_correct": 1,
+          "notes": "Question requests checkable numerical examples for each article; answer lists only kinds of numbers for film source without any actual film number. Its source fact supplies concrete numbers correctly."
+        }
+      ],
+      "separate_fr_format_findings": [],
+      "directory": "build/d-nfr-full-20261125-002/article_article",
+      "implementation_sha256": "0305d7f137b1b4e2bc8ddb057bbd0c74990b73d394f60292df56d7775310fa17",
+      "scores_sha256": "0c6d15e9abb7192b6af3e0cb0560f24702ec3a9ca78ea360b822894bbf530cc5"
+    },
+    {
+      "input_profile": "video_video",
+      "outcome": "PASS",
+      "runs": {
+        "1": {
+          "answer_correct": 18,
+          "source_attribution_correct": 19,
+          "denominator": 20,
+          "unscored": 0
+        },
+        "2": {
+          "answer_correct": 20,
+          "source_attribution_correct": 20,
+          "denominator": 20,
+          "unscored": 0
+        }
+      },
+      "controlled_regression": "passed",
+      "provider_calls": 40,
+      "reported_tokens": 223075,
+      "evidence_checks": {
+        "profile": "video_video",
+        "checks": 191,
+        "subtitle_checks": 191,
+        "failed": 0,
+        "model_calls": 0,
+        "semantic_support": "Not established by exact source/quotation/time matching."
+      },
+      "failed_cases": [
+        {
+          "run": 1,
+          "case_id": "D-04",
+          "answer_correct": 0,
+          "source_attribution_correct": 1,
+          "notes": "Answer assigns proof verification to AI alongside Ahlberg; source fact preserves author verification and AI discovery."
+        },
+        {
+          "run": 1,
+          "case_id": "D-20",
+          "answer_correct": 0,
+          "source_attribution_correct": 0,
+          "notes": "Answer and game fact interpret ambiguous ASR 12.1 as exact 12点1分; supplied text does not establish that precision."
+        }
+      ],
+      "separate_fr_format_findings": [
+        {
+          "run": 1,
+          "case_id": "D-05",
+          "issue": "Multiple sentences; retained separately as FR finding."
+        },
+        {
+          "run": 1,
+          "case_id": "D-17",
+          "issue": "Multiple sentences; retained separately as FR finding."
+        },
+        {
+          "run": 1,
+          "case_id": "D-20",
+          "issue": "Multiple sentences; retained separately as FR finding."
+        },
+        {
+          "run": 2,
+          "case_id": "D-17",
+          "issue": "Multiple sentences; retained separately as FR finding."
+        }
+      ],
+      "directory": "build/d-nfr-full-20261125-002/video_video",
+      "implementation_sha256": "0305d7f137b1b4e2bc8ddb057bbd0c74990b73d394f60292df56d7775310fa17",
+      "scores_sha256": "43f74f2bde09a36edac3fe366761a279e8005e79f47d2b67c0e6232d4f1fcfe2"
+    },
+    {
+      "input_profile": "video_article",
+      "outcome": "PASS",
+      "runs": {
+        "1": {
+          "answer_correct": 17,
+          "source_attribution_correct": 18,
+          "denominator": 20,
+          "unscored": 0
+        },
+        "2": {
+          "answer_correct": 18,
+          "source_attribution_correct": 18,
+          "denominator": 20,
+          "unscored": 0
+        }
+      },
+      "controlled_regression": "passed",
+      "provider_calls": 40,
+      "reported_tokens": 314864,
+      "evidence_checks": {
+        "profile": "video_article",
+        "checks": 245,
+        "subtitle_checks": 113,
+        "failed": 0,
+        "model_calls": 0,
+        "semantic_support": "Not established by exact source/quotation/time matching."
+      },
+      "failed_cases": [
+        {
+          "run": 1,
+          "case_id": "D-02",
+          "answer_correct": 0,
+          "source_attribution_correct": 1,
+          "notes": "Answer assigns code checking/verification to AI; own math finding correctly describes independent program verification."
+        },
+        {
+          "run": 1,
+          "case_id": "D-07",
+          "answer_correct": 1,
+          "source_attribution_correct": 0,
+          "notes": "Answer correctly preserves continuing checks; math source fact wrongly says both accounts only published machine-checkable code instead of distinguishing the human manuscript."
+        },
+        {
+          "run": 1,
+          "case_id": "D-13",
+          "answer_correct": 1,
+          "source_attribution_correct": 0,
+          "notes": "Correct no-modifier/no-MOD attribution in answer; unused ready article is left at limited_search rather than grounded source scope."
+        },
+        {
+          "run": 1,
+          "case_id": "D-18",
+          "answer_correct": 0,
+          "source_attribution_correct": 1,
+          "notes": "Answer supplies separate differences but omits the explicitly requested commonality; individual source facts correctly describe the tutorial and media digest."
+        },
+        {
+          "run": 1,
+          "case_id": "D-19",
+          "answer_correct": 0,
+          "source_attribution_correct": 1,
+          "notes": "Answer says all film entries have durations although extra recommendation entries lack them; own film fact says only multiple works, and game fact correctly states missing completion duration."
+        },
+        {
+          "run": 2,
+          "case_id": "D-02",
+          "answer_correct": 0,
+          "source_attribution_correct": 0,
+          "notes": "Answer and math source fact assign proof verification to AI instead of preserving AI discovery versus independent/human verification."
+        },
+        {
+          "run": 2,
+          "case_id": "D-11",
+          "answer_correct": 1,
+          "source_attribution_correct": 0,
+          "notes": "Answer correctly says identity cannot be established, but game source fact asserts it is not GTA 6 without evidence."
+        },
+        {
+          "run": 2,
+          "case_id": "D-18",
+          "answer_correct": 0,
+          "source_attribution_correct": 1,
+          "notes": "Answer supplies differences but omits the explicitly requested common ground; individual findings remain source-grounded."
+        }
+      ],
+      "separate_fr_format_findings": [],
+      "directory": "build/d-nfr-full-20261125-002/video_article",
+      "implementation_sha256": "0305d7f137b1b4e2bc8ddb057bbd0c74990b73d394f60292df56d7775310fa17",
+      "scores_sha256": "7039e1b6b4d1d0e8c1cba1b5b31b36a0964986b8b281a046a766516ba00fafca"
+    }
+  ],
+  "responses": 120,
+  "provider_calls": 120,
+  "reported_total_tokens": 1149130,
+  "evidence_checks": 732,
+  "failed_evidence_checks": 0,
+  "source_integrity": "All frozen saved subtitle tracks/revisions/selections and article documents/content payloads match both owner store and isolated runtime after evaluation. Production hash still matches each new freeze.",
+  "grading": "Codex source-grounded assisted grading under owner standing delegation: 按原文和错误记录补齐评分",
+  "new_outputs_human_review_claimed": false,
+  "independent_review_or_PR_approval_claimed": false,
+  "production_changes_during_test": false,
+  "service_stopped": true,
+  "temporary_credentials_and_data_removed": true,
+  "formal_result": "PASS for this retained local evaluation: all three profiles meet both metrics in both rounds and all controlled regressions pass. Residual errors and separate FR presentation findings remain disclosed.",
+  "scope": "Saved text/subtitle comparison only; quotation matches do not establish semantic accuracy. Multiple-sentence presentation issues remain separate FR findings.",
+  "retention_scope": "Only this complete 120-response NFR evaluation is retained at the owner request; this does not assert that no prior evaluations occurred.",
+  "published_evidence": {
+    "archive": "d-nfr-full-20261125-002.zip",
+    "sha256": "1c6ddec05c28150a83996e31114c3c93156b8076bf66f1ffdc8f6f71d6ca4c52",
+    "scope": "Historical frozen implementation; later PR-review changes not measured by this PASS."
+  }
+}

@@ -79,3 +79,91 @@ test('reader title translates on click and toggles without a separate translatio
   await expect(title).toContainText('这是第1句的中文译文。')
   await expect(page.locator('.reading-nav-title .text-translation-control')).toHaveCount(0)
 })
+
+test('saved content comparison verifies original passages and rejects an edited source on reopen', async ({ page, request }) => {
+  const settings = await (await request.get('/api/ai/settings')).json()
+  expect((await request.put('/api/ai/settings', { data: {
+    baseUrl: 'https://ai-fixture.example/v1', model: 'fixture-comparison', chatModel: 'fixture-comparison',
+    enabledModels: ['fixture-comparison'], revision: settings.revision,
+  } })).ok()).toBe(true)
+  const items: ContentItem[] = ['a', 'b', 'c', 'd'].map((letter, index) => ({
+    id: 'rss:' + letter.repeat(64), platform: 'rss', platformId: letter.repeat(64), kind: 'article',
+    title: `比较测试资料 ${index + 1}`, author: 'Fixture', authorId: '', url: `https://example.com/policy-${letter}`,
+    thumbnailUrl: '', description: '', durationSeconds: 0, publishedAt: 1720000000,
+    articleBlocks: [{ kind: 'paragraph', text: `付款后 ${14 + index * 16} 天内可申请退款😀。` }],
+  }))
+  for (const item of items) expect((await request.post('/api/library', { data: item })).ok()).toBe(true)
+  await page.goto('/library')
+  await page.getByRole('button', { name: '比较内容', exact: true }).click()
+  const dialog = page.getByRole('dialog', { name: '多内容比较' })
+  const start = dialog.getByRole('button', { name: '开始比较', exact: true })
+  await expect(start).toBeDisabled()
+  await dialog.getByLabel(items[0].title, { exact: true }).check()
+  await dialog.getByLabel(items[1].title, { exact: true }).check()
+  await dialog.getByLabel(items[2].title, { exact: true }).check()
+  await expect(dialog.getByLabel(items[3].title, { exact: true })).toBeDisabled()
+  await dialog.getByLabel(items[2].title, { exact: true }).uncheck()
+  await dialog.getByLabel('比较问题', { exact: true }).fill('退款期限是否一致？')
+  await dialog.getByLabel('调用上限', { exact: true }).fill('1')
+  await start.click()
+  const findings = dialog.getByRole('region', { name: '比较结果' })
+  await expect(findings.getByRole('heading', { name: '比较回答', exact: true })).toBeVisible()
+  await expect(findings).toContainText('两份资料分别规定了不同的退款期限')
+  await expect(findings.getByRole('article')).toHaveCount(2)
+  await expect(findings).toContainText('已发起 1/1 次')
+  await findings.getByRole('button', { name: '查看原文 · 已核验' }).first().click()
+  const original = dialog.getByRole('region', { name: '引用原文' })
+  await expect(original.locator('mark')).toHaveText(items[0].articleBlocks![0].text)
+  // Reopening re-reads the source, rather than trusting the earlier result.
+  const changed = { ...items[0], articleBlocks: [{ kind: 'paragraph', text: '原文已修改。' }] }
+  expect((await request.post('/api/library', { data: changed })).ok()).toBe(true)
+  await findings.getByRole('button', { name: '查看原文 · 已核验' }).first().click()
+  await expect(dialog.getByRole('alert')).toContainText('原文已变更')
+  await expect(original).toHaveCount(0)
+  await expect(findings.locator('.comparison-answer')).toContainText('两份资料分别规定了不同的退款期限')
+  await page.setViewportSize({ width: 390, height: 844 })
+  expect(await dialog.evaluate(element => element.scrollWidth > element.clientWidth)).toBe(false)
+})
+
+// D-T01/D-T03: readiness and preparation cover the missing-subtitle journey.
+test('comparison explains unsupported notes and refreshes saved captions before partial comparison', async ({ page, request }) => {
+  const settings = await (await request.get('/api/ai/settings')).json()
+  expect((await request.put('/api/ai/settings', { data: {
+    baseUrl: 'https://ai-fixture.example/v1', model: 'fixture-comparison', chatModel: 'fixture-comparison',
+    enabledModels: ['fixture-comparison'], revision: settings.revision,
+  } })).ok()).toBe(true)
+  const videos: ContentItem[] = ['ReadyTest01', 'ReadyTest02'].map((id, index) => ({
+    id: 'youtube:' + id, platform: 'youtube', platformId: id, kind: 'video', title: `字幕准备测试 ${index + 1}`,
+    author: 'Fixture', authorId: '', url: 'https://www.youtube.com/watch?v=' + id, thumbnailUrl: '',
+    description: '', durationSeconds: 60, publishedAt: 1720000000,
+  }))
+  const note: ContentItem = {
+    ...videos[0], id: 'xiaohongshu:6af5dcc3000000002500b6f5', platform: 'xiaohongshu',
+    platformId: '6af5dcc3000000002500b6f5', kind: 'image', title: '不支持的图文测试',
+    url: 'https://www.xiaohongshu.com/explore/6af5dcc3000000002500b6f5',
+  }
+  for (const item of [...videos, note]) expect((await request.post('/api/library', { data: item })).ok()).toBe(true)
+  await page.goto('/library')
+  await page.getByRole('button', { name: '比较内容', exact: true }).click()
+  const dialog = page.getByRole('dialog', { name: '多内容比较' })
+  await expect(dialog.getByLabel(note.title, { exact: true })).toBeDisabled()
+  await expect(dialog).toContainText('图文/图片暂不支持比较')
+  await dialog.getByLabel(videos[0].title, { exact: true }).check()
+  await dialog.getByLabel(videos[1].title, { exact: true }).check()
+  await dialog.getByLabel('比较问题', { exact: true }).fill('退款期限是否一致？')
+  const start = dialog.getByRole('button', { name: '开始比较', exact: true })
+  await expect(dialog).toContainText('所选来源均没有已确认可用的原文')
+  await expect(start).toBeDisabled()
+  await expect(dialog.getByRole('link', { name: '准备原文字幕' }).first()).toHaveAttribute('href', '/reader?contentId=' + encodeURIComponent(videos[0].id))
+  const track: SubtitleTrack = { language: 'zh', label: '中文', automatic: false, source: 'youtube', cues: [{ start: 12, end: 20, text: '付款后 14 天内可以申请退款。' }] }
+  expect((await request.put('/api/saved-subtitles/' + encodeURIComponent(videos[0].id) + '/zh', { data: { track, revision: 0, selected: true } })).ok()).toBe(true)
+  await dialog.getByRole('button', { name: '重新检查来源', exact: true }).click()
+  await expect(dialog).toContainText('仅 1 份来源有可用原文')
+  await expect(start).toBeEnabled()
+  await start.click()
+  const results = dialog.getByRole('region', { name: '比较结果' })
+  await expect(results).toContainText('两份资料分别规定了不同的退款期限，适用条件需要结合原文确认。')
+  await expect(results.getByRole('article', { name: videos[0].title, exact: true })).toContainText(track.cues[0].text)
+  await expect(results.getByRole('article', { name: videos[1].title, exact: true })).toContainText('没有可用的正文或原文字幕')
+  await expect(results.getByRole('button', { name: '查看原文 · 已核验' })).toHaveCount(1)
+})

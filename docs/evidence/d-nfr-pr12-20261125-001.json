@@ -1,0 +1,175 @@
+{
+  "date": "2026-11-25",
+  "timezone": "Asia/Hong_Kong",
+  "owner": "Wenlong Lu (D)",
+  "scorer": "Codex, source-grounded assisted scoring under existing owner delegation",
+  "grading": "author_self_evaluation",
+  "independent_human_review_claimed": false,
+  "model": "openai/gpt-5.4",
+  "settings_revision": 8,
+  "comparison_requests": 120,
+  "provider_calls_started": 120,
+  "reported_tokens": 1153451,
+  "http_format_failures": [
+    {
+      "profile": "article_article",
+      "run": 2,
+      "case_id": "D-18",
+      "http_status": 502,
+      "code": "ai_chat_failed",
+      "message": "模型返回的比较结果格式无效，请重新比较。"
+    },
+    {
+      "profile": "article_article",
+      "run": 2,
+      "case_id": "D-20",
+      "http_status": 502,
+      "code": "ai_chat_failed",
+      "message": "模型返回的比较结果格式无效，请重新比较。"
+    },
+    {
+      "profile": "article_article",
+      "run": 2,
+      "case_id": "D-01",
+      "http_status": 502,
+      "code": "ai_chat_failed",
+      "message": "模型返回的比较结果格式无效，请重新比较。"
+    },
+    {
+      "profile": "article_article",
+      "run": 1,
+      "case_id": "D-01",
+      "http_status": 502,
+      "code": "ai_chat_failed",
+      "message": "模型返回的比较结果格式无效，请重新比较。"
+    },
+    {
+      "profile": "video_video",
+      "run": 2,
+      "case_id": "D-20",
+      "http_status": 502,
+      "code": "ai_chat_failed",
+      "message": "模型返回的比较结果格式无效，请重新比较。"
+    },
+    {
+      "profile": "video_article",
+      "run": 2,
+      "case_id": "D-06",
+      "http_status": 502,
+      "code": "ai_chat_failed",
+      "message": "模型返回的比较结果格式无效，请重新比较。"
+    },
+    {
+      "profile": "video_article",
+      "run": 1,
+      "case_id": "D-14",
+      "http_status": 502,
+      "code": "ai_chat_failed",
+      "message": "模型返回的比较结果格式无效，请重新比较。"
+    },
+    {
+      "profile": "video_article",
+      "run": 1,
+      "case_id": "D-19",
+      "http_status": 502,
+      "code": "ai_chat_failed",
+      "message": "模型返回的比较结果格式无效，请重新比较。"
+    },
+    {
+      "profile": "video_article",
+      "run": 1,
+      "case_id": "D-07",
+      "http_status": 502,
+      "code": "ai_chat_failed",
+      "message": "模型返回的比较结果格式无效，请重新比较。"
+    }
+  ],
+  "outcome": "PASS",
+  "profiles": {
+    "article_article": {
+      "outcome": "PASS",
+      "runs": {
+        "1": {
+          "answer_correct": 18,
+          "source_attribution_correct": 19,
+          "denominator": 20,
+          "unscored": 0
+        },
+        "2": {
+          "answer_correct": 16,
+          "source_attribution_correct": 16,
+          "denominator": 20,
+          "unscored": 0
+        }
+      },
+      "controlled_regression": "passed",
+      "evidence_reopens": {
+        "checks": 221,
+        "failed": 0,
+        "model_calls": 0,
+        "semantic_support": "Not established by exact source/quotation matching."
+      }
+    },
+    "video_video": {
+      "outcome": "PASS",
+      "runs": {
+        "1": {
+          "answer_correct": 19,
+          "source_attribution_correct": 20,
+          "denominator": 20,
+          "unscored": 0
+        },
+        "2": {
+          "answer_correct": 18,
+          "source_attribution_correct": 18,
+          "denominator": 20,
+          "unscored": 0
+        }
+      },
+      "controlled_regression": "passed",
+      "evidence_reopens": {
+        "profile": "video_video",
+        "checks": 182,
+        "subtitle_checks": 182,
+        "failed": 0,
+        "model_calls": 0,
+        "semantic_support": "Not established by exact source/quotation/time matching."
+      }
+    },
+    "video_article": {
+      "outcome": "PASS",
+      "runs": {
+        "1": {
+          "answer_correct": 17,
+          "source_attribution_correct": 17,
+          "denominator": 20,
+          "unscored": 0
+        },
+        "2": {
+          "answer_correct": 17,
+          "source_attribution_correct": 17,
+          "denominator": 20,
+          "unscored": 0
+        }
+      },
+      "controlled_regression": "passed",
+      "evidence_reopens": {
+        "profile": "video_article",
+        "checks": 216,
+        "subtitle_checks": 102,
+        "failed": 0,
+        "model_calls": 0,
+        "semantic_support": "Not established by exact source/quotation/time matching."
+      }
+    }
+  },
+  "threshold": "Each profile/round separately requires >=16/20 answers and >=16/20 complete-case source attribution plus passing regression; no pooling.",
+  "semantic_rubric": "Unchanged pre-annotated original-text cases, every attempt retained.",
+  "historical_attempts": "Prior published historical attempt and disclosed missing earlier attempts remain separate; no waiver claimed.",
+  "evidence_reopens": 619,
+  "published_evidence": {
+    "archive": "d-nfr-pr12-20261125-001.zip",
+    "sha256": "b8cd8d423abbbb483dcfb7332300781af87301b16f49a4b028458d8db7a71008",
+    "verification_command": "python3 test/local/d-comparison/verify-public-evaluation.py --archive docs/evidence/d-nfr-pr12-20261125-001.zip"
+  }
+}

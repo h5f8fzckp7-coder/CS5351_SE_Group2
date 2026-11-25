@@ -1,0 +1,192 @@
+{
+  "date": "2026-11-22",
+  "timezone": "Asia/Hong_Kong",
+  "startedAt": "2026-11-22T18:47:47+08:00",
+  "lastRequestStartedAt": "2026-11-22T18:57:25+08:00",
+  "model": "openai/gpt-5.4-mini",
+  "gateway": "https://api.ofox.ai/v1",
+  "comparisons": 100,
+  "providerCalls": 100,
+  "capturedProviderResponses": 100,
+  "http200": 100,
+  "answersReturned": 97,
+  "withheldAnswers": [
+    83,
+    90,
+    91
+  ],
+  "evidenceReopens": 901,
+  "evidenceReopenFailures": 0,
+  "unverifiedCitations": 0,
+  "reportedTokens": 1508571,
+  "meanSecondsIncludingReopens": 5.831,
+  "medianSecondsIncludingReopens": 5.502,
+  "p95SecondsNearestRankIncludingReopens": 9.22,
+  "maxSecondsIncludingReopens": 9.969,
+  "assistantReview": {
+    "pass": 80,
+    "warning": 14,
+    "fail": 6
+  },
+  "perQuestion": [
+    {
+      "questionId": 1,
+      "question": "这三篇文章的主题分别是什么？",
+      "runs": 10,
+      "answersReturned": 10,
+      "pass": 9,
+      "warning": 1,
+      "fail": 0,
+      "warningRepetitions": [
+        10
+      ],
+      "failedRepetitions": []
+    },
+    {
+      "questionId": 2,
+      "question": "哪篇文章介绍了鸿蒙应用开发？",
+      "runs": 10,
+      "answersReturned": 10,
+      "pass": 10,
+      "warning": 0,
+      "fail": 0,
+      "warningRepetitions": [],
+      "failedRepetitions": []
+    },
+    {
+      "questionId": 3,
+      "question": "鸿蒙那篇主要关注哪些现实问题？",
+      "runs": 10,
+      "answersReturned": 10,
+      "pass": 7,
+      "warning": 3,
+      "fail": 0,
+      "warningRepetitions": [
+        5,
+        7,
+        8
+      ],
+      "failedRepetitions": []
+    },
+    {
+      "questionId": 4,
+      "question": "影视那篇推荐了哪些类型的作品？",
+      "runs": 10,
+      "answersReturned": 10,
+      "pass": 10,
+      "warning": 0,
+      "fail": 0,
+      "warningRepetitions": [],
+      "failedRepetitions": []
+    },
+    {
+      "questionId": 5,
+      "question": "GTA 那篇主要讨论什么？",
+      "runs": 10,
+      "answersReturned": 10,
+      "pass": 6,
+      "warning": 4,
+      "fail": 0,
+      "warningRepetitions": [
+        3,
+        5,
+        7,
+        8
+      ],
+      "failedRepetitions": []
+    },
+    {
+      "questionId": 6,
+      "question": "鸿蒙和 GTA 两篇的关注点有什么不同？",
+      "runs": 10,
+      "answersReturned": 10,
+      "pass": 9,
+      "warning": 1,
+      "fail": 0,
+      "warningRepetitions": [
+        4
+      ],
+      "failedRepetitions": []
+    },
+    {
+      "questionId": 7,
+      "question": "影视推荐和 GTA 两篇有哪些共同点？",
+      "runs": 10,
+      "answersReturned": 10,
+      "pass": 4,
+      "warning": 3,
+      "fail": 3,
+      "warningRepetitions": [
+        4,
+        5,
+        6
+      ],
+      "failedRepetitions": [
+        2,
+        3,
+        7
+      ]
+    },
+    {
+      "questionId": 8,
+      "question": "哪些文章偏技术应用，哪些偏娱乐？",
+      "runs": 10,
+      "answersReturned": 10,
+      "pass": 10,
+      "warning": 0,
+      "fail": 0,
+      "warningRepetitions": [],
+      "failedRepetitions": []
+    },
+    {
+      "questionId": 9,
+      "question": "这三篇文章分别适合什么读者？",
+      "runs": 10,
+      "answersReturned": 8,
+      "pass": 6,
+      "warning": 2,
+      "fail": 2,
+      "warningRepetitions": [
+        4,
+        7
+      ],
+      "failedRepetitions": [
+        3,
+        10
+      ]
+    },
+    {
+      "questionId": 10,
+      "question": "仅凭这三篇文章，能确定 GTA 6 的售价吗？",
+      "runs": 10,
+      "answersReturned": 9,
+      "pass": 9,
+      "warning": 0,
+      "fail": 1,
+      "warningRepetitions": [],
+      "failedRepetitions": [
+        1
+      ]
+    }
+  ],
+  "sourceVersions": {
+    "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b": [
+      "article-revision:1:f309169f1a91e7b4d5ae3475d93da488ea30a5118e644aad26133d08a5a7647b"
+    ],
+    "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a": [
+      "article-revision:1:c7cf1a3e0d002d4bf30c9dd5d7c9a95c4423439203878223c9ca1458bcd266b2"
+    ],
+    "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e": [
+      "content-revision:1:d9677b77bf439bd1650a64f506a5cd03382850a6b3ec238b1b813b3e9625e05e"
+    ]
+  },
+  "sourceVersionsStable": true,
+  "binaryUnchanged": true,
+  "comparisonSourceFilesUnchanged": true,
+  "limitations": "Codex assistant, source-guided review; not an independent human evaluator; 10 repeated questions, not 100 independent prompts or NFR-04 acceptance; GTA evidence only a saved RSS excerpt; no browser E2E.",
+  "artifactDirectory": "/Users/lwl/Documents/Codex/2026-11-14/fen-xi/outputs/comparison-100-20261122",
+  "report": "/Users/lwl/Documents/Codex/2026-11-14/fen-xi/outputs/comparison-100-20261122/report.md",
+  "questionManifest": "/Users/lwl/Documents/Codex/2026-11-14/fen-xi/outputs/comparison-100-20261122/manifest.json",
+  "reviewCriteria": "/Users/lwl/Documents/Codex/2026-11-14/fen-xi/outputs/comparison-100-20261122/review-criteria.json",
+  "note": "User-requested 10 original questions x 10 consecutive runs each. Results include assistant semantic review, not an independent accuracy benchmark. Product code remained frozen."
+}
