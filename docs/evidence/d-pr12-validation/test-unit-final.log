@@ -1,0 +1,122 @@
+cd src/web && npm run build && npm test
+
+> tangentry-web@0.0.3.6 build
+> node scripts/prepare-pdf.mjs && tsc --noEmit && vite build
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 2507 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                      1.70 kB │ gzip:   0.80 kB
+dist/assets/pdf.worker.min-CjEcRF4W.mjs          1,264.34 kB
+dist/assets/LocalVideoPlayer-DtFQldPs.css            1.62 kB │ gzip:   0.57 kB
+dist/assets/BilibiliPage-DHlWSci7.css                2.85 kB │ gzip:   0.91 kB
+dist/assets/sha2-DDiS2x7Z.css                        5.83 kB │ gzip:   1.59 kB
+dist/assets/MediaReader-C92CTvuD.css                 7.53 kB │ gzip:   1.92 kB
+dist/assets/DownloadsPage-BZV52MiV.css              17.19 kB │ gzip:   3.66 kB
+dist/assets/GlobalNotesPage-L7-lLsh0.css            21.36 kB │ gzip:   4.28 kB
+dist/assets/NotesPanel-j-7GvvWb.css                 38.17 kB │ gzip:   5.73 kB
+dist/assets/SubscriptionsPage-CAiGfUj3.css          42.07 kB │ gzip:   7.25 kB
+dist/assets/usePlaybackPosition-BjbD4I1a.css        65.59 kB │ gzip:  10.99 kB
+dist/assets/index-CEuyLQAm.css                     171.26 kB │ gzip:  29.72 kB
+dist/assets/captions-C9vbklDa.js                     0.45 kB │ gzip:   0.30 kB
+dist/assets/saveFile-BRzTunPE.js                     0.68 kB │ gzip:   0.46 kB
+dist/assets/MarkdownRenderer-CbqR0Rnt.js             2.72 kB │ gzip:   1.22 kB
+dist/assets/textAnchors-Dzo4wajT.js                  2.95 kB │ gzip:   1.25 kB
+dist/assets/YouTubeReadingWorkspace-DkxrjUNt.js      3.30 kB │ gzip:   1.69 kB
+dist/assets/refresh-cw-BZB7lkg7.js                   4.83 kB │ gzip:   2.22 kB
+dist/assets/ContentReadingWorkspace--8TjU99f.js      5.52 kB │ gzip:   2.50 kB
+dist/assets/BilibiliPage-C8wD4qAE.js                 6.77 kB │ gzip:   2.77 kB
+dist/assets/ReadingWorkspace-jb7ZE2Sw.js             6.91 kB │ gzip:   3.00 kB
+dist/assets/LocalVideoPlayer-CR3MFrm-.js            14.46 kB │ gzip:   5.02 kB
+dist/assets/sha2-QKOoXVos.js                        18.50 kB │ gzip:   7.53 kB
+dist/assets/DownloadsPage-CJSTuBfj.js               24.94 kB │ gzip:   7.09 kB
+dist/assets/GlobalNotesPage-CcakNCZm.js             38.49 kB │ gzip:  11.79 kB
+dist/assets/NotesPanel-FxONQfk8.js                  78.49 kB │ gzip:  23.82 kB
+dist/assets/SubscriptionsPage-D7M9uNCj.js           90.82 kB │ gzip:  24.17 kB
+dist/assets/MediaReader-CvzjXpNw.js                 95.46 kB │ gzip:  29.72 kB
+dist/assets/usePlaybackPosition-Barja0aD.js        139.63 kB │ gzip:  44.04 kB
+dist/assets/pdf-B2J5KcYE.js                        430.24 kB │ gzip: 129.30 kB
+dist/assets/index-BvEnG5GX.js                      810.98 kB │ gzip: 239.65 kB
+
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 1.15s
+
+> tangentry-web@0.0.3.6 test
+> vitest run
+
+
+ RUN  v5.0.5 <repository>/src/web
+
+
+ Test Files  70 passed (70)
+      Tests  304 passed (304)
+   Start at  12:33:52
+   Duration  2.44s (import 59%, transform 22%, tests 15%, worker 3%)
+
+    Isolate  70 workers spawned · ~119ms startup each (spawn + environment, per file)
+             at least ~804ms faster with isolate: false — reuses workers across files instead of one per file
+
+cd src && go test ./...
+ok  	tangentry/cmd/tangentry-desktop	3.654s
+?   	tangentry/cmd/tangentry-mcp	[no test files]
+?   	tangentry/cmd/tangentry-server	[no test files]
+ok  	tangentry/internal/adapters/aichat	(cached)
+ok  	tangentry/internal/adapters/articles	(cached)
+ok  	tangentry/internal/adapters/feeds	(cached)
+ok  	tangentry/internal/adapters/filesystem	(cached)
+?   	tangentry/internal/adapters/htmlimage	[no test files]
+?   	tangentry/internal/adapters/papers	[no test files]
+ok  	tangentry/internal/adapters/pdftext	(cached)
+ok  	tangentry/internal/adapters/platforms/bilibili	(cached)
+ok  	tangentry/internal/adapters/platforms/discourse	(cached)
+ok  	tangentry/internal/adapters/platforms/douyin	(cached)
+ok  	tangentry/internal/adapters/platforms/xiaohongshu	(cached)
+ok  	tangentry/internal/adapters/platforms/xiaoyuzhou	(cached)
+ok  	tangentry/internal/adapters/platforms/youtube	(cached)
+ok  	tangentry/internal/adapters/sqlite	(cached)
+ok  	tangentry/internal/adapters/storage/local	(cached)
+ok  	tangentry/internal/adapters/storage/webdav	(cached)
+ok  	tangentry/internal/adapters/tools	(cached)
+ok  	tangentry/internal/agent	(cached)
+ok  	tangentry/internal/agent/gateway	(cached)
+ok  	tangentry/internal/agent/mcp	(cached)
+ok  	tangentry/internal/ai	(cached)
+ok  	tangentry/internal/app	(cached)
+ok  	tangentry/internal/articles	(cached)
+ok  	tangentry/internal/automaticsubtitles	(cached)
+ok  	tangentry/internal/automaticsubtitles/worker	(cached)
+ok  	tangentry/internal/backup	(cached)
+ok  	tangentry/internal/citation	(cached)
+?   	tangentry/internal/config	[no test files]
+ok  	tangentry/internal/content	(cached)
+ok  	tangentry/internal/credentials	(cached)
+ok  	tangentry/internal/desktop	(cached)
+ok  	tangentry/internal/discovery	(cached)
+?   	tangentry/internal/documents	[no test files]
+ok  	tangentry/internal/downloads	(cached)
+ok  	tangentry/internal/favoritesync	(cached)
+?   	tangentry/internal/history	[no test files]
+?   	tangentry/internal/jobs	[no test files]
+ok  	tangentry/internal/layering	1.021s
+ok  	tangentry/internal/netpolicy	(cached)
+ok  	tangentry/internal/notes	(cached)
+ok  	tangentry/internal/papers	(cached)
+ok  	tangentry/internal/platformfetch	(cached)
+ok  	tangentry/internal/playback	(cached)
+?   	tangentry/internal/preferences	[no test files]
+ok  	tangentry/internal/readingprogress	(cached)
+ok  	tangentry/internal/readstate	(cached)
+ok  	tangentry/internal/retrieval	(cached)
+ok  	tangentry/internal/server	(cached)
+ok  	tangentry/internal/subscriptions	(cached)
+ok  	tangentry/internal/subtitles	(cached)
+ok  	tangentry/internal/transcription	(cached)
+ok  	tangentry/internal/transport/http	(cached)
+?   	tangentry/web	[no test files]
+?   	tangentry/web/tests/server	[no test files]

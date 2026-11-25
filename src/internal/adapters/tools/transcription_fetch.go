@@ -100,6 +100,13 @@ func (t *Transcriber) fetchPlatformAudio(ctx context.Context, audio transcriptio
 		if audio.Referer != "" {
 			args = append(args, "--referer", audio.Referer)
 		}
+		if audio.Platform == "bilibili" {
+			// The generic extractor probes the media before the chunked downloader
+			// starts. Bilibili CDNs can reject that first GET without a Range
+			// header (403/567), even when the signed URL is still valid. An open
+			// range also lets yt-dlp set its own bounds for subsequent chunks.
+			args = append(args, "--add-header", "Range:bytes=0-")
+		}
 		args = append(args, "--", raw)
 		cmd := command(ctx, binary, args...)
 		cmd.Env = toolEnvironment()

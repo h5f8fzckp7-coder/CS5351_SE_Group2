@@ -1,0 +1,87 @@
+{
+  "date": "2026-11-23",
+  "finalStrategy": "Single provider generation with substantive per-source findings, scoped title/content rules and server rendering of stable source-reference tags; no extra LLM reviewer in production.",
+  "finalComparisons": 19,
+  "finalHttp200": 19,
+  "finalProviderCalls": 19,
+  "finalEvidenceReopens": 192,
+  "finalEvidenceFailures": 0,
+  "targetRepeatedCases": 10,
+  "targetReorderedCases": 2,
+  "targetReview": "No observed repeat of the previous definite math-topic mismatch or source-order swap in 10 repeated and 2 reordered final cases. This is targeted assistant review, not an accuracy guarantee.",
+  "ownerLiveSmoke": {
+    "http": 200,
+    "providerCalls": 1,
+    "answer": "「最强流派一套带走八周目叶师傅，《绝技秒杀流》成型版，直…」 该视频明确说“没有用任何修改器、没有打任何伤害的mod”，并强调这些是游戏本身内容、所有人都可复刻。"
+  },
+  "stages": {
+    "before": {
+      "recordedCompletedComparisons": 5,
+      "recordedProviderCalls": 5,
+      "reportedTokens": 28519
+    },
+    "intermediate": {
+      "recordedCompletedComparisons": 19,
+      "recordedProviderCalls": 19,
+      "reportedTokens": 146554
+    },
+    "prompt-only-v2": {
+      "recordedCompletedComparisons": 19,
+      "recordedProviderCalls": 19,
+      "reportedTokens": 146068
+    },
+    "review-with-draft": {
+      "recordedCompletedComparisons": 9,
+      "recordedProviderCalls": 18,
+      "reportedTokens": 71395
+    },
+    "independent-review": {
+      "recordedCompletedComparisons": 19,
+      "recordedProviderCalls": 38,
+      "reportedTokens": 174673
+    },
+    "final": {
+      "recordedCompletedComparisons": 19,
+      "recordedProviderCalls": 19,
+      "reportedTokens": 147135
+    }
+  },
+  "recordedCompletedProviderCallsIncludingOwnerSmoke": 119,
+  "recordedReportedTokensIncludingOwnerSmoke": 719990,
+  "interruptedUnrecordedRequest": {
+    "count": 1,
+    "additionalProviderCallsRange": [
+      0,
+      2
+    ],
+    "note": "The review-with-draft runner was interrupted while one additional request was in flight; its response/usage were not captured. Completed outputs were retained. Do not infer an exact all-attempt call/token total."
+  },
+  "remainingIssues": [
+    "Some answers make unnecessary negative claims about unused sources (C02/C04).",
+    "Film-type enumeration remains incomplete in C07 (does not cover all stored types).",
+    "Two source findings (R03/R07) contain stray non-Chinese word fragments.",
+    "C01 styles a build name like a game title; source citations do not establish semantic correctness."
+  ],
+  "checks": [
+    "Four Go packages test/vet passed, including context bounds, display policy and new identity rendering tests.",
+    "Fifteen frontend unit tests and production frontend/backend builds passed.",
+    "Browser E2E was not run for this change."
+  ],
+  "ownerSubtitleChecks": [
+    {
+      "contentId": "bilibili:BV15aytzcENP",
+      "unchanged": true
+    },
+    {
+      "contentId": "bilibili:BV1eJs86MEat",
+      "unchanged": true
+    },
+    {
+      "contentId": "bilibili:BV1NH4p6rEVd",
+      "unchanged": true
+    }
+  ],
+  "deployedBinarySHA256": "928dc6ea356e69f99d09c01e734b48fe4a885b04c0003e260a0f422f0466bfa2",
+  "baselineBinarySHA256": "5b2f10dec20f0e7a8e786d8b1a2e47b5edcb10f2b7f6386fbca7f616fe6a661c",
+  "report": "/Users/lwl/Documents/Codex/2026-11-14/fen-xi/outputs/comparison-consistency-20261123/report.md"
+}

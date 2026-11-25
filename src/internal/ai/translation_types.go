@@ -114,6 +114,8 @@ type Service struct {
 	wait            sync.WaitGroup
 	saveSummaryNote func(context.Context, SummaryResult) error
 	retrievalEngine *retrieval.Engine
+
+	comparisonSource ComparisonSource
 }
 
 // SetSummaryNoteWriter connects the optional notes use case at the composition root.

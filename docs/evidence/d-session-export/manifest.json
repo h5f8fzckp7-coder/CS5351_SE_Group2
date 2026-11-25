@@ -1,0 +1,36 @@
+{
+  "session_id": "01a1d91d-08ff-73f1-a965-ad387d83f648",
+  "source_raw_sha256": "5349903d607a99481d8889ec383a2c3ccc2313548615b2423638cf28be62a897",
+  "source_raw_bytes": 181758857,
+  "source_compressed_sha256": "246999b7a484bb76e97c8b2ca2ca7e52111c47fcdded8b06009e00a85a6f5ed9",
+  "source_records": 10935,
+  "record_types": {
+    "session_meta": 1,
+    "event_msg": 5220,
+    "response_item": 4213,
+    "world_state": 20,
+    "turn_context": 179,
+    "token_usage_record": 1295,
+    "compacted": 7
+  },
+  "user_interventions": 186,
+  "redactions": {
+    "private_agent_configuration_or_reasoning": 1340,
+    "private_home_path": 2373,
+    "private_runtime_metadata": 2874,
+    "internal_state_or_compaction": 27,
+    "duplicate_event_or_runtime_state": 5044,
+    "private_temporary_path": 773,
+    "media_attachment": 53,
+    "embedded_media": 1,
+    "bearer_token": 1,
+    "signed_query": 7
+  },
+  "files": {
+    "conversation.sanitized.jsonl.gz": "196e9fa410bad624c1aae48b075b2c0f087d5b1b83f7add91aded8517ca51e07",
+    "student-interventions.csv": "c8901d68ecb57fb5c690f0d911903024a2f617b432d2122973837b3256143b65",
+    "README.md": "16ef3a567b0ee1f32979f9d61ffd94e47650a1fe76a59517997530758d46fa9a"
+  },
+  "scope": "Full chronological sanitized projection through the frozen cutoff; every original record has an index and original-line hash. Primary user/assistant/tool messages are preserved except explicit redactions. Private runtime instructions, encrypted reasoning, duplicate event contents, internal state and image/audio/video attachments are replaced with typed hash tombstones. Not byte-identical to the private raw export; original retained locally. No OpenCode usage, human approval, independent signature or missing historical response is reconstructed.",
+  "annotation_method": "Codex indexes actual user messages and identifies explicit behavior, scoring, testing and deletion requests by original record; interpretations await owner review, not independent signatures."
+}

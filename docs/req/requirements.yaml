@@ -24,9 +24,11 @@ note: >-
   for implementation; final implementation acceptance still requires
   a non-author human review of the implementation PR.
 
-  D requirements (FR-04, NFR-04): Approved for implementation via PR #8
-  (owner/d) by a non-author group member. Final implementation acceptance
-  still requires a separate non-author human review of the implementation PR.
+  Earlier D requirements were approved for implementation via PR #8
+  (owner/d) by a non-author group member. The current natural-language FR-04
+  and local assisted NFR-04 contract require separate ratification; their
+  approval fields remain pending. Final implementation acceptance also
+  requires a non-author human review of the implementation PR.
 requirements:
   - id: FR-01
     type: functional
@@ -626,71 +628,93 @@ requirements:
     approval: pending
     priority: Must
     source:
-      - "../../README.md#L38"
-      - "../../README.md#L83-L88"
+      - "fr-04-multi-content-comparison.md"
+      - "../../README.md#d多内容比较"
       - "../plans/d-comparison-plan.md"
-      - "../../src/internal/ai/translation_types.go"
+      - "../../src/internal/ai/comparison.go"
     related: ["FR-01", "FR-02"]
     statement: >-
       A reader can select two or three distinct, accessible saved articles
-      or original subtitle sources, ask a comparison question, and see an
-      overall relationship with a result for each selected source.
-      The relationships are same, conflict, not_mentioned, and
-      insufficient_evidence. The result links to verified source passages
-      and discloses partial source failures and task-stop states.
+      or videos with saved original-language subtitle text, ask about all
+      or a subset of the selection, and receive one concise natural-language
+      sentence from the configured conversation model. Each selected source
+      has an ordered result showing its finding, evidence state, citation
+      verification and available original-text navigation. A successfully
+      decoded generated answer is displayed regardless of whether any or all
+      source checks pass. Source failures and task-stop states remain explicit.
     fit:
       - id: AC-FR-04-1
-        scenario: "The reader submits a question with two or three eligible selected sources, or sends invalid input."
+        scenario: "The reader checks saved sources, selects an original subtitle track where required, and submits a question or invalid input."
         expected: >-
-          Valid requests use the authorized source snapshots. A blank question,
-          fewer than two or more than three IDs, duplicate IDs, malformed IDs,
-          or unavailable or unauthorized IDs are rejected before a provider
-          request starts. Unauthorized and nonexistent IDs share a generic
-          public error.
+          Readiness checks read only saved data and start no model, media
+          download or transcription. The panel shows preparation reasons,
+          supports saving an eligible original track with revision checks,
+          and disables submission when none of the selected sources is ready.
+          Valid requests reload authorized snapshots. Invalid question length,
+          source count, duplicate or malformed IDs, unavailable sources, model
+          configuration, revision or call limits are rejected before generation.
+          Unauthorized and nonexistent IDs share a generic public error.
         test: D-T01
       - id: AC-FR-04-2
-        scenario: "Readable sources support matching facts, incompatible facts, or a field absence in completely inspected records."
+        scenario: "The reader asks about all selected articles or video subtitle sources, or focuses on a subset."
         expected: >-
-          The comparison classifies the relationship and includes one result
-          per selected source in input order. Supported facts link to the
-          corresponding verified original passages. A not_mentioned result
-          carries a versioned coverage reference for a complete field scope.
+          The configured enabled conversation model returns a single-line
+          natural-language answer of at most 600 Unicode characters. Overall
+          output is not restricted to relationship categories. Every selected
+          source appears exactly once in input order with correct attribution.
+          Supported findings link to that source's verified original passages.
+          Source evidence states distinguish supported, not_mentioned,
+          not_relevant and insufficient_evidence. Confirmed absence requires
+          versioned complete-field coverage; unrelated status requires complete
+          supplied text and cannot conceal a real source failure.
         test: D-T02
       - id: AC-FR-04-3
         scenario: "A selected and authorized source fails to read, has no usable text, changes version before final verification, or only has limited coverage."
         expected: >-
           The affected source has an explicit evidence insufficiency status and
-          a specific reason. Valid remaining facts are shown as partial evidence
-          and the overall relationship is insufficient_evidence. A request
-          with all source reads failed starts zero generation requests.
+          a specific reason. Other valid findings and citations remain visible.
+          A successfully decoded generated answer remains displayed even if
+          any or all source checks fail. Missing text or failed retrieval cannot
+          establish field absence or irrelevance. A request with no usable
+          source text starts zero generation requests and reports source issues.
         test: D-T03
       - id: AC-FR-04-4
         scenario: "The model returns a cross-source, altered, stale, forged or out-of-range citation, or malformed output."
         expected: >-
           The service rejects invalid references and prevents them from
-          receiving a verified status or an enabled source jump. Output that
-          cannot be decoded becomes an explicit failure.
+          receiving a verified status or an enabled verified-source jump.
+          Citation failure does not clear a successfully decoded answer.
+          Unknown, duplicate or mismatched source identities and output that
+          cannot be decoded become explicit failures. Verified quotation
+          matching does not establish semantic correctness of the answer.
         test: D-T04
       - id: AC-FR-04-5
         scenario: "A comparison uses an explicit completion limit or encounters a retrieval context limit."
         expected: >-
           Completion starts, retries and fallback share one A invocation ledger.
-          Its configured limit and terminal states apply. B retrieval counts
-          are tracked separately. Context fits both character and UTF-8 byte
-          limits, and a source with an unusable context share is identified.
+          Omission means unlimited calls; explicit limits are integers from 1
+          through 100. A's configured limit and terminal states apply. B
+          retrieval counts are tracked separately. Context fits both character
+          and UTF-8 byte limits, and unusable source context is identified.
         test: D-T05
       - id: AC-FR-04-6
         scenario: "A reader opens existing single-content chat and then uses the comparison workflow."
         expected: >-
           Single-content chat, history and clear keep their existing behavior.
           In the comparison workflow a verified citation opens the selected
-          passage, and a partial source failure is shown on that source.
+          article passage or subtitle time locator and rechecks the current
+          source. Stale or deleted evidence loses verified navigation while
+          other valid sources and the generated answer remain visible.
+          Changing the selected subtitle track clears the previous comparison
+          result; the next submission uses the saved selection and version.
         test: D-T07
     tradeoff: >-
-      v1 focuses on single-turn comparisons of stored articles and original
-      subtitle text. Confirmed absence is limited to a complete field scope.
-      Partial coverage is surfaced as insufficient evidence. PDF and
-      persisted multi-turn comparisons can be reviewed after v1.
+      Scope is single-turn text comparison of saved articles and original
+      video subtitle text, including mixed inputs. Images, PDF, standalone
+      audio, video frames, automatic transcription during comparison and
+      persisted multi-turn comparison history are outside this requirement.
+      Confirmed absence needs complete-field coverage. Answer visibility is
+      independent of citation validity; semantic accuracy is evaluated separately.
 
   - id: NFR-04
     type: nonfunctional
@@ -698,46 +722,67 @@ requirements:
     approval: pending
     priority: Must
     source:
-      - "../../README.md#L38"
+      - "nfr-04-local-evaluation.md"
+      - "../../README.md#d多内容比较"
       - "../plans/d-comparison-plan.md"
-      - "../evidence/d-comparison-fixtures.json"
+      - "../../test/local/d-comparison/README.md"
     related: ["FR-04"]
     statement: >-
-      On the frozen 20-case evaluation set, the complete comparison flow
-      reaches at least 80 percent relationship classification accuracy and
-      at least 80 percent case-level source attribution accuracy. Every
-      injected source failure is explicitly represented for the affected
-      source and the comparison reports insufficient evidence overall.
-    metric: "min(relation_classification_accuracy, case_level_source_attribution_accuracy)"
+      The author evaluates article/article, video/video and video/article
+      profiles through the local application and configured real conversation
+      model. Each profile has 20 frozen, pre-annotated questions run twice.
+      Every profile and round reaches at least 80 percent answer correctness
+      and at least 80 percent case-level source attribution accuracy. Regression
+      discloses every tested source failure and gives zero invalid citations
+      verified status or verified navigation. Decoded answers remain visible
+      under FR-04 independently of verification or quality scores.
+    metric: "min(answer_correctness, case_level_source_attribution_accuracy)"
     threshold: 0.80
     method: >-
-      Freeze 20 pre-annotated synthetic cases, then run and independently
-      score the pinned upstream single-chat baseline and the integrated D
-      workflow on identical source snapshots, questions and fault schedules.
-      Publish separate numerators and a denominator of 20 for each metric.
-      Missing or unclassifiable outputs count as incorrect. Attribution
-      requires all selected sources in the case to have correct identity,
-      status, fact and verified evidence or justified coverage or failure.
-      Record model and prompt configuration, call counts, first scores,
-      adjudications and per-run outcomes. Both integrated runs must pass.
+      The author freezes 20 representative questions per input profile,
+      selected saved text snapshots and versions, expected answer/source
+      findings, model/settings, implementation and material hashes before
+      collection. Record video language, selected track revision, cue/time
+      coverage and item duration; partial subtitles do not prove full-video
+      coverage. Run each 20-case profile twice with the same real-model setup,
+      retaining every response and failure. The author scores both metrics
+      separately as 0 or 1 per case against the originals and records rationale.
+      Each metric keeps denominator 20 for each profile and run; do not pool
+      profiles or rounds. Request failures and wrong answers score zero,
+      and missing grades or evidence leave evaluation
+      incomplete. Record author_self_evaluation, raw response/configuration
+      hashes and the controlled regression command, output and exit code.
+      A scripted model checks failure handling only, not real-model quality.
     fit:
       - id: AC-NFR-04-1
-        scenario: "The frozen evaluation set is scored on the initial integrated run and its repeat."
+        scenario: "The author collects and scores two local rounds for each article/article, video/video and video/article 20-case profile."
         expected: >-
-          Each run scores at least 16 out of 20 for overall relationship
-          classification and at least 16 out of 20 for case-level source
-          attribution. Baseline scores, each run's scores, and all misses
-          are reported separately.
+          Every profile and round separately scores at least 16 out of 20 for
+          natural-language answer correctness and at least 16 out of 20 for
+          case-level source
+          attribution. Semantic equivalence is allowed without a fixed overall
+          category. All selected sources must have correct identity, findings,
+          evidence or justified relevance/coverage/limitation to earn the case's
+          attribution point. All six complete score sets, rationale, raw
+          responses and frozen configuration are retained and labeled author
+          self-evaluation.
+          Missing cases or unscored rows never constitute a pass.
         test: D-T06
       - id: AC-NFR-04-2
-        scenario: "The fixed corpus injects a source read failure, missing original text, or a stale source."
+        scenario: "The local controlled comparison regression exercises read failures, missing or limited text, invalid citations and changed or deleted sources."
         expected: >-
-          Every injection appears under the correct source with the expected
-          failure reason, and zero injected partial source failures are
-          returned as a successful same relationship.
+          The controlled regression exits zero and every tested failure appears
+          under its correct source with a specific reason. Zero invalid citations
+          receive verified status or enabled verified navigation. Other valid
+          evidence and successfully decoded answers remain under FR-04. Failures
+          cannot be hidden as an unsupported claim of full-source agreement.
+          Actual command, output and exit code are archived with the quality runs.
         test: D-T06
     tradeoff: >-
-      The 20-case suite measures a fixed course evaluation, including explicit
-      source failures. Case-level attribution makes one wrong source fail the
-      case. Per-source diagnostics expose partial correctness and the repeated
-      run records real-provider variation.
+      The evaluation measures the recorded local application, model and source
+      scope using author scoring. Three 20-case profiles, two complete rounds
+      per profile, separate 80 percent thresholds for both metrics in every
+      profile/round and a controlled failure regression define completion.
+      Reports disclose
+      self-evaluation bias, uncovered text types/models and known limitations.
+      Course-required approval, review and CI records are maintained separately.

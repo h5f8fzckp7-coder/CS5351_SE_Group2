@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-22",
+  "configuredModel": "openai/gpt-5.4-mini",
+  "question": "这两篇文章的主题一致吗",
+  "answer": "不一致：第一篇讲鸿蒙高校创新赛里学生把技术用于视障出行、养老照护和日常交互等真实场景，第二篇是影视推荐与资讯周报，主要在介绍多部电影、剧集和预告。",
+  "elapsedSeconds": 6.4,
+  "categoryReturned": false,
+  "verifiedEvidenceReopens": 9,
+  "sources": [
+    {
+      "title": "这群在鸿蒙写应用的年轻人，只想做点「用得上」的",
+      "state": "supported",
+      "citations": 5
+    },
+    {
+      "title": "本周看什么 | 最近值得一看的 10 部作品",
+      "state": "supported",
+      "citations": 4
+    }
+  ],
+  "budget": {
+    "max": 2,
+    "started": 1,
+    "usageKnown": true,
+    "perCall": [
+      {
+        "prompt": 14490,
+        "output": 406,
+        "total": 14896
+      }
+    ],
+    "cumulative": {
+      "prompt": 14490,
+      "output": 406,
+      "total": 14896
+    },
+    "status": "completed"
+  },
+  "testInvocations": 2,
+  "limitations": "One public-article regression scenario; initial run used source handles in the sentence, and the final prompt asks for reader-friendly article names. Not NFR-04 acceptance."
+}

@@ -1,0 +1,1376 @@
+{
+  "date": "2026-11-22",
+  "configuredModel": "openai/gpt-5.4-mini",
+  "environment": "Isolated SQLite backup of saved public sources and settings. Loopback diagnostic proxy forwarded to the configured gateway and captured source evidence/model content/usage without logging credentials. No owner settings or source data changed.",
+  "baseline": {
+    "case": {
+      "run": 1,
+      "question": "GTA 那篇主要讨论什么？",
+      "seconds": 5.9,
+      "answer": null,
+      "answerSourceIds": null,
+      "message": null,
+      "sources": [
+        {
+          "contentId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b",
+          "title": "这群在鸿蒙写应用的年轻人，只想做点「用得上」的",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": []
+        },
+        {
+          "contentId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+          "title": "本周看什么 | 最近值得一看的 10 部作品",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": []
+        },
+        {
+          "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+          "title": "游戏史最高分，不负 13 年的等待：《GTA 6》游玩体验",
+          "state": "insufficient_evidence",
+          "reason": "source_unverified",
+          "fact": null,
+          "citations": [
+            {
+              "id": "citation-1",
+              "passageId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e#article:0:s0-s3:0-67",
+              "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+              "source": "article",
+              "sourceVersion": "content-revision:1:d9677b77bf439bd1650a64f506a5cd03382850a6b3ec238b1b813b3e9625e05e",
+              "locator": "article:0:s0-s3",
+              "quote": "《GTA 6》游玩体验",
+              "startRune": 0,
+              "endRune": 0,
+              "status": "invalid",
+              "reason": "quote does not exactly match source passage"
+            },
+            {
+              "id": "citation-2",
+              "passageId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e#article:0:s0-s3:0-67",
+              "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+              "source": "article",
+              "sourceVersion": "content-revision:1:d9677b77bf439bd1650a64f506a5cd03382850a6b3ec238b1b813b3e9625e05e",
+              "locator": "article:0:s0-s3",
+              "quote": "原标题：《侠盗猎车手6》游戏评测：10分｜篝火。",
+              "startRune": 43,
+              "endRune": 67,
+              "status": "verified"
+            },
+            {
+              "id": "citation-3",
+              "passageId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e#article:0:s3-s6:67-104",
+              "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+              "source": "article",
+              "sourceVersion": "content-revision:1:d9677b77bf439bd1650a64f506a5cd03382850a6b3ec238b1b813b3e9625e05e",
+              "locator": "article:0:s3-s6",
+              "quote": "作为RockstarGames时隔13年推出的《侠盗猎车手》系列新 ...",
+              "startRune": 67,
+              "endRune": 104,
+              "status": "verified"
+            }
+          ]
+        }
+      ],
+      "evidenceReopens": 0,
+      "evidenceErrors": [],
+      "budget": {
+        "max": 2,
+        "started": 1,
+        "usageKnown": true,
+        "perCall": [
+          {
+            "prompt": 14926,
+            "output": 247,
+            "total": 15173
+          }
+        ],
+        "cumulative": {
+          "prompt": 14926,
+          "output": 247,
+          "total": 15173
+        },
+        "status": "completed"
+      }
+    },
+    "modelOutput": {
+      "answer": "GTA 那篇主要是在谈《GTA 6》的游玩体验与评测，并强调它作为 Rockstar 时隔 13 年推出的新作“游戏史最高分”。",
+      "answerSources": [
+        "S3"
+      ],
+      "sources": {
+        "S1": {
+          "citations": [],
+          "contentId": "S1",
+          "fact": "",
+          "field": "",
+          "state": "not_relevant"
+        },
+        "S2": {
+          "citations": [],
+          "contentId": "S2",
+          "fact": "",
+          "field": "",
+          "state": "not_relevant"
+        },
+        "S3": {
+          "citations": [
+            {
+              "passageId": "S3-P1",
+              "quote": "《GTA 6》游玩体验"
+            },
+            {
+              "passageId": "S3-P1",
+              "quote": "原标题：《侠盗猎车手6》游戏评测：10分｜篝火。"
+            },
+            {
+              "passageId": "S3-P2",
+              "quote": "作为RockstarGames时隔13年推出的《侠盗猎车手》系列新 ..."
+            }
+          ],
+          "contentId": "S3",
+          "fact": "文章主要是《GTA 6》的游玩体验与游戏评测，强调这是 Rockstar 时隔 13 年推出的系列新作。",
+          "field": "",
+          "state": "supported"
+        }
+      }
+    },
+    "gtaSuppliedPassages": [
+      {
+        "id": "S3-P1",
+        "text": "编注：本文首发于「篝火营地」，原作者多边形。少数派经授权后转载，仅对文章格式略作调整。原标题：《侠盗猎车手6》游戏评测：10分｜篝火。"
+      },
+      {
+        "id": "S3-P2",
+        "text": "作为RockstarGames时隔13年推出的《侠盗猎车手》系列新 ..."
+      },
+      {
+        "id": "S3-P3",
+        "text": "查看全文"
+      }
+    ],
+    "finding": "The first baseline attempt reproduced title-as-body quote mismatch for 《GTA 6》游玩体验, alongside two verified body quotations; answer was withheld."
+  },
+  "finalCases": [
+    {
+      "run": 1,
+      "question": "GTA 那篇主要讨论什么？",
+      "seconds": 5.5,
+      "answer": "GTA 那篇主要在讲《GTA 6》评测本身，强调它是 Rockstar 时隔 13 年推出的系列新作。",
+      "answerSourceIds": [
+        "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e"
+      ],
+      "message": null,
+      "sources": [
+        {
+          "contentId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b",
+          "title": "这群在鸿蒙写应用的年轻人，只想做点「用得上」的",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": []
+        },
+        {
+          "contentId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+          "title": "本周看什么 | 最近值得一看的 10 部作品",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": []
+        },
+        {
+          "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+          "title": "游戏史最高分，不负 13 年的等待：《GTA 6》游玩体验",
+          "state": "supported",
+          "reason": null,
+          "fact": "这篇文章是《侠盗猎车手6》游戏评测，讨论 Rockstar 时隔 13 年推出的《GTA》系列新作。《GTA 6》游玩体验。",
+          "citations": [
+            {
+              "id": "citation-1",
+              "passageId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e#article:0:s0-s3:0-67",
+              "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+              "source": "article",
+              "sourceVersion": "content-revision:1:d9677b77bf439bd1650a64f506a5cd03382850a6b3ec238b1b813b3e9625e05e",
+              "locator": "article:0:s0-s3",
+              "quote": "编注：本文首发于「篝火营地」，原作者多边形。少数派经授权后转载，仅对文章格式略作调整。原标题：《侠盗猎车手6》游戏评测：10分｜篝火。",
+              "startRune": 0,
+              "endRune": 67,
+              "status": "verified"
+            },
+            {
+              "id": "citation-2",
+              "passageId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e#article:0:s3-s6:67-104",
+              "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+              "source": "article",
+              "sourceVersion": "content-revision:1:d9677b77bf439bd1650a64f506a5cd03382850a6b3ec238b1b813b3e9625e05e",
+              "locator": "article:0:s3-s6",
+              "quote": "作为RockstarGames时隔13年推出的《侠盗猎车手》系列新 ...",
+              "startRune": 67,
+              "endRune": 104,
+              "status": "verified"
+            }
+          ]
+        }
+      ],
+      "evidenceReopens": 2,
+      "evidenceErrors": [],
+      "budget": {
+        "max": 2,
+        "started": 1,
+        "usageKnown": true,
+        "perCall": [
+          {
+            "prompt": 14833,
+            "output": 180,
+            "total": 15013
+          }
+        ],
+        "cumulative": {
+          "prompt": 14833,
+          "output": 180,
+          "total": 15013
+        },
+        "status": "completed"
+      }
+    },
+    {
+      "run": 2,
+      "question": "GTA 那篇主要讨论什么？",
+      "seconds": 4.9,
+      "answer": "《GTA 6》那篇主要是在评测这部时隔 13 年回归的系列新作，强调其“游戏史最高分”和游玩体验。",
+      "answerSourceIds": [
+        "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e"
+      ],
+      "message": null,
+      "sources": [
+        {
+          "contentId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b",
+          "title": "这群在鸿蒙写应用的年轻人，只想做点「用得上」的",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": []
+        },
+        {
+          "contentId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+          "title": "本周看什么 | 最近值得一看的 10 部作品",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": []
+        },
+        {
+          "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+          "title": "游戏史最高分，不负 13 年的等待：《GTA 6》游玩体验",
+          "state": "supported",
+          "reason": null,
+          "fact": "文章主要评测《侠盗猎车手6》（GTA 6），并指出它是 Rockstar Games 时隔 13 年推出的系列新作。",
+          "citations": [
+            {
+              "id": "citation-1",
+              "passageId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e#article:0:s0-s3:0-67",
+              "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+              "source": "article",
+              "sourceVersion": "content-revision:1:d9677b77bf439bd1650a64f506a5cd03382850a6b3ec238b1b813b3e9625e05e",
+              "locator": "article:0:s0-s3",
+              "quote": "编注：本文首发于「篝火营地」，原作者多边形。少数派经授权后转载，仅对文章格式略作调整。原标题：《侠盗猎车手6》游戏评测：10分｜篝火。",
+              "startRune": 0,
+              "endRune": 67,
+              "status": "verified"
+            },
+            {
+              "id": "citation-2",
+              "passageId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e#article:0:s3-s6:67-104",
+              "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+              "source": "article",
+              "sourceVersion": "content-revision:1:d9677b77bf439bd1650a64f506a5cd03382850a6b3ec238b1b813b3e9625e05e",
+              "locator": "article:0:s3-s6",
+              "quote": "作为RockstarGames时隔13年推出的《侠盗猎车手》系列新 ...",
+              "startRune": 67,
+              "endRune": 104,
+              "status": "verified"
+            }
+          ]
+        }
+      ],
+      "evidenceReopens": 2,
+      "evidenceErrors": [],
+      "budget": {
+        "max": 2,
+        "started": 1,
+        "usageKnown": true,
+        "perCall": [
+          {
+            "prompt": 14833,
+            "output": 177,
+            "total": 15010
+          }
+        ],
+        "cumulative": {
+          "prompt": 14833,
+          "output": 177,
+          "total": 15010
+        },
+        "status": "completed"
+      }
+    },
+    {
+      "run": 3,
+      "question": "GTA 那篇主要讨论什么？",
+      "seconds": 4.9,
+      "answer": "GTA 那篇主要是在介绍《GTA 6》游戏评测，重点强调它是 Rockstar 时隔 13 年推出的系列新作。",
+      "answerSourceIds": [
+        "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e"
+      ],
+      "message": null,
+      "sources": [
+        {
+          "contentId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b",
+          "title": "这群在鸿蒙写应用的年轻人，只想做点「用得上」的",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": []
+        },
+        {
+          "contentId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+          "title": "本周看什么 | 最近值得一看的 10 部作品",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": []
+        },
+        {
+          "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+          "title": "游戏史最高分，不负 13 年的等待：《GTA 6》游玩体验",
+          "state": "supported",
+          "reason": null,
+          "fact": "文章主要是《GTA 6》的游戏评测，提到这是 RockstarGames 时隔 13 年推出的《侠盗猎车手》系列新作。",
+          "citations": [
+            {
+              "id": "citation-1",
+              "passageId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e#article:0:s0-s3:0-67",
+              "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+              "source": "article",
+              "sourceVersion": "content-revision:1:d9677b77bf439bd1650a64f506a5cd03382850a6b3ec238b1b813b3e9625e05e",
+              "locator": "article:0:s0-s3",
+              "quote": "编注：本文首发于「篝火营地」，原作者多边形。少数派经授权后转载，仅对文章格式略作调整。原标题：《侠盗猎车手6》游戏评测：10分｜篝火。",
+              "startRune": 0,
+              "endRune": 67,
+              "status": "verified"
+            },
+            {
+              "id": "citation-2",
+              "passageId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e#article:0:s3-s6:67-104",
+              "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+              "source": "article",
+              "sourceVersion": "content-revision:1:d9677b77bf439bd1650a64f506a5cd03382850a6b3ec238b1b813b3e9625e05e",
+              "locator": "article:0:s3-s6",
+              "quote": "作为RockstarGames时隔13年推出的《侠盗猎车手》系列新 ...",
+              "startRune": 67,
+              "endRune": 104,
+              "status": "verified"
+            }
+          ]
+        }
+      ],
+      "evidenceReopens": 2,
+      "evidenceErrors": [],
+      "budget": {
+        "max": 2,
+        "started": 1,
+        "usageKnown": true,
+        "perCall": [
+          {
+            "prompt": 14833,
+            "output": 180,
+            "total": 15013
+          }
+        ],
+        "cumulative": {
+          "prompt": 14833,
+          "output": 180,
+          "total": 15013
+        },
+        "status": "completed"
+      }
+    },
+    {
+      "run": 4,
+      "question": "GTA 那篇主要讨论什么？",
+      "seconds": 5.3,
+      "answer": "GTA 那篇主要是在讲《侠盗猎车手6》的游玩体验与评测，强调它作为 Rockstar 时隔 13 年推出的新作。",
+      "answerSourceIds": [
+        "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e"
+      ],
+      "message": null,
+      "sources": [
+        {
+          "contentId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b",
+          "title": "这群在鸿蒙写应用的年轻人，只想做点「用得上」的",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": []
+        },
+        {
+          "contentId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+          "title": "本周看什么 | 最近值得一看的 10 部作品",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": []
+        },
+        {
+          "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+          "title": "游戏史最高分，不负 13 年的等待：《GTA 6》游玩体验",
+          "state": "supported",
+          "reason": null,
+          "fact": "这篇文章讨论《侠盗猎车手6》的游戏评测与游玩体验，并提到它是 Rockstar 时隔 13 年推出的系列新作。",
+          "citations": [
+            {
+              "id": "citation-1",
+              "passageId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e#article:0:s0-s3:0-67",
+              "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+              "source": "article",
+              "sourceVersion": "content-revision:1:d9677b77bf439bd1650a64f506a5cd03382850a6b3ec238b1b813b3e9625e05e",
+              "locator": "article:0:s0-s3",
+              "quote": "编注：本文首发于「篝火营地」，原作者多边形。少数派经授权后转载，仅对文章格式略作调整。原标题：《侠盗猎车手6》游戏评测：10分｜篝火。",
+              "startRune": 0,
+              "endRune": 67,
+              "status": "verified"
+            },
+            {
+              "id": "citation-2",
+              "passageId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e#article:0:s3-s6:67-104",
+              "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+              "source": "article",
+              "sourceVersion": "content-revision:1:d9677b77bf439bd1650a64f506a5cd03382850a6b3ec238b1b813b3e9625e05e",
+              "locator": "article:0:s3-s6",
+              "quote": "作为RockstarGames时隔13年推出的《侠盗猎车手》系列新 ...",
+              "startRune": 67,
+              "endRune": 104,
+              "status": "verified"
+            }
+          ]
+        }
+      ],
+      "evidenceReopens": 2,
+      "evidenceErrors": [],
+      "budget": {
+        "max": 2,
+        "started": 1,
+        "usageKnown": true,
+        "perCall": [
+          {
+            "prompt": 14833,
+            "output": 176,
+            "total": 15009
+          }
+        ],
+        "cumulative": {
+          "prompt": 14833,
+          "output": 176,
+          "total": 15009
+        },
+        "status": "completed"
+      }
+    },
+    {
+      "run": 5,
+      "question": "GTA 那篇主要讨论什么？",
+      "seconds": 4.9,
+      "answer": "GTA 那篇主要是在评测《侠盗猎车手6》的游玩体验，强调它是 Rockstar 时隔 13 年推出的系列新作。",
+      "answerSourceIds": [
+        "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e"
+      ],
+      "message": null,
+      "sources": [
+        {
+          "contentId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b",
+          "title": "这群在鸿蒙写应用的年轻人，只想做点「用得上」的",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": []
+        },
+        {
+          "contentId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+          "title": "本周看什么 | 最近值得一看的 10 部作品",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": []
+        },
+        {
+          "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+          "title": "游戏史最高分，不负 13 年的等待：《GTA 6》游玩体验",
+          "state": "supported",
+          "reason": null,
+          "fact": "文章评测《侠盗猎车手6》的游玩体验，并提到这是 Rockstar 时隔 13 年推出的《侠盗猎车手》系列新作。",
+          "citations": [
+            {
+              "id": "citation-1",
+              "passageId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e#article:0:s0-s3:0-67",
+              "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+              "source": "article",
+              "sourceVersion": "content-revision:1:d9677b77bf439bd1650a64f506a5cd03382850a6b3ec238b1b813b3e9625e05e",
+              "locator": "article:0:s0-s3",
+              "quote": "编注：本文首发于「篝火营地」，原作者多边形。少数派经授权后转载，仅对文章格式略作调整。原标题：《侠盗猎车手6》游戏评测：10分｜篝火。",
+              "startRune": 0,
+              "endRune": 67,
+              "status": "verified"
+            },
+            {
+              "id": "citation-2",
+              "passageId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e#article:0:s3-s6:67-104",
+              "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+              "source": "article",
+              "sourceVersion": "content-revision:1:d9677b77bf439bd1650a64f506a5cd03382850a6b3ec238b1b813b3e9625e05e",
+              "locator": "article:0:s3-s6",
+              "quote": "作为RockstarGames时隔13年推出的《侠盗猎车手》系列新 ...",
+              "startRune": 67,
+              "endRune": 104,
+              "status": "verified"
+            }
+          ]
+        }
+      ],
+      "evidenceReopens": 2,
+      "evidenceErrors": [],
+      "budget": {
+        "max": 2,
+        "started": 1,
+        "usageKnown": true,
+        "perCall": [
+          {
+            "prompt": 14833,
+            "output": 177,
+            "total": 15010
+          }
+        ],
+        "cumulative": {
+          "prompt": 14833,
+          "output": 177,
+          "total": 15010
+        },
+        "status": "completed"
+      }
+    },
+    {
+      "run": 6,
+      "question": "GTA 那篇主要讨论什么？",
+      "seconds": 11.2,
+      "answer": "GTA 那篇主要在说《GTA 6》这部游戏评测，核心是它等了 13 年才推出、并被评价为“游戏史最高分”。",
+      "answerSourceIds": [
+        "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e"
+      ],
+      "message": null,
+      "sources": [
+        {
+          "contentId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b",
+          "title": "这群在鸿蒙写应用的年轻人，只想做点「用得上」的",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": []
+        },
+        {
+          "contentId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+          "title": "本周看什么 | 最近值得一看的 10 部作品",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": []
+        },
+        {
+          "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+          "title": "游戏史最高分，不负 13 年的等待：《GTA 6》游玩体验",
+          "state": "supported",
+          "reason": null,
+          "fact": "这篇文章是《GTA 6》的游戏评测，提到它是 RockStar Games 时隔 13 年推出的《侠盗猎车手》系列新作，并以 10 分评价。",
+          "citations": [
+            {
+              "id": "citation-1",
+              "passageId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e#article:0:s0-s3:0-67",
+              "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+              "source": "article",
+              "sourceVersion": "content-revision:1:d9677b77bf439bd1650a64f506a5cd03382850a6b3ec238b1b813b3e9625e05e",
+              "locator": "article:0:s0-s3",
+              "quote": "编注：本文首发于「篝火营地」，原作者多边形。少数派经授权后转载，仅对文章格式略作调整。原标题：《侠盗猎车手6》游戏评测：10分｜篝火。",
+              "startRune": 0,
+              "endRune": 67,
+              "status": "verified"
+            },
+            {
+              "id": "citation-2",
+              "passageId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e#article:0:s3-s6:67-104",
+              "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+              "source": "article",
+              "sourceVersion": "content-revision:1:d9677b77bf439bd1650a64f506a5cd03382850a6b3ec238b1b813b3e9625e05e",
+              "locator": "article:0:s3-s6",
+              "quote": "作为RockstarGames时隔13年推出的《侠盗猎车手》系列新 ...",
+              "startRune": 67,
+              "endRune": 104,
+              "status": "verified"
+            }
+          ]
+        }
+      ],
+      "evidenceReopens": 2,
+      "evidenceErrors": [],
+      "budget": {
+        "max": 2,
+        "started": 1,
+        "usageKnown": true,
+        "perCall": [
+          {
+            "prompt": 14833,
+            "output": 190,
+            "total": 15023
+          }
+        ],
+        "cumulative": {
+          "prompt": 14833,
+          "output": 190,
+          "total": 15023
+        },
+        "status": "completed"
+      }
+    },
+    {
+      "run": 7,
+      "question": "GTA 那篇主要讨论什么？",
+      "seconds": 6.7,
+      "answer": "GTA 那篇主要在讲《侠盗猎车手6》游戏评测与游玩体验，强调它是 Rockstar 时隔 13 年推出的新作。",
+      "answerSourceIds": [
+        "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e"
+      ],
+      "message": null,
+      "sources": [
+        {
+          "contentId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b",
+          "title": "这群在鸿蒙写应用的年轻人，只想做点「用得上」的",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": []
+        },
+        {
+          "contentId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+          "title": "本周看什么 | 最近值得一看的 10 部作品",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": []
+        },
+        {
+          "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+          "title": "游戏史最高分，不负 13 年的等待：《GTA 6》游玩体验",
+          "state": "supported",
+          "reason": null,
+          "fact": "文章是《侠盗猎车手6》游戏评测，首发标题写明为“游戏史最高分，不负 13 年的等待：《GTA 6》游玩体验”，并提到这是 Rockstar Games 时隔 13 年推出的《侠盗猎车手》系列新作。",
+          "citations": [
+            {
+              "id": "citation-1",
+              "passageId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e#article:0:s0-s3:0-67",
+              "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+              "source": "article",
+              "sourceVersion": "content-revision:1:d9677b77bf439bd1650a64f506a5cd03382850a6b3ec238b1b813b3e9625e05e",
+              "locator": "article:0:s0-s3",
+              "quote": "编注：本文首发于「篝火营地」，原作者多边形。少数派经授权后转载，仅对文章格式略作调整。原标题：《侠盗猎车手6》游戏评测：10分｜篝火。",
+              "startRune": 0,
+              "endRune": 67,
+              "status": "verified"
+            },
+            {
+              "id": "citation-2",
+              "passageId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e#article:0:s3-s6:67-104",
+              "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+              "source": "article",
+              "sourceVersion": "content-revision:1:d9677b77bf439bd1650a64f506a5cd03382850a6b3ec238b1b813b3e9625e05e",
+              "locator": "article:0:s3-s6",
+              "quote": "作为RockstarGames时隔13年推出的《侠盗猎车手》系列新 ...",
+              "startRune": 67,
+              "endRune": 104,
+              "status": "verified"
+            }
+          ]
+        }
+      ],
+      "evidenceReopens": 2,
+      "evidenceErrors": [],
+      "budget": {
+        "max": 2,
+        "started": 1,
+        "usageKnown": true,
+        "perCall": [
+          {
+            "prompt": 14833,
+            "output": 207,
+            "total": 15040
+          }
+        ],
+        "cumulative": {
+          "prompt": 14833,
+          "output": 207,
+          "total": 15040
+        },
+        "status": "completed"
+      }
+    },
+    {
+      "run": 8,
+      "question": "GTA 那篇主要讨论什么？",
+      "seconds": 4.8,
+      "answer": "GTA 那篇主要是在说《GTA 6》游玩体验与评测，强调它是 Rockstar 时隔 13 年推出的新作。",
+      "answerSourceIds": [
+        "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e"
+      ],
+      "message": null,
+      "sources": [
+        {
+          "contentId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b",
+          "title": "这群在鸿蒙写应用的年轻人，只想做点「用得上」的",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": []
+        },
+        {
+          "contentId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+          "title": "本周看什么 | 最近值得一看的 10 部作品",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": []
+        },
+        {
+          "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+          "title": "游戏史最高分，不负 13 年的等待：《GTA 6》游玩体验",
+          "state": "supported",
+          "reason": null,
+          "fact": "文章主要讨论《GTA 6》的游玩体验和游戏评测，并提到它是 Rockstar 时隔 13 年推出的《侠盗猎车手》系列新作。",
+          "citations": [
+            {
+              "id": "citation-1",
+              "passageId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e#article:0:s0-s3:0-67",
+              "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+              "source": "article",
+              "sourceVersion": "content-revision:1:d9677b77bf439bd1650a64f506a5cd03382850a6b3ec238b1b813b3e9625e05e",
+              "locator": "article:0:s0-s3",
+              "quote": "编注：本文首发于「篝火营地」，原作者多边形。少数派经授权后转载，仅对文章格式略作调整。原标题：《侠盗猎车手6》游戏评测：10分｜篝火。",
+              "startRune": 0,
+              "endRune": 67,
+              "status": "verified"
+            },
+            {
+              "id": "citation-2",
+              "passageId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e#article:0:s3-s6:67-104",
+              "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+              "source": "article",
+              "sourceVersion": "content-revision:1:d9677b77bf439bd1650a64f506a5cd03382850a6b3ec238b1b813b3e9625e05e",
+              "locator": "article:0:s3-s6",
+              "quote": "作为RockstarGames时隔13年推出的《侠盗猎车手》系列新 ...",
+              "startRune": 67,
+              "endRune": 104,
+              "status": "verified"
+            }
+          ]
+        }
+      ],
+      "evidenceReopens": 2,
+      "evidenceErrors": [],
+      "budget": {
+        "max": 2,
+        "started": 1,
+        "usageKnown": true,
+        "perCall": [
+          {
+            "prompt": 14833,
+            "output": 178,
+            "total": 15011
+          }
+        ],
+        "cumulative": {
+          "prompt": 14833,
+          "output": 178,
+          "total": 15011
+        },
+        "status": "completed"
+      }
+    },
+    {
+      "run": 9,
+      "question": "GTA 那篇主要讨论什么？",
+      "seconds": 4.8,
+      "answer": "GTA 那篇主要在讲《侠盗猎车手6》游玩体验与评测，强调它是 Rockstar 时隔 13 年推出的新作。",
+      "answerSourceIds": [
+        "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e"
+      ],
+      "message": null,
+      "sources": [
+        {
+          "contentId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b",
+          "title": "这群在鸿蒙写应用的年轻人，只想做点「用得上」的",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": []
+        },
+        {
+          "contentId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+          "title": "本周看什么 | 最近值得一看的 10 部作品",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": []
+        },
+        {
+          "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+          "title": "游戏史最高分，不负 13 年的等待：《GTA 6》游玩体验",
+          "state": "supported",
+          "reason": null,
+          "fact": "文章讨论《侠盗猎车手6》的游玩体验与评测，并提到它是 Rockstar 时隔 13 年推出的系列新作。",
+          "citations": [
+            {
+              "id": "citation-1",
+              "passageId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e#article:0:s0-s3:0-67",
+              "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+              "source": "article",
+              "sourceVersion": "content-revision:1:d9677b77bf439bd1650a64f506a5cd03382850a6b3ec238b1b813b3e9625e05e",
+              "locator": "article:0:s0-s3",
+              "quote": "编注：本文首发于「篝火营地」，原作者多边形。少数派经授权后转载，仅对文章格式略作调整。原标题：《侠盗猎车手6》游戏评测：10分｜篝火。",
+              "startRune": 0,
+              "endRune": 67,
+              "status": "verified"
+            },
+            {
+              "id": "citation-2",
+              "passageId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e#article:0:s3-s6:67-104",
+              "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+              "source": "article",
+              "sourceVersion": "content-revision:1:d9677b77bf439bd1650a64f506a5cd03382850a6b3ec238b1b813b3e9625e05e",
+              "locator": "article:0:s3-s6",
+              "quote": "作为RockstarGames时隔13年推出的《侠盗猎车手》系列新 ...",
+              "startRune": 67,
+              "endRune": 104,
+              "status": "verified"
+            }
+          ]
+        }
+      ],
+      "evidenceReopens": 2,
+      "evidenceErrors": [],
+      "budget": {
+        "max": 2,
+        "started": 1,
+        "usageKnown": true,
+        "perCall": [
+          {
+            "prompt": 14833,
+            "output": 173,
+            "total": 15006
+          }
+        ],
+        "cumulative": {
+          "prompt": 14833,
+          "output": 173,
+          "total": 15006
+        },
+        "status": "completed"
+      }
+    },
+    {
+      "run": 10,
+      "question": "GTA 那篇主要讨论什么？",
+      "seconds": 5.4,
+      "answer": "GTA 那篇主要是在做《GTA 6》游玩体验/评测，强调这部时隔 13 年推出的新作“史上最高分”，即作者对游戏体验的总体评价。",
+      "answerSourceIds": [
+        "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e"
+      ],
+      "message": null,
+      "sources": [
+        {
+          "contentId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b",
+          "title": "这群在鸿蒙写应用的年轻人，只想做点「用得上」的",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": []
+        },
+        {
+          "contentId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+          "title": "本周看什么 | 最近值得一看的 10 部作品",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": []
+        },
+        {
+          "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+          "title": "游戏史最高分，不负 13 年的等待：《GTA 6》游玩体验",
+          "state": "supported",
+          "reason": null,
+          "fact": "文章是《GTA 6》游玩体验/评测，标题和编注都指向这是一篇对游戏的评价文章。",
+          "citations": [
+            {
+              "id": "citation-1",
+              "passageId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e#article:0:s0-s3:0-67",
+              "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+              "source": "article",
+              "sourceVersion": "content-revision:1:d9677b77bf439bd1650a64f506a5cd03382850a6b3ec238b1b813b3e9625e05e",
+              "locator": "article:0:s0-s3",
+              "quote": "编注：本文首发于「篝火营地」，原作者多边形。少数派经授权后转载，仅对文章格式略作调整。原标题：《侠盗猎车手6》游戏评测：10分｜篝火。",
+              "startRune": 0,
+              "endRune": 67,
+              "status": "verified"
+            },
+            {
+              "id": "citation-2",
+              "passageId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e#article:0:s3-s6:67-104",
+              "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+              "source": "article",
+              "sourceVersion": "content-revision:1:d9677b77bf439bd1650a64f506a5cd03382850a6b3ec238b1b813b3e9625e05e",
+              "locator": "article:0:s3-s6",
+              "quote": "作为RockstarGames时隔13年推出的《侠盗猎车手》系列新 ...",
+              "startRune": 67,
+              "endRune": 104,
+              "status": "verified"
+            }
+          ]
+        }
+      ],
+      "evidenceReopens": 2,
+      "evidenceErrors": [],
+      "budget": {
+        "max": 2,
+        "started": 1,
+        "usageKnown": true,
+        "perCall": [
+          {
+            "prompt": 14833,
+            "output": 182,
+            "total": 15015
+          }
+        ],
+        "cumulative": {
+          "prompt": 14833,
+          "output": 182,
+          "total": 15015
+        },
+        "status": "completed"
+      }
+    },
+    {
+      "run": 11,
+      "question": "影视那篇推荐了哪些类型的作品？",
+      "seconds": 5.9,
+      "answer": "影视那篇主要推荐了电影、剧集、动画、纪录片和真人秀作品，并且覆盖剧情、悬疑、犯罪、科幻、喜剧、运动、奇幻、冒险等类型。",
+      "answerSourceIds": [
+        "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a"
+      ],
+      "message": null,
+      "sources": [
+        {
+          "contentId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b",
+          "title": "这群在鸿蒙写应用的年轻人，只想做点「用得上」的",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": []
+        },
+        {
+          "contentId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+          "title": "本周看什么 | 最近值得一看的 10 部作品",
+          "state": "supported",
+          "reason": null,
+          "fact": "文章推荐了多种影视作品，包含电影、剧集、动画、纪录片和真人秀，类型涉及剧情、悬疑、犯罪、科幻、喜剧、运动、奇幻和冒险。",
+          "citations": [
+            {
+              "id": "citation-1",
+              "passageId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a#article:1:s0-s2:0-132",
+              "contentId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+              "source": "article",
+              "sourceVersion": "article-revision:1:c7cf1a3e0d002d4bf30c9dd5d7c9a95c4423439203878223c9ca1458bcd266b2",
+              "locator": "article:1:s0-s2",
+              "quote": "近期佳作推荐：[电影] 茫然女王、[电影] 行走之人、[美剧] 紧急呼救 第十季、[美剧] 一杆入魂 第二季、[英剧] 狐狸女士 第三季、[美剧] 圣丹尼斯医院 第三季、[电影] 窃取本书者将会…、[动画] 罗梅莉亚战记、[电影] 吉姆皇后、[纪录片] 扯淡电影史",
+              "startRune": 0,
+              "endRune": 132,
+              "status": "verified"
+            },
+            {
+              "id": "citation-2",
+              "passageId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a#article:3:s0:0-85",
+              "contentId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+              "source": "article",
+              "sourceVersion": "article-revision:1:c7cf1a3e0d002d4bf30c9dd5d7c9a95c4423439203878223c9ca1458bcd266b2",
+              "locator": "article:3:s0",
+              "quote": "几则影视资讯：《泥面人》内地定档 11 月 27 日、《沙丘》《沙丘 2》内地重映定档、罗伯特·帕丁森出演新任詹姆斯·邦德、《目击者约瑟芬》确认引进、《悲惨世界》确认引进",
+              "startRune": 0,
+              "endRune": 85,
+              "status": "verified"
+            },
+            {
+              "id": "citation-3",
+              "passageId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a#article:5:s0:0-9",
+              "contentId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+              "source": "article",
+              "sourceVersion": "article-revision:1:c7cf1a3e0d002d4bf30c9dd5d7c9a95c4423439203878223c9ca1458bcd266b2",
+              "locator": "article:5:s0",
+              "quote": "[电影] 茫然女王",
+              "startRune": 0,
+              "endRune": 9,
+              "status": "verified"
+            },
+            {
+              "id": "citation-4",
+              "passageId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a#article:13:s0:0-9",
+              "contentId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+              "source": "article",
+              "sourceVersion": "article-revision:1:c7cf1a3e0d002d4bf30c9dd5d7c9a95c4423439203878223c9ca1458bcd266b2",
+              "locator": "article:13:s0",
+              "quote": "[电影] 行走之人",
+              "startRune": 0,
+              "endRune": 9,
+              "status": "verified"
+            },
+            {
+              "id": "citation-5",
+              "passageId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a#article:21:s0:0-13",
+              "contentId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+              "source": "article",
+              "sourceVersion": "article-revision:1:c7cf1a3e0d002d4bf30c9dd5d7c9a95c4423439203878223c9ca1458bcd266b2",
+              "locator": "article:21:s0",
+              "quote": "[美剧] 紧急呼救 第十季",
+              "startRune": 0,
+              "endRune": 13,
+              "status": "verified"
+            },
+            {
+              "id": "citation-6",
+              "passageId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a#article:29:s0:0-13",
+              "contentId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+              "source": "article",
+              "sourceVersion": "article-revision:1:c7cf1a3e0d002d4bf30c9dd5d7c9a95c4423439203878223c9ca1458bcd266b2",
+              "locator": "article:29:s0",
+              "quote": "[美剧] 一杆入魂 第二季",
+              "startRune": 0,
+              "endRune": 13,
+              "status": "verified"
+            },
+            {
+              "id": "citation-7",
+              "passageId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a#article:38:s0:0-13",
+              "contentId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+              "source": "article",
+              "sourceVersion": "article-revision:1:c7cf1a3e0d002d4bf30c9dd5d7c9a95c4423439203878223c9ca1458bcd266b2",
+              "locator": "article:38:s0",
+              "quote": "[英剧] 狐狸女士 第三季",
+              "startRune": 0,
+              "endRune": 13,
+              "status": "verified"
+            },
+            {
+              "id": "citation-8",
+              "passageId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a#article:46:s0:0-15",
+              "contentId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+              "source": "article",
+              "sourceVersion": "article-revision:1:c7cf1a3e0d002d4bf30c9dd5d7c9a95c4423439203878223c9ca1458bcd266b2",
+              "locator": "article:46:s0",
+              "quote": "[美剧] 圣丹尼斯医院 第三季",
+              "startRune": 0,
+              "endRune": 15,
+              "status": "verified"
+            }
+          ]
+        },
+        {
+          "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+          "title": "游戏史最高分，不负 13 年的等待：《GTA 6》游玩体验",
+          "state": "not_relevant",
+          "reason": "question_unrelated",
+          "fact": null,
+          "citations": []
+        }
+      ],
+      "evidenceReopens": 8,
+      "evidenceErrors": [],
+      "budget": {
+        "max": 2,
+        "started": 1,
+        "usageKnown": true,
+        "perCall": [
+          {
+            "prompt": 14835,
+            "output": 227,
+            "total": 15062
+          }
+        ],
+        "cumulative": {
+          "prompt": 14835,
+          "output": 227,
+          "total": 15062
+        },
+        "status": "completed"
+      }
+    },
+    {
+      "run": 12,
+      "question": "分别概括这三篇文章的主题",
+      "seconds": 6.3,
+      "answer": "第一篇讲鸿蒙高校创新赛中大学生把 AI 和鸿蒙能力用于养老、视障、陪伴与穿搭等真实场景；第二篇是本周影视推荐，集中介绍多部近期作品及预告、定档信息；第三篇只是对《GTA 6》评测转载的编注和来源说明，主要是在标明文章出处。",
+      "answerSourceIds": [
+        "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b",
+        "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+        "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e"
+      ],
+      "message": null,
+      "sources": [
+        {
+          "contentId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b",
+          "title": "这群在鸿蒙写应用的年轻人，只想做点「用得上」的",
+          "state": "supported",
+          "reason": null,
+          "fact": "文章主题是鸿蒙高校创新赛中大学生将 AI 和鸿蒙能力用于视障辅助、养老照护、亲情沟通和穿搭整理等真实生活问题。",
+          "citations": [
+            {
+              "id": "citation-1",
+              "passageId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b#article:6:s0-s3:0-177",
+              "contentId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b",
+              "source": "article",
+              "sourceVersion": "article-revision:1:f309169f1a91e7b4d5ae3475d93da488ea30a5118e644aad26133d08a5a7647b",
+              "locator": "article:6:s0-s3",
+              "quote": "所以今年被列入「全国普通高校学科竞赛排行榜」的鸿蒙高校创新赛，恰好提供了一次近距离观察的机会。在前往南京大学决赛现场前，我们提前了解了决赛作品的信息。让人意外的是，比起商业路演里常见的功能宣传，这群二十岁出头的大学生在文档里写下了大量「不允许系统做什么」的克制规则——做养老院卧床护理系统的北京工业大学团队写着「未采集数据保留缺测状态，绝不显示为正常」；",
+              "startRune": 0,
+              "endRune": 177,
+              "status": "verified"
+            },
+            {
+              "id": "citation-2",
+              "passageId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b#article:10:s0-s2:0-146",
+              "contentId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b",
+              "source": "article",
+              "sourceVersion": "article-revision:1:f309169f1a91e7b4d5ae3475d93da488ea30a5118e644aad26133d08a5a7647b",
+              "locator": "article:10:s0-s2",
+              "quote": "在主流软件都习惯围绕视力良好、手指灵活、反应敏捷的「标准用户」打转的当下，一旦有人偏离了这个标准，人与数字世界之间就会出现一道失语的断层；于是这群来自产品设计、物理、统计与计算机等不同专业的大学生，就试图借助 HarmonyOS 的全场景协同与智能体能力，去把这些被忽略的日常断层一点点接上。",
+              "startRune": 0,
+              "endRune": 146,
+              "status": "verified"
+            },
+            {
+              "id": "citation-3",
+              "passageId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b#article:12:s0-s3:0-129",
+              "contentId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b",
+              "source": "article",
+              "sourceVersion": "article-revision:1:f309169f1a91e7b4d5ae3475d93da488ea30a5118e644aad26133d08a5a7647b",
+              "locator": "article:12:s0-s3",
+              "quote": "山东大学团队设计视障出行辅具《灵触随行》，是因为注意到视障人士出门时，传统白手杖只能探到地面近处，探不到悬空的树枝或路牌；而市面上常见的语音辅具习惯不间断地播报路况，反而堵住了视障者用来听取周围车流声与脚步声的耳朵。怎样在不占用听觉的前提下帮视障者感知空间？",
+              "startRune": 0,
+              "endRune": 129,
+              "status": "verified"
+            },
+            {
+              "id": "citation-4",
+              "passageId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b#article:16:s0-s3:0-151",
+              "contentId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b",
+              "source": "article",
+              "sourceVersion": "article-revision:1:f309169f1a91e7b4d5ae3475d93da488ea30a5118e644aad26133d08a5a7647b",
+              "locator": "article:16:s0-s3",
+              "quote": "如果说《灵触随行》延伸的是街头行走时的空间触觉，那么北京工业大学三名大二学生开发的《卧安智护》，则把感知的触角铺到了养老院的病床上。团队从智能床垫广告联想到长期卧床的失能老人：他们无法自主翻身，也说不出哪块皮肤受压过久，护工仅凭肉眼巡视很难拿捏翻身时机；但在病房安装摄像头监测睡姿，又会侵犯老人的隐私。",
+              "startRune": 0,
+              "endRune": 151,
+              "status": "verified"
+            },
+            {
+              "id": "citation-5",
+              "passageId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b#article:21:s0-s2:0-141",
+              "contentId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b",
+              "source": "article",
+              "sourceVersion": "article-revision:1:f309169f1a91e7b4d5ae3475d93da488ea30a5118e644aad26133d08a5a7647b",
+              "locator": "article:21:s0-s2",
+              "quote": "过去一两年里，不少适老软件试图用聊天机器人代替子女陪老人说话。但在华中科技大学与华南师范大学跨校团队看来，独居老人真正渴望的依然是与亲人联系，只是两代人在工具习惯上隔着一道墙：长辈面对多层菜单和密集按钮总怕点错，异地子女在工作间隙收到几句零散语音，也很难拼凑出父母近几天的真实状态。",
+              "startRune": 0,
+              "endRune": 141,
+              "status": "verified"
+            },
+            {
+              "id": "citation-6",
+              "passageId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b#article:29:s0:0-120",
+              "contentId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b",
+              "source": "article",
+              "sourceVersion": "article-revision:1:f309169f1a91e7b4d5ae3475d93da488ea30a5118e644aad26133d08a5a7647b",
+              "locator": "article:29:s0",
+              "quote": "当我们把视线从特殊群体拉回普通人的日常生活，会发现即便是年轻人，每天也都在忍受着许多习以为常的「小麻烦」——比如半夜看手表被突然亮起的白光晃得眯起眼、通知栏里生硬弹出又瞬间消失的浮窗，或是每天早上站在塞满衣服的衣柜前，依然不知道该穿哪一件。",
+              "startRune": 0,
+              "endRune": 120,
+              "status": "verified"
+            },
+            {
+              "id": "citation-7",
+              "passageId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b#article:32:s0:0-60",
+              "contentId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b",
+              "source": "article",
+              "sourceVersion": "article-revision:1:f309169f1a91e7b4d5ae3475d93da488ea30a5118e644aad26133d08a5a7647b",
+              "locator": "article:32:s0",
+              "quote": "走出屏幕之内的视觉直觉，西安交通大学与哈尔滨工程大学团队开发的《MORPHIA》，则试图帮年轻人在屏幕之外理顺衣橱秩序。",
+              "startRune": 0,
+              "endRune": 60,
+              "status": "verified"
+            },
+            {
+              "id": "citation-8",
+              "passageId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b#article:35:s0:0-133",
+              "contentId": "rss:a933249b106d46a85755102cd7ce5f05a15acd3aa3379cf31bbf556280a1ef4b",
+              "source": "article",
+              "sourceVersion": "article-revision:1:f309169f1a91e7b4d5ae3475d93da488ea30a5118e644aad26133d08a5a7647b",
+              "locator": "article:35:s0",
+              "quote": "团队在鸿蒙端侧实现了个人 3D 数字形象的多角度虚拟试衣，并配备了五个专项 Skill：系统不仅能记住用户在对话中提到的「怕冷」等偏好，在降温降雨前通过鸿蒙桌面服务卡片主动推送穿搭方案，还能结合差旅目的地天气与场合要求，从真实衣橱里最大化复用单品、生成精简打包清单。",
+              "startRune": 0,
+              "endRune": 133,
+              "status": "verified"
+            }
+          ]
+        },
+        {
+          "contentId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+          "title": "本周看什么 | 最近值得一看的 10 部作品",
+          "state": "supported",
+          "reason": null,
+          "fact": "文章主题是本周影视推荐，包含近期佳作、预告、新闻周报和多部作品的简介点评。",
+          "citations": [
+            {
+              "id": "citation-1",
+              "passageId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a#article:1:s0-s2:0-132",
+              "contentId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+              "source": "article",
+              "sourceVersion": "article-revision:1:c7cf1a3e0d002d4bf30c9dd5d7c9a95c4423439203878223c9ca1458bcd266b2",
+              "locator": "article:1:s0-s2",
+              "quote": "近期佳作推荐：[电影] 茫然女王、[电影] 行走之人、[美剧] 紧急呼救 第十季、[美剧] 一杆入魂 第二季、[英剧] 狐狸女士 第三季、[美剧] 圣丹尼斯医院 第三季、[电影] 窃取本书者将会…、[动画] 罗梅莉亚战记、[电影] 吉姆皇后、[纪录片] 扯淡电影史",
+              "startRune": 0,
+              "endRune": 132,
+              "status": "verified"
+            },
+            {
+              "id": "citation-2",
+              "passageId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a#article:2:s0:0-86",
+              "contentId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+              "source": "article",
+              "sourceVersion": "article-revision:1:c7cf1a3e0d002d4bf30c9dd5d7c9a95c4423439203878223c9ca1458bcd266b2",
+              "locator": "article:2:s0",
+              "quote": "几则精彩预告：《克里夫·布斯的惊险再冒险》终极预告、《豺狼的日子 第二季》首支预告、《冰川时代 6：火山大冒险》正式预告、《跃动青春 第二季》正式预告、电影《夜莺》定档预告",
+              "startRune": 0,
+              "endRune": 86,
+              "status": "verified"
+            },
+            {
+              "id": "citation-3",
+              "passageId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a#article:3:s0:0-85",
+              "contentId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+              "source": "article",
+              "sourceVersion": "article-revision:1:c7cf1a3e0d002d4bf30c9dd5d7c9a95c4423439203878223c9ca1458bcd266b2",
+              "locator": "article:3:s0",
+              "quote": "几则影视资讯：《泥面人》内地定档 11 月 27 日、《沙丘》《沙丘 2》内地重映定档、罗伯特·帕丁森出演新任詹姆斯·邦德、《目击者约瑟芬》确认引进、《悲惨世界》确认引进",
+              "startRune": 0,
+              "endRune": 85,
+              "status": "verified"
+            },
+            {
+              "id": "citation-4",
+              "passageId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a#article:99:s0:0-7",
+              "contentId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+              "source": "article",
+              "sourceVersion": "article-revision:1:c7cf1a3e0d002d4bf30c9dd5d7c9a95c4423439203878223c9ca1458bcd266b2",
+              "locator": "article:99:s0",
+              "quote": "📅 本周新预告",
+              "startRune": 0,
+              "endRune": 7,
+              "status": "verified"
+            },
+            {
+              "id": "citation-5",
+              "passageId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a#article:115:s0:0-8",
+              "contentId": "rss:f359099a635e9a51d1e3e2af104cfa1c88147b4c490bcc78488b821934b5d01a",
+              "source": "article",
+              "sourceVersion": "article-revision:1:c7cf1a3e0d002d4bf30c9dd5d7c9a95c4423439203878223c9ca1458bcd266b2",
+              "locator": "article:115:s0",
+              "quote": "📽 影视新闻周报",
+              "startRune": 0,
+              "endRune": 8,
+              "status": "verified"
+            }
+          ]
+        },
+        {
+          "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+          "title": "游戏史最高分，不负 13 年的等待：《GTA 6》游玩体验",
+          "state": "supported",
+          "reason": null,
+          "fact": "这篇内容主要是《GTA 6》评测转载的编注，说明首发来源与原标题。",
+          "citations": [
+            {
+              "id": "citation-1",
+              "passageId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e#article:0:s0-s3:0-67",
+              "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+              "source": "article",
+              "sourceVersion": "content-revision:1:d9677b77bf439bd1650a64f506a5cd03382850a6b3ec238b1b813b3e9625e05e",
+              "locator": "article:0:s0-s3",
+              "quote": "编注：本文首发于「篝火营地」，原作者多边形。少数派经授权后转载，仅对文章格式略作调整。原标题：《侠盗猎车手6》游戏评测：10分｜篝火。",
+              "startRune": 0,
+              "endRune": 67,
+              "status": "verified"
+            },
+            {
+              "id": "citation-2",
+              "passageId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e#article:0:s3-s6:67-104",
+              "contentId": "rss:5641587879161d138988a937fe6e4140af25cf766bb2fb84d77649d180b8d29e",
+              "source": "article",
+              "sourceVersion": "content-revision:1:d9677b77bf439bd1650a64f506a5cd03382850a6b3ec238b1b813b3e9625e05e",
+              "locator": "article:0:s3-s6",
+              "quote": "作为RockstarGames时隔13年推出的《侠盗猎车手》系列新 ...",
+              "startRune": 67,
+              "endRune": 104,
+              "status": "verified"
+            }
+          ]
+        }
+      ],
+      "evidenceReopens": 15,
+      "evidenceErrors": [],
+      "budget": {
+        "max": 2,
+        "started": 1,
+        "usageKnown": true,
+        "perCall": [
+          {
+            "prompt": 14834,
+            "output": 347,
+            "total": 15181
+          }
+        ],
+        "cumulative": {
+          "prompt": 14834,
+          "output": 347,
+          "total": 15181
+        },
+        "status": "completed"
+      }
+    }
+  ],
+  "summary": {
+    "focusedRuns": 10,
+    "focusedAnswersReturned": 10,
+    "controlRuns": 2,
+    "controlAnswersReturned": 2,
+    "verifiedEvidenceReopens": 43,
+    "evidenceErrors": 0,
+    "allFinalModelRowsUsePassageIdsOnly": true,
+    "providerCalls": 13,
+    "reportedTokens": 195566
+  },
+  "limitations": "Ten repeated focused questions and two controls are regression observations, not NFR-04 semantic accuracy acceptance or deterministic-output guarantees. Citation text is now extracted by the server and still checked with C. Model-selected evidence may not entail every generated fact: some focused outputs repeat a high-score claim from the supplied title rather than establish it from the body. These runs are not scored as semantic accuracy passes. The GTA item only has its saved RSS excerpt. Browser E2E was not executed.",
+  "comparisonSourceSHA256": "1a43fee70c04cab9484a741c04686b62fdcf9bfd313234aeb72fd327ed9adab6",
+  "builtBinarySHA256": "db2de3425702a09411a777bcf6628f6d876fd5238d245b4c7caea3705f468543"
+}

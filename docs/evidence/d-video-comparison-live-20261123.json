@@ -1,0 +1,81 @@
+{
+  "date": "2026-11-23",
+  "model": "openai/gpt-5.4-mini",
+  "comparisonRequests": 15,
+  "modelCalls": 14,
+  "http200": 15,
+  "returnedAnswers": 14,
+  "evidenceReopens": 72,
+  "evidenceFailures": 0,
+  "knownReportedTokens": 121340,
+  "sourcePreparationNote": "Initial third-video save mistakenly used POST instead of PUT and returned 404. Initial four affected results were retained as missing-text degradation observations. After the test setup was corrected, only those four questions were rerun with 1123 saved original subtitle cues. No product code change or result replacement.",
+  "positiveSourceVideos": [
+    {
+      "id": "bilibili:BV15aytzcENP",
+      "label": "黎曼猜想讲解",
+      "cues": 280
+    },
+    {
+      "id": "bilibili:BV1NH4p6rEVd",
+      "label": "绝技秒杀流游戏教程",
+      "cues": 40,
+      "lastCueEndSeconds": 90.14,
+      "videoDurationSeconds": 455
+    },
+    {
+      "id": "bilibili:BV1kVxy6aEYd",
+      "label": "山姆10月新品试吃测评",
+      "cues": 1123
+    }
+  ],
+  "semanticFindings": [
+    {
+      "stage": "initial",
+      "id": "V10",
+      "severity": "error",
+      "detail": "The answer incorrectly says the Riemann-hypothesis video does not match its title, although its own per-source finding and citations describe exactly that title topic. Detection of the bad Sima Yi track is correct."
+    },
+    {
+      "stage": "initial",
+      "id": "V02",
+      "severity": "warning",
+      "detail": "The focused modifier/MOD answer identifies the game video correctly, but says the math video has no related statement while its card is insufficient_evidence/limited_search."
+    },
+    {
+      "stage": "third_subtitle_prepared",
+      "id": "V06",
+      "severity": "warning",
+      "detail": "The boss 魔渊领主 is unnecessarily styled with book-title brackets, risking confusion with a game title; the gameplay-vs-food comparison is otherwise supported."
+    }
+  ],
+  "limits": [
+    "API workflow tests, not browser interaction or independent semantic accuracy scoring.",
+    "Comparison reads saved subtitle text; it does not analyze the video image/audio or validate the external truth of the transcript.",
+    "The Sima Yi saved track is unrelated repeated text and is an intentional bad-input diagnostic, not a valid third positive source.",
+    "Existing game subtitles end near 90 seconds of a 455-second video; no conclusion is made about any unrepresented later audio or frames."
+  ],
+  "report": "/Users/lwl/Documents/Codex/2026-11-14/fen-xi/outputs/video-comparison-20261123/report.md",
+  "ownerSubtitleSnapshotChecks": [
+    {
+      "contentId": "bilibili:BV15aytzcENP",
+      "unchanged": true
+    },
+    {
+      "contentId": "bilibili:BV1NH4p6rEVd",
+      "unchanged": true
+    },
+    {
+      "contentId": "bilibili:BV1eJs86MEat",
+      "unchanged": true
+    },
+    {
+      "contentId": "xiaohongshu:6af5dcc3000000002500b6f5",
+      "unchanged": true
+    },
+    {
+      "contentId": "xiaohongshu:6affe356000000002501f722",
+      "unchanged": true
+    }
+  ],
+  "ownerSavedSubtitlesAndSelectionsChangedByTests": false
+}
