@@ -24,7 +24,7 @@ Before collection, freeze 20 questions for each profile, two or three accessible
 
 Saved article text and original-language video subtitle text are eligible. Record the selected language, track revision, cue count, subtitle coverage interval and video duration. A saved preview or partial track supports claims about its supplied text, not the entire video, unseen parts or the soundtrack. Prepare and select tracks before collection; transcription accuracy and video-frame understanding are outside this comparison quality metric. The report identifies the actual sources, content types and model evaluated, and quality claims are limited to that scope.
 
-Frozen materials identify the questions and annotations, original-text hashes, source versions, model, settings revision, invocation/context/retrieval configuration and implementation hashes. A change to the dataset, scoring criteria, implementation, source or configuration requires a new evaluation directory and two complete rounds. Retain the evidence from every attempt.
+Frozen materials identify the questions and annotations, original-text hashes, source versions, model, settings revision, invocation/context/retrieval configuration and implementation hashes. A change to the dataset, scoring criteria, implementation, source or configuration requires a new evaluation directory and two complete rounds. Retain the complete evaluation used for final acceptance. Retaining every debugging run or superseded evaluation attempt is not required.
 
 ## Scoring method
 
@@ -44,6 +44,8 @@ Check whether each `supported` finding is supported by its own original text, wh
 
 ### Denominators and records
 
+The required archive covers the final acceptance evaluation: all three profiles, both rounds, all 120 scheduled responses (including errors and incorrect answers), frozen materials and configuration, complete score sheets with rationale, and controlled-regression evidence. Earlier debugging runs and superseded evaluation attempts may be omitted from this archive. Do not combine selected cases or rounds from different attempts into the retained evaluation.
+
 Each metric has a fixed denominator of 20 for each profile and round. Do not exclude failed cases. Record both scores and a source-based rationale for every case. Missing cases, grades, raw responses or controlled-regression evidence make the evaluation **incomplete**, not passing. Errors in a complete record score 0. Any metric below 16/20 in any profile or round makes the evaluation **fail**.
 
 ## Acceptance criteria
@@ -60,4 +62,4 @@ Quality runs use the real configured model. Scripted provider responses are used
 
 ## Completion
 
-Record **NFR-04 local self-evaluation passed** only when both quality metrics pass in both rounds of all three profiles, each profile has passing controlled-regression evidence and all records are retained. Report unexecuted checks, uncovered scenarios and known limitations separately. Maintain course-required test-plan approval, change review and CI records as their respective project records.
+Record **NFR-04 local self-evaluation passed** only when both quality metrics pass in both rounds of all three profiles, each profile has passing controlled-regression evidence and the complete final acceptance evaluation is retained. Report unexecuted checks, uncovered scenarios and known limitations separately. Maintain course-required test-plan approval, change review and CI records as their respective project records.
