@@ -2414,3 +2414,29 @@ entries:
       indexed. No historical lost response, approval, OpenCode attribution or
       instructor waiver is fabricated. No GitHub message, merge or review
       approval is submitted by this task.
+
+  - id: E-AI-003
+    date: "2026-11-25"
+    owner: "刘若轩 (E)"
+    tool: "Cursor Grok 4.7"
+    model: "Grok 4.7"
+    purpose: >-
+      Reconcile owner-e-liu-ruoxuan with orangesummertime/main after PR #12
+      merged. Resolve the integration conflicts so Owner E citation freshness
+      and Owner D comparison both remain, then run the recorded regression on
+      that merged tree. This is not an OpenCode session and not a review.
+    scope:
+      wrote:
+        - "Merge commit 4c29ba7c8bd9143d9686bfa439230c3f3dd4ed82, resolving the six conflicted files"
+        - "docs/evidence/e-main-reconcile-20261125.md"
+        - "docs/ai-use-log.yaml (this entry)"
+    generated_code: true
+    transcript_status: "not an official course OpenCode transcript"
+    official_course_transcripts: "not produced for this reconciliation"
+    human_review: pending
+    notes: >-
+      No official OpenCode raw transcript was committed. No APPROVED
+      test-approval record was added. PR #11 was not merged. The conflict
+      resolution keeps both sides' behavior; contribution filenames were
+      not renumbered. Verification commands and results are in
+      docs/evidence/e-main-reconcile-20261125.md.
